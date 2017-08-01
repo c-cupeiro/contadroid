@@ -1,9 +1,33 @@
 <resources>
     <string name="app_name">Contadroid</string>
-    <string name="title_activity_basic">BasicActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_menu_actual_month">Mes Actual</string>
+    <string name="navigation_drawer_menu_chart">Resumen Año</string>
+    <string name="navigation_drawer_menu_template">Definir Plantilla</string>
+    <string name="navigation_drawer_menu_settings">Opciones</string>
+    <string name="navigation_drawer_menu_logout">Cerrar Sesion</string>
+    <string name="navigation_drawer_menu_login">Iniciar Sesion</string>
+
+
+    <string name="main.title">Mes Actual</string>
+    <string name="main.tab.expenses_paid">Realizados</string>
+    <string name="main.tab.expenses_not_paid">Pendientes</string>
+
 
     <string name="action_settings">Settings</string>
+
+    <string name="group_income">Ingresos</string>
+    <string name="group_home">Casa</string>
+    <string name="group_transport">Transporte</string>
+    <string name="group_food">Comida</string>
+    <string name="group_shopping">Compras</string>
+    <string name="group_leisure">Ocio</string>
+    <string name="group_other">Otros</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
