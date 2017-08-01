@@ -6,4 +6,5 @@
     <color name="textColor">#FFFFFF</color>
     <color name="colorAccent">#EF3131</color>
     <color name="fabColor">#3B4859</color>
+    <color name="header_navigation_color">#006262</color>
 </resources>
