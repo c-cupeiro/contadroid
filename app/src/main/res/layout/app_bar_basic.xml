@@ -18,6 +18,14 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:elevation="6dp"
+            android:visibility="gone"
+            android:minHeight="?attr/actionBarSize"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -37,6 +45,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:tint="@color/textColor"
+        android:backgroundTint="@color/fabColor"
+        app:srcCompat="@drawable/plus" />
 
 </RelativeLayout>
