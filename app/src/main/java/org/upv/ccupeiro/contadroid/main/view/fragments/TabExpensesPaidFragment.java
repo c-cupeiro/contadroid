@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.upv.ccupeiro.contadroid.R;
+import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 import org.upv.ccupeiro.contadroid.main.model.CardExpense;
 import org.upv.ccupeiro.contadroid.main.view.adapter.MainCardAdapter;
 
@@ -32,7 +34,7 @@ public class TabExpensesPaidFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab_expenses_paid, container, false);
         initializaButterKnife(rootView);
-        prepareAdapter(rootView);
+        prepareAdapter();
         return rootView;
     }
 
@@ -40,8 +42,9 @@ public class TabExpensesPaidFragment extends Fragment {
         ButterKnife.bind(this,view);
     }
 
-    private void prepareAdapter(View rootView) {
+    private void prepareAdapter() {
         adapter = new MainCardAdapter(mockListCards());
+        //adapter.setLayoutManager(new LinearLayoutManager(null));
         rvPaidExpenses.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPaidExpenses.setAdapter(adapter);
     }
@@ -50,9 +53,14 @@ public class TabExpensesPaidFragment extends Fragment {
 
     private List<CardExpense> mockListCards(){
         List<CardExpense> cardList = new ArrayList<>();
+        List<Expense> expenseList = new ArrayList<>();
+        expenseList.add(new Expense("Nombre",20.0f, ExpensesGroup.INCOME));
+        expenseList.add(new Expense("Nombre","Descripción 1",20.0f, ExpensesGroup.INCOME));
+        expenseList.get(0).setPaid(true);
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_income,null),
-                getResources().getString(R.string.group_income)
+                getResources().getString(R.string.group_income),
+                expenseList
         ));
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_home,null),

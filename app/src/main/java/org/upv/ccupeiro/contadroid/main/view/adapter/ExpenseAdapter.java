@@ -39,7 +39,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         holder.expense_name.setText(expense.getName());
         holder.expense_amount.setText(expense.getAmountEuroString());
         holder.expense_checkbox.setChecked(expense.isPaid());
-        holder.expense_description.setText(expense.getDescription());
+        if(expense.getDescription().isEmpty()){
+            holder.expense_description.setVisibility(View.GONE);
+        }else{
+            holder.expense_description.setText(expense.getDescription());
+        }
     }
 
     @Override

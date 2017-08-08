@@ -24,6 +24,13 @@ public class CardExpense {
         expenseList = new ArrayList<>();
     }
 
+    public CardExpense(Drawable cardLogo, String cardText,List<Expense> expenseList) {
+        this.cardLogo = cardLogo;
+        this.cardText = cardText;
+        this.cardAmount = 0;
+        this.expenseList = expenseList;
+    }
+
     public Drawable getCardLogo() {
         return cardLogo;
     }
@@ -43,6 +50,7 @@ public class CardExpense {
     public List<Expense> getExpenseList() {
         return expenseList;
     }
+
     public void addExpense(Expense expense){
         cardAmount +=expense.getAmount();
         expenseList.add(expense);

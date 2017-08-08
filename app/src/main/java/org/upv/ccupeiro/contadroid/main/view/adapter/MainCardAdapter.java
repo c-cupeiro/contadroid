@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.upv.ccupeiro.contadroid.R;
+import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.main.model.CardExpense;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import butterknife.ButterKnife;
 
 public class MainCardAdapter extends RecyclerView.Adapter<MainCardAdapter.ViewHolder> {
     protected List<CardExpense> cardsList;
+    protected RecyclerView.LayoutManager innerRvLayoutManager;
 
 
     public MainCardAdapter(List<CardExpense> cardsList) {
@@ -35,20 +37,24 @@ public class MainCardAdapter extends RecyclerView.Adapter<MainCardAdapter.ViewHo
         return new ViewHolder(rootView);
     }
 
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager){
+        innerRvLayoutManager = layoutManager;
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CardExpense cardInfo = cardsList.get(position);
         holder.card_icon.setImageDrawable(cardInfo.getCardLogo());
         holder.card_name.setText(cardInfo.getCardText());
         holder.card_amount.setText(cardInfo.getCardAmountEuroString());
-        //prepareAdapter(itemView);
+        prepareAdapter(holder.rv_paid_expenses, cardInfo.getExpenseList());
     }
 
-   /* private void prepareAdapter(View itemView) {
-        adapter = new ExpenseAdapter();
-        rvPaidExpenses.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvPaidExpenses.setAdapter(adapter);
-    }*/
+    private void prepareAdapter(RecyclerView rv_paid_expenses, List<Expense> expenseList) {
+        ExpenseAdapter adapter = new ExpenseAdapter(expenseList);
+        rv_paid_expenses.setLayoutManager(new LinearLayoutManager(null));
+        rv_paid_expenses.setAdapter(adapter);
+    }
 
     @Override
     public int getItemCount() {
