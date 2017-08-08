@@ -8,4 +8,12 @@
     <color name="colorAccent">#EF3131</color>
     <color name="fabColor">#3B4859</color>
     <color name="header_navigation_color">#006262</color>
+    <color name="icon_background_income_color">#ff9933</color>
+    <color name="icon_background_home_color">#00cc00</color>
+    <color name="icon_background_transport_color">#0099ff</color>
+    <color name="icon_background_food_color">#cc66ff</color>
+    <color name="icon_background_shopping_color">#990033</color>
+    <color name="icon_background_leisure_color">#006600</color>
+    <color name="icon_background_other_color">#cc0000</color>
+
 </resources>

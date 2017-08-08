@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/expense_row_vertical">
+
+        <TextView
+            android:id="@+id/tv_expense_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/expense_row_main_horizontal"
+            android:text="Internet y Fijo"
+            android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
+        <CheckBox
+            android:id="@+id/checkbox_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="50dp" />
+
+        <TextView
+            android:id="@+id/tv_expense_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/expense_row_amount_margin_rigth"
+            android:text="40,00 €"
+            android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_expense_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/expense_row_description_horizontal"
+        android:textAppearance="@android:style/TextAppearance.Holo.Small"
+        android:text="Descripcion"/>
+</LinearLayout>

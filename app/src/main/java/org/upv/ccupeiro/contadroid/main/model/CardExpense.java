@@ -14,13 +14,13 @@ import java.util.List;
 public class CardExpense {
     private Drawable cardLogo;
     private String cardText;
-    private float cardTotal;
+    private float cardAmount;
     private List<Expense> expenseList;
 
     public CardExpense(Drawable cardLogo, String cardText) {
         this.cardLogo = cardLogo;
         this.cardText = cardText;
-        this.cardTotal = 0;
+        this.cardAmount = 0;
         expenseList = new ArrayList<>();
     }
 
@@ -32,15 +32,19 @@ public class CardExpense {
         return cardText;
     }
 
-    public float getCardTotal() {
-        return cardTotal;
+    public float getCardAmount() {
+        return cardAmount;
+    }
+
+    public String getCardAmountEuroString(){
+        return String.format("%.2f €",cardAmount);
     }
 
     public List<Expense> getExpenseList() {
         return expenseList;
     }
     public void addExpense(Expense expense){
-        cardTotal+=expense.getAmount();
+        cardAmount +=expense.getAmount();
         expenseList.add(expense);
     }
 }

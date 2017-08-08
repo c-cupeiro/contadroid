@@ -47,6 +47,10 @@ public class Expense {
         return amount;
     }
 
+    public String getAmountEuroString(){
+        return String.format("%.2f €",amount);
+    }
+
     public void setAmount(float amount) {
         this.amount = amount;
     }

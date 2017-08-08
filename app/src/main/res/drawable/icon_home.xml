@@ -6,11 +6,11 @@
                 android:height="24dp"/>
             <stroke
                 android:width="3dp"
-                android:color="@android:color/holo_blue_dark"/>
-            <solid android:color="@android:color/holo_blue_dark"/>
+                android:color="@color/icon_background_home_color"/>
+            <solid android:color="@color/icon_background_home_color"/>
         </shape>
     </item>
-    <item android:drawable="@drawable/bus"
+    <item android:drawable="@drawable/home_variant"
         android:bottom="2dp"
         android:top="2dp"
         android:right="2dp"
