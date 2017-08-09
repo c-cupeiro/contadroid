@@ -1,6 +1,7 @@
 package org.upv.ccupeiro.contadroid.common.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -25,6 +26,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import org.upv.ccupeiro.contadroid.R;
+import org.upv.ccupeiro.contadroid.main.view.activity.MainActivity;
 
 import java.util.List;
 
@@ -73,11 +75,10 @@ public abstract class BasicActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_actual_month) {
-            // Handle the camera action
+            initActualMonthActivity();
             showSnakcbar("Has pulsado el mes Actual");
         } else if (id == R.id.nav_chart) {
             showSnakcbar("Has pulsado la grafica");
@@ -90,10 +91,15 @@ public abstract class BasicActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             showSnakcbar("Has pulsado logout");
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void initActualMonthActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     private void showSnakcbar(String text){

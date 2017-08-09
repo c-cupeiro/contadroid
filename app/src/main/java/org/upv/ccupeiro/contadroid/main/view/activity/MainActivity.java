@@ -26,7 +26,6 @@ public class MainActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeFrameLayout(R.layout.activity_main);
-        //this.initializeButterKnife();
         setTitle(R.string.main_title);
         initializeTabLayout();
         initializeFloatingButton(new View.OnClickListener() {

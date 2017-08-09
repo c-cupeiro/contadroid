@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     tools:context="org.upv.ccupeiro.contadroid.main.view.fragments.TabExpensesPaidFragment">
 
-    <!--
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="GASTOS PAGADOS!!" />-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_card_paid_expenses"
         android:layout_width="match_parent"

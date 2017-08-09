@@ -37,10 +37,6 @@ public class MainCardAdapter extends RecyclerView.Adapter<MainCardAdapter.ViewHo
         return new ViewHolder(rootView);
     }
 
-    public void setLayoutManager(RecyclerView.LayoutManager layoutManager){
-        innerRvLayoutManager = layoutManager;
-    }
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CardExpense cardInfo = cardsList.get(position);
@@ -70,7 +66,6 @@ public class MainCardAdapter extends RecyclerView.Adapter<MainCardAdapter.ViewHo
         TextView card_amount;
         @BindView(R.id.rv_paid_expenses)
         RecyclerView rv_paid_expenses;
-        ExpenseAdapter adapter;
 
         public ViewHolder(View itemView) {
             super(itemView);

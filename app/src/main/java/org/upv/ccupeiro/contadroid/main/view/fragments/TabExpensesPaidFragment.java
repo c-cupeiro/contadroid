@@ -43,20 +43,20 @@ public class TabExpensesPaidFragment extends Fragment {
     }
 
     private void prepareAdapter() {
-        adapter = new MainCardAdapter(mockListCards());
-        //adapter.setLayoutManager(new LinearLayoutManager(null));
+        adapter = new MainCardAdapter(mockListCardsPaid());
         rvPaidExpenses.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPaidExpenses.setAdapter(adapter);
     }
 
 
 
-    private List<CardExpense> mockListCards(){
+    private List<CardExpense> mockListCardsPaid(){
         List<CardExpense> cardList = new ArrayList<>();
         List<Expense> expenseList = new ArrayList<>();
         expenseList.add(new Expense("Nombre",20.0f, ExpensesGroup.INCOME));
         expenseList.add(new Expense("Nombre","Descripción 1",20.0f, ExpensesGroup.INCOME));
         expenseList.get(0).setPaid(true);
+        expenseList.get(1).setPaid(true);
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_income,null),
                 getResources().getString(R.string.group_income),
@@ -64,27 +64,33 @@ public class TabExpensesPaidFragment extends Fragment {
         ));
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_home,null),
-                getResources().getString(R.string.group_home)
+                getResources().getString(R.string.group_home),
+                expenseList
         ));
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_transport,null),
-                getResources().getString(R.string.group_transport)
+                getResources().getString(R.string.group_transport),
+                expenseList
         ));
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_food,null),
-                getResources().getString(R.string.group_food)
+                getResources().getString(R.string.group_food),
+                expenseList
         ));
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_shoppings,null),
-                getResources().getString(R.string.group_shopping)
+                getResources().getString(R.string.group_shopping),
+                expenseList
         ));
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_leisure,null),
-                getResources().getString(R.string.group_leisure)
+                getResources().getString(R.string.group_leisure),
+                expenseList
         ));
         cardList.add(new CardExpense(
                 ResourcesCompat.getDrawable(getResources(),R.drawable.icon_other,null),
-                getResources().getString(R.string.group_other)
+                getResources().getString(R.string.group_other),
+                expenseList
         ));
         return cardList;
     }

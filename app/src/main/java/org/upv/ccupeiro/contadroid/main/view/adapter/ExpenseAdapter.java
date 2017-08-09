@@ -1,10 +1,12 @@
 package org.upv.ccupeiro.contadroid.main.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import org.upv.ccupeiro.contadroid.R;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
  */
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
-
+    private static final String TAG = "ExpenseAdapter";
     protected List<Expense> expenseList;
 
     public ExpenseAdapter(List<Expense> expenseList) {
@@ -39,6 +41,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         holder.expense_name.setText(expense.getName());
         holder.expense_amount.setText(expense.getAmountEuroString());
         holder.expense_checkbox.setChecked(expense.isPaid());
+        holder.expense_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.i(TAG, "onCheckedChanged: Se ha cambiado el check a "+isChecked);
+            }
+        });
         if(expense.getDescription().isEmpty()){
             holder.expense_description.setVisibility(View.GONE);
         }else{
