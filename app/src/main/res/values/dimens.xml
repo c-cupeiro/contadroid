@@ -10,4 +10,9 @@
     <dimen name="expense_row_amount_margin_rigth">40dp</dimen>
     <dimen name="expense_row_description_horizontal">20dp</dimen>
     <dimen name="expense_row_vertical">5dp</dimen>
+    <dimen name="circle_icon_size">24dp</dimen>
+    <dimen name="circle_icon_stroke_width">3dp</dimen>
+    <dimen name="icon_drawable_margin">2dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_viewport_size">24</dimen>
 </resources>

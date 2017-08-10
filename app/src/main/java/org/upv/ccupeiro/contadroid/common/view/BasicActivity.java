@@ -1,7 +1,6 @@
 package org.upv.ccupeiro.contadroid.common.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -12,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,13 +18,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.main.view.activity.MainActivity;
+import org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity;
 
 import java.util.List;
 
@@ -78,7 +75,7 @@ public abstract class BasicActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_actual_month) {
-            initActualMonthActivity();
+            ActualMonthActivity.open(this);
             showSnakcbar("Has pulsado el mes Actual");
         } else if (id == R.id.nav_chart) {
             showSnakcbar("Has pulsado la grafica");
@@ -95,14 +92,7 @@ public abstract class BasicActivity extends AppCompatActivity
         return true;
     }
 
-    private void initActualMonthActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-    }
-
-    private void showSnakcbar(String text){
+    protected void showSnakcbar(String text){
         Snackbar.make(mDrawer, text, Snackbar.LENGTH_LONG).show();
     }
 
@@ -120,8 +110,6 @@ public abstract class BasicActivity extends AppCompatActivity
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
-        //mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);

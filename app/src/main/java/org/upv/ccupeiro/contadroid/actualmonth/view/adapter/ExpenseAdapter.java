@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.main.view.adapter;
+package org.upv.ccupeiro.contadroid.actualmonth.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,18 +12,15 @@ import android.widget.TextView;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Carlos on 08/08/2017.
- */
-
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
     private static final String TAG = "ExpenseAdapter";
-    protected List<Expense> expenseList;
+    List<Expense> expenseList = new ArrayList<>();
 
     public ExpenseAdapter(List<Expense> expenseList) {
         this.expenseList = expenseList;

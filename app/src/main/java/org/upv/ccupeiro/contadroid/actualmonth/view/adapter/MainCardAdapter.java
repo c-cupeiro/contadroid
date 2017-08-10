@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.main.view.adapter;
+package org.upv.ccupeiro.contadroid.actualmonth.view.adapter;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,20 +10,17 @@ import android.widget.TextView;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
-import org.upv.ccupeiro.contadroid.main.model.CardExpense;
+import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpense;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Carlos on 07/08/2017.
- */
-
 public class MainCardAdapter extends RecyclerView.Adapter<MainCardAdapter.ViewHolder> {
-    protected List<CardExpense> cardsList;
-    protected RecyclerView.LayoutManager innerRvLayoutManager;
+    List<CardExpense> cardsList = new ArrayList<>();;
+    RecyclerView.LayoutManager innerRvLayoutManager;
 
 
     public MainCardAdapter(List<CardExpense> cardsList) {

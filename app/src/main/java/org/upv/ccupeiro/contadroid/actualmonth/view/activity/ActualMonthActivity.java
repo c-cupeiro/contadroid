@@ -1,21 +1,22 @@
-package org.upv.ccupeiro.contadroid.main.view.activity;
+package org.upv.ccupeiro.contadroid.actualmonth.view.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.view.BasicActivity;
-import org.upv.ccupeiro.contadroid.main.view.adapter.MainTabAdapter;
+import org.upv.ccupeiro.contadroid.actualmonth.view.adapter.MainTabAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BasicActivity {
+public class ActualMonthActivity extends BasicActivity {
 
     @Nullable
     @BindView(R.id.tabs_view)
@@ -36,8 +37,15 @@ public class MainActivity extends BasicActivity {
         });
     }
 
+    public static void open(Activity activity){
+        Intent intent = new Intent(activity, ActualMonthActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
     private void clickOnFab(View view) {
-        Snackbar.make(view, "Clickado FAB", Snackbar.LENGTH_LONG).show();
+        showSnakcbar("Clickado FAB");
     }
 
     protected void initializeTabLayout() {

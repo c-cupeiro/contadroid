@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.upv.ccupeiro.contadroid.main.view.activity.MainActivity">
+    tools:context="org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity">
     <android.support.v4.view.ViewPager
         android:id="@+id/tabs_view"
         android:layout_width="match_parent"
