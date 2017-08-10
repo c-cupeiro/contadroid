@@ -3,6 +3,7 @@ package org.upv.ccupeiro.contadroid.common.model;
 import org.upv.ccupeiro.contadroid.common.utils.Constant;
 
 public class Expense {
+    private int id;
     private String name;
     private String description;
     private float amount;
@@ -23,6 +24,14 @@ public class Expense {
         this.amount = amount;
         this.isPaid = false;
         this.group = group;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
