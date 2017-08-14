@@ -123,9 +123,8 @@ public abstract class BasicActivity extends AppCompatActivity
         initializeButterKnife();
     }
 
-    protected void initializeFloatingButton(View.OnClickListener fabOnClicklistener) {
+    protected void showFloatingButton() {
         fab.setVisibility(View.VISIBLE);
-        fab.setOnClickListener(fabOnClicklistener);
     }
 
     protected void initializeTabLayout(List<String> tabsNames, final ViewPager tabView) {

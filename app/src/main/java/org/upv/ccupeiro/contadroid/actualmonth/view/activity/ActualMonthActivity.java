@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class ActualMonthActivity extends BasicActivity {
 
@@ -29,12 +30,7 @@ public class ActualMonthActivity extends BasicActivity {
         initializeFrameLayout(R.layout.activity_main);
         setTitle(R.string.main_title);
         initializeTabLayout();
-        initializeFloatingButton(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickOnFab(view);
-            }
-        });
+        showFloatingButton();
     }
 
     public static void open(Activity activity){
@@ -44,6 +40,7 @@ public class ActualMonthActivity extends BasicActivity {
         activity.finish();
     }
 
+    @OnClick(R.id.fab)
     private void clickOnFab(View view) {
         showSnakcbar("Clickado FAB");
     }

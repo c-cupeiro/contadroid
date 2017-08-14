@@ -26,4 +26,9 @@
     <string name="group_leisure">Ocio</string>
     <string name="group_other">Otros</string>
 
+    <string name="add_expense_title_hint">Titulo</string>
+    <string name="add_expense_description_hint">Descripción</string>
+    <string name="add_expense_amount_hint">Importe</string>
+    <string name="add_expense_category_card_title">Categorias</string>
+
 </resources>

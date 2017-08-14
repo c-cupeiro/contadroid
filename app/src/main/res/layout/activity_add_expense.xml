@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.upv.ccupeiro.contadroid.addexpense.view.activity.AddExpenseActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@color/textColor" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <EditText
+        android:id="@+id/et_expense_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_below="@id/appbar"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="@string/add_expense_title_hint" />
+
+    <EditText
+        android:id="@+id/et_expense_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_below="@id/et_expense_title"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="@string/add_expense_description_hint" />
+    <LinearLayout
+        android:id="@+id/ll_amount_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_expense_description"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:weightSum="4"
+        android:orientation="horizontal" >
+        <EditText
+            android:id="@+id/et_expense_amount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:layout_weight="1"
+            android:hint="@string/add_expense_amount_hint" />
+        <TextView
+            android:id="@+id/tv_currency"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:text="€"
+            android:layout_weight="3"
+            />
+    </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_amount_group"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:elevation="@dimen/cardview_default_elevation" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_expense_category_card_title"
+                android:gravity="center"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="@dimen/card_view_padding_title"
+                android:background="@color/colorPrimaryLight"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_paid_expenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBackCard"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+</RelativeLayout>
