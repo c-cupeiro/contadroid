@@ -3,7 +3,7 @@ package org.upv.ccupeiro.contadroid.actualmonth.model;
 import android.graphics.drawable.Drawable;
 
 import org.upv.ccupeiro.contadroid.common.model.Expense;
-import org.upv.ccupeiro.contadroid.common.utils.Constant;
+import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class CardExpense {
     }
 
     public String getCardAmountEuroString(){
-        return String.format(Constant.FORMAT_MONEY,cardAmount);
+        return StringUtils.formatAmount(cardAmount);
     }
 
     public List<Expense> getExpenseList() {

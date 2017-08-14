@@ -92,7 +92,7 @@ public abstract class BasicActivity extends AppCompatActivity
         return true;
     }
 
-    protected void showSnakcbar(String text){
+    public void showSnakcbar(String text){
         Snackbar.make(mDrawer, text, Snackbar.LENGTH_LONG).show();
     }
 

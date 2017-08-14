@@ -1,6 +1,6 @@
 package org.upv.ccupeiro.contadroid.common.model;
 
-import org.upv.ccupeiro.contadroid.common.utils.Constant;
+import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 public class Expense {
     private int id;
@@ -55,7 +55,7 @@ public class Expense {
     }
 
     public String getAmountEuroString(){
-        return String.format(Constant.FORMAT_MONEY,amount);
+        return StringUtils.formatAmount(amount);
     }
 
     public void setAmount(float amount) {
