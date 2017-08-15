@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_category_row"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/category_margin"
+    android:padding="@dimen/category_padding"
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/iv_category_row_icon"
+        app:srcCompat="@drawable/icon_transport"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="4dp" />
+
+    <TextView
+        android:id="@+id/tv_category_row_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="4dp"
+        android:text="Transporte"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+</LinearLayout>

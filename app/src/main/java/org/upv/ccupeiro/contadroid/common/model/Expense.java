@@ -10,21 +10,23 @@ public class Expense {
     private boolean isPaid;
     private ExpensesGroup group;
 
-    public Expense(String name, float amount, ExpensesGroup group) {
+    public Expense(int id, String name, String description, float amount, boolean isPaid, ExpensesGroup group) {
+        this.id = id;
         this.name = name;
+        this.description = description;
         this.amount = amount;
+        this.isPaid = isPaid;
         this.group = group;
-        this.description = "";
-        this.isPaid = false;
     }
-
     public Expense(String name, String description, float amount, ExpensesGroup group) {
+        this.id = -1;
         this.name = name;
         this.description = description;
         this.amount = amount;
         this.isPaid = false;
         this.group = group;
     }
+
 
     public int getId() {
         return id;

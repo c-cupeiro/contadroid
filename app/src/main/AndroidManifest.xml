@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".actualmonth.view.activity.ActualMonthActivity"
-            android:label="MAIN"
+            android:label="@string/actual_month_activity_title"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addexpense.view.activity.AddExpenseActivity"></activity>
+        <activity android:name=".addexpense.view.activity.AddExpenseActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

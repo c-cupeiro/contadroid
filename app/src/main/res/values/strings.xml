@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Contadroid</string>
+    <string name="empty"></string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,9 +12,10 @@
     <string name="navigation_drawer_menu_login">Iniciar Sesion</string>
 
 
-    <string name="main_title">Mes Actual</string>
-    <string name="main_tab_expenses_paid">Realizados</string>
-    <string name="main_tab_expenses_not_paid">Pendientes</string>
+    <string name="actual_month_title">Mes Actual</string>
+    <string name="actual_month_tab_expenses_paid">Realizados</string>
+    <string name="actual_month_tab_expenses_not_paid">Pendientes</string>
+    <string name="actual_month_activity_title">Mes Actual</string>
 
 
     <string name="action_settings">Settings</string>
@@ -26,9 +28,16 @@
     <string name="group_leisure">Ocio</string>
     <string name="group_other">Otros</string>
 
+    <string name="add_expense_title_activity">Añadir Gasto</string>
     <string name="add_expense_title_hint">Titulo</string>
     <string name="add_expense_description_hint">Descripción</string>
     <string name="add_expense_amount_hint">Importe</string>
     <string name="add_expense_category_card_title">Categorias</string>
+    <string name="add_expense_menu_save">Guardar</string>
+    <string name="add_expense_init_error">Falta </string>
+    <string name="add_expense_title_error">el nombre del gasto</string>
+    <string name="add_expense_amount_error">la cantidad de dinero</string>
+    <string name="add_expense_group_error">el tipo de gasto</string>
+    <string name="add_expense_error_separator">,</string>
 
 </resources>

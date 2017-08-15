@@ -7,6 +7,7 @@ public enum ExpensesGroup {
     FOOD,
     SHOPPING,
     LEISURE,
-    OTHER;
+    OTHER,
+    EMPTY;
 
 }

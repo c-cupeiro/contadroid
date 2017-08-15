@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import org.upv.ccupeiro.contadroid.R;
+import org.upv.ccupeiro.contadroid.addexpense.view.activity.AddExpenseActivity;
 import org.upv.ccupeiro.contadroid.common.view.BasicActivity;
 import org.upv.ccupeiro.contadroid.actualmonth.view.adapter.MainTabAdapter;
 
@@ -28,7 +29,7 @@ public class ActualMonthActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeFrameLayout(R.layout.activity_main);
-        setTitle(R.string.main_title);
+        setTitle(R.string.actual_month_title);
         initializeTabLayout();
         showFloatingButton();
     }
@@ -41,14 +42,19 @@ public class ActualMonthActivity extends BasicActivity {
     }
 
     @OnClick(R.id.fab)
-    private void clickOnFab(View view) {
-        showSnakcbar("Clickado FAB");
+    void clickOnFab(View view) {
+        openAddActivity();
+    }
+
+    private void openAddActivity() {
+        Intent intent = new Intent(this, AddExpenseActivity.class);
+        startActivity(intent);
     }
 
     protected void initializeTabLayout() {
         List<String> tabsNames = new ArrayList<>();
-        tabsNames.add(getString(R.string.main_tab_expenses_paid));
-        tabsNames.add(getString(R.string.main_tab_expenses_not_paid));
+        tabsNames.add(getString(R.string.actual_month_tab_expenses_paid));
+        tabsNames.add(getString(R.string.actual_month_tab_expenses_not_paid));
         mainTabAdapter = new MainTabAdapter(getSupportFragmentManager(),tabsNames.size());
         tabs_view.setAdapter(mainTabAdapter);
         super.initializeTabLayout(tabsNames, tabs_view);

@@ -26,8 +26,8 @@ public class CardExpenseRowRenderer extends CardExpenseRenderer {
         void onCheckboxClicked(CardExpenseItem expense);
     }
 
-    public CardExpenseRowRenderer(Listener removeItemListener) {
-        this.checkboxItemListener = removeItemListener;
+    public CardExpenseRowRenderer(Listener checkboxItemListener) {
+        this.checkboxItemListener = checkboxItemListener;
     }
 
     @Override
