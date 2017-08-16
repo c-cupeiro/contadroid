@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -25,12 +24,11 @@ import org.upv.ccupeiro.contadroid.addexpense.model.SimpleExpenseGroup;
 import org.upv.ccupeiro.contadroid.addexpense.view.renderer.ExpenseGroupViewRenderer;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
+import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.R.attr.name;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
@@ -38,18 +36,20 @@ public class AddExpenseActivity extends AppCompatActivity {
     public static final String ADD_EXPENSE_SEND_EXPENSE = "AddExpenseSendExpense";
     public static final String ADD_EXPENSE_RETURN_EXPENSE = "addExpenseReturnExpense";
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
     @BindView(R.id.et_expense_title)
-    protected EditText et_title;
+    EditText et_name;
     @BindView(R.id.et_expense_description)
-    protected EditText et_description;
+    EditText et_description;
     @BindView(R.id.et_expense_amount)
-    protected EditText et_amount;
+    EditText et_amount;
     @BindView(R.id.rv_category_expenses)
-    protected RecyclerView rv_category;
+    RecyclerView rv_category;
     private RVRendererAdapter<ExpenseGroupView> adapter;
 
     private boolean isEdition=false;
+    private boolean isExpenseEditionPaid = false;
+    private int expenseEditionId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,12 +105,14 @@ public class AddExpenseActivity extends AppCompatActivity {
         if(extras != null){
             Expense editionExpense = (Expense) extras.getSerializable(ADD_EXPENSE_SEND_EXPENSE);
             isEdition = true;
+            isExpenseEditionPaid = editionExpense.isPaid();
+            expenseEditionId = editionExpense.getId();
             renderData(editionExpense);
         }
     }
 
     private void renderData(Expense editionExpense) {
-        et_title.setText(editionExpense.getName());
+        et_name.setText(editionExpense.getName());
         if(!editionExpense.getDescription().isEmpty())
             et_description.setText(editionExpense.getDescription());
         et_amount.setText(StringUtils.formatAmount(editionExpense.getAmount()));
@@ -141,7 +143,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     }
 
     private void showSnackBar(String text){
-        Snackbar.make(toolbar, text, Snackbar.LENGTH_LONG).show();
+        new SnackBarUtils(toolbar,text).showShortSnackBar();
     }
 
 
@@ -168,21 +170,30 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     private void saveExpense(){
         if(validateExpense()){
-            String title = et_title.getText().toString();
+            String name = et_name.getText().toString();
             String description = et_description.getText().toString();
             float amount = Float.parseFloat(et_amount.getText().toString());
             ExpensesGroup group = getSelectedGroup();
-            Expense expense = new Expense(title,description,amount,group);
+            Expense.Builder expense = new Expense.Builder()
+                    .withName(name)
+                    .withDescription(description)
+                    .withAmount(amount)
+                    .withGroup(group);
+            if(isEdition){
+                expense.withId(expenseEditionId);
+                if(isExpenseEditionPaid)
+                    expense.isPaid();
+            }
             Intent returnIntent = new Intent();
-            returnIntent.putExtra(ADD_EXPENSE_RETURN_EXPENSE,expense);
+            returnIntent.putExtra(ADD_EXPENSE_RETURN_EXPENSE,expense.build());
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
         }
     }
     private boolean validateExpense(){
         String error = "";
-        if(et_title.getText().toString().isEmpty())
-            error+=getString(R.string.add_expense_title_error);
+        if(et_name.getText().toString().isEmpty())
+            error+=getString(R.string.add_expense_name_error);
         if(et_amount.getText().toString().isEmpty()){
             error+=addSeparator(error)+getString(R.string.add_expense_amount_error);
         }

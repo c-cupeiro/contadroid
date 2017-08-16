@@ -1,5 +1,6 @@
 package org.upv.ccupeiro.contadroid.actualmonth.model;
 
+import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 
 import static android.R.attr.id;
@@ -15,6 +16,85 @@ public class CardExpenseItem {
     private float amount;
     private String description;
     private boolean isPaid;
+
+    public final static CardExpenseItem CARD_EXPENSE_ITEM_EMPTY = new CardExpenseItem(false,false,
+            -1, R.drawable.icon_other,ExpensesGroup.EMPTY,"",0,"",false);
+
+    private CardExpenseItem(boolean isGroupHeader, boolean isExpenseRow, int expenseId, int icon, ExpensesGroup group, String name, float amount, String description, boolean isPaid) {
+        this.isGroupHeader = isGroupHeader;
+        this.isExpenseRow = isExpenseRow;
+        this.expenseId = expenseId;
+        this.icon = icon;
+        this.group = group;
+        this.name = name;
+        this.amount = amount;
+        this.description = description;
+        this.isPaid = isPaid;
+    }
+
+    public static class Builder{
+        private boolean isGroupHeader = false;
+        private boolean isExpenseRow = false;
+        private int expenseId = -1;
+        private int icon = R.drawable.icon_other;
+        private ExpensesGroup group = ExpensesGroup.EMPTY;
+        private String name = "";
+        private float amount = 0;
+        private String description = "";
+        private boolean isPaid = false;
+
+        public Builder isGroupHeader(){
+            this.isGroupHeader = true;
+            return this;
+        }
+
+        public Builder isExpenseRow(){
+            this.isExpenseRow = true;
+            return this;
+        }
+
+        public Builder withExpenseId(int expenseId){
+            this.expenseId = expenseId;
+            return this;
+        }
+
+        public Builder withIcon(int icon){
+            this.icon = icon;
+            return this;
+        }
+
+        public Builder withGroup(ExpensesGroup group){
+            this.group = group;
+            return this;
+        }
+
+        public Builder withName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder withAmount(float amount){
+            this.amount = amount;
+            return this;
+        }
+
+        public Builder withDescription(String description){
+            this.description = description;
+            return this;
+        }
+
+        public Builder isPaid(){
+            this.isPaid = true;
+            return this;
+        }
+
+        public CardExpenseItem build(){
+            return new CardExpenseItem(isGroupHeader, isExpenseRow, expenseId, icon,
+                    group, name, amount, description, isPaid);
+        }
+
+    }
+
 
     public boolean isGroupHeader() {
         return isGroupHeader;
@@ -104,5 +184,20 @@ public class CardExpenseItem {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "CardExpenseItem{" +
+                "isGroupHeader=" + isGroupHeader +
+                ", isExpenseRow=" + isExpenseRow +
+                ", expenseId=" + expenseId +
+                ", icon=" + icon +
+                ", group=" + group +
+                ", name='" + name + '\'' +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", isPaid=" + isPaid +
+                '}';
     }
 }

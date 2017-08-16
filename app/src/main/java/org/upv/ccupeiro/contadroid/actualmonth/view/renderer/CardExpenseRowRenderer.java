@@ -18,11 +18,9 @@ import butterknife.OnLongClick;
 
 public class CardExpenseRowRenderer extends CardExpenseRenderer {
     @BindView(R.id.tv_row_description)
-    protected TextView description;
+    TextView description;
     @BindView(R.id.checkbox_row_item)
-    protected CheckBox checkbox;
-    @BindView(R.id.ll_row_item)
-    protected LinearLayout row_item;
+    CheckBox checkbox;
 
     private Listener itemListener;
 

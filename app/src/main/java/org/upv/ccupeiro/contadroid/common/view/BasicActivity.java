@@ -24,6 +24,7 @@ import android.widget.FrameLayout;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity;
+import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 
 import java.util.List;
 
@@ -32,22 +33,22 @@ public abstract class BasicActivity extends AppCompatActivity
 
     @Nullable
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
     @Nullable
     @BindView(R.id.tabs)
-    protected TabLayout tabLayout;
+    TabLayout tabLayout;
     @Nullable
     @BindView(R.id.nav_view)
-    protected NavigationView navigationView;
+    NavigationView navigationView;
     @Nullable
     @BindView(R.id.drawer_layout)
-    protected DrawerLayout mDrawer;
+    DrawerLayout mDrawer;
     @Nullable
     @BindView(R.id.content_frame)
-    protected FrameLayout content_Layout;
+    FrameLayout content_Layout;
     @Nullable
     @BindView(R.id.fab)
-    protected FloatingActionButton fab;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public abstract class BasicActivity extends AppCompatActivity
     }
 
     public void showSnakcbar(String text){
-        Snackbar.make(mDrawer, text, Snackbar.LENGTH_LONG).show();
+        new SnackBarUtils(mDrawer,text).showShortSnackBar();
     }
 
     private void initializeButterKnife() {

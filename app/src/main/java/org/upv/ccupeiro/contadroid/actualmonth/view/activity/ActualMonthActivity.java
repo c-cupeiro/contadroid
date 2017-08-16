@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.addexpense.view.activity.AddExpenseActivity;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.BasicActivity;
 import org.upv.ccupeiro.contadroid.actualmonth.view.adapter.MainTabAdapter;
 
@@ -29,7 +31,7 @@ public class ActualMonthActivity extends BasicActivity {
     public static final int EDIT_EXPENSE_REQUEST_CODE = 102;
     @Nullable
     @BindView(R.id.tabs_view)
-    protected ViewPager tabsView;
+    ViewPager tabsView;
     private MainTabAdapter mainTabAdapter;
 
     @Override
@@ -66,7 +68,7 @@ public class ActualMonthActivity extends BasicActivity {
                         AddExpenseActivity.openSendDataWithResult(activity,expenseFromCardExpense(cardExpense),EDIT_EXPENSE_REQUEST_CODE);
                         break;
                     case DELETE_OPTION:
-                        ((BasicActivity)activity).showSnakcbar("Borrar elemento");
+                        new SnackBarUtils(tabsView,"Borrar elemento").showShortSnackBar();
                         break;
                 }
             }
@@ -75,10 +77,15 @@ public class ActualMonthActivity extends BasicActivity {
     }
 
     private Expense expenseFromCardExpense(CardExpenseItem cardExpense) {
-        Expense expense = new Expense(cardExpense.getExpenseId(),cardExpense.getName(),
-                cardExpense.getDescription(),cardExpense.getAmount(),
-                cardExpense.isPaid(),cardExpense.getGroup());
-        return expense;
+        Expense.Builder expense = new Expense.Builder()
+                .withId(cardExpense.getExpenseId())
+                .withName(cardExpense.getName())
+                .withDescription(cardExpense.getDescription())
+                .withAmount(cardExpense.getAmount())
+                .withGroup(cardExpense.getGroup());
+        if(cardExpense.isPaid())
+            expense.isPaid();
+        return expense.build();
     }
 
     protected void initializeTabLayout() {
@@ -90,4 +97,21 @@ public class ActualMonthActivity extends BasicActivity {
         super.initializeTabLayout(tabsNames, tabsView);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case ADD_EXPENSE_REQUEST_CODE:
+                if(resultCode == RESULT_OK){
+                    new SnackBarUtils(tabsView,"Gasto Guardado").showShortSnackBar();
+                }
+                break;
+            case EDIT_EXPENSE_REQUEST_CODE:
+                if(resultCode == RESULT_OK){
+                    new SnackBarUtils(tabsView,"Gasto Editado").showShortSnackBar();
+                }
+                break;
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

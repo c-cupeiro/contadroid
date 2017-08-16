@@ -45,23 +45,24 @@ public class SimpleCardExpenseItemCollection {
 
 
     private static CardExpenseItem generateGroupHeader(int icon,String name,float amount){
-        CardExpenseItem groupHeader = new CardExpenseItem();
-        groupHeader.setGroupHeader(true);
-        groupHeader.setIcon(icon);
-        groupHeader.setName(name);
-        groupHeader.setAmount(amount);
-        return groupHeader;
+        return new CardExpenseItem.Builder()
+                .isGroupHeader()
+                .withIcon(icon)
+                .withName(name)
+                .withAmount(amount)
+                .build();
     }
     private static CardExpenseItem generateExpenseRow(ExpensesGroup group, String name, String description,
                                                       float amount, boolean paid){
-        CardExpenseItem expenseRow = new CardExpenseItem();
-        expenseRow.setExpenseRow(true);
-        expenseRow.setGroup(group);
-        expenseRow.setName(name);
-        expenseRow.setDescription(description);
-        expenseRow.setAmount(amount);
-        expenseRow.setPaid(paid);
-        return expenseRow;
+        CardExpenseItem.Builder expenseRow = new CardExpenseItem.Builder()
+                .isExpenseRow()
+                .withGroup(group)
+                .withName(name)
+                .withDescription(description)
+                .withAmount(amount);
+        if(paid)
+            expenseRow.isPaid();
+        return expenseRow.build();
     }
 
 }

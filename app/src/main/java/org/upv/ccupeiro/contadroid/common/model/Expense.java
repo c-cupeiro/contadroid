@@ -1,5 +1,6 @@
 package org.upv.ccupeiro.contadroid.common.model;
 
+import org.upv.ccupeiro.contadroid.addexpense.model.ExpenseGroupView;
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ public class Expense implements Serializable{
     private boolean isPaid;
     private ExpensesGroup group;
 
-    public Expense(int id, String name, String description, float amount, boolean isPaid, ExpensesGroup group) {
+    private Expense(int id, String name, String description, float amount, boolean isPaid, ExpensesGroup group) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -20,14 +21,49 @@ public class Expense implements Serializable{
         this.isPaid = isPaid;
         this.group = group;
     }
-    public Expense(String name, String description, float amount, ExpensesGroup group) {
-        this.id = -1;
-        this.name = name;
-        this.description = description;
-        this.amount = amount;
-        this.isPaid = false;
-        this.group = group;
+    public static class Builder{
+        private int id = -1;
+        private String name = "";
+        private String description = "";
+        private float amount = 0;
+        private boolean isPaid = false;
+        private ExpensesGroup group = ExpensesGroup.EMPTY;
+
+        public Builder withId(int id){
+            this.id = id;
+            return this;
+        }
+
+        public Builder withName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder withDescription(String description){
+            this.description = description;
+            return this;
+        }
+
+        public Builder withAmount(float amount){
+            this.amount = amount;
+            return this;
+        }
+
+        public Builder isPaid(){
+            this.isPaid = true;
+            return this;
+        }
+
+        public Builder withGroup(ExpensesGroup group){
+            this.group = group;
+            return this;
+        }
+
+        public Expense build(){
+            return new Expense(id, name, description, amount, isPaid, group);
+        }
     }
+
 
 
     public int getId() {
