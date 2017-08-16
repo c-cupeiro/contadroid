@@ -2,7 +2,9 @@ package org.upv.ccupeiro.contadroid.common.model;
 
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
-public class Expense {
+import java.io.Serializable;
+
+public class Expense implements Serializable{
     private int id;
     private String name;
     private String description;

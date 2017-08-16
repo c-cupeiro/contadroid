@@ -19,11 +19,11 @@ import butterknife.OnClick;
 
 public class ExpenseGroupViewRenderer extends Renderer<ExpenseGroupView> {
     @BindView(R.id.iv_category_row_icon)
-    ImageView iv_row_icon;
+    private ImageView iv_row_icon;
     @BindView(R.id.tv_category_row_name)
-    TextView tv_row_name;
+    private TextView tv_row_name;
     @BindView(R.id.ll_category_row)
-    LinearLayout ll_category;
+    private LinearLayout ll_category;
 
     private Listener rowItemListener;
 

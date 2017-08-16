@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 
 public class CardExpenseHeaderRenderer extends CardExpenseRenderer {
     @BindView(R.id.iv_row_header_icon)
-    ImageView icon;
+    private ImageView icon;
 
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup parent) {

@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 public class TabExpensesPaidFragment extends Fragment {
     @Nullable
     @BindView(R.id.rv_card_paid_expenses)
-    RecyclerView rvPaidExpenses;
+    private RecyclerView rvPaidExpenses;
 
     private RVRendererAdapter<CardExpenseItem> adapter;
 

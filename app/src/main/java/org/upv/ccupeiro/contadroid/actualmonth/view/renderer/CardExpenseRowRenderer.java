@@ -16,9 +16,9 @@ import butterknife.OnClick;
 
 public class CardExpenseRowRenderer extends CardExpenseRenderer {
     @BindView(R.id.tv_row_description)
-    TextView description;
+    private TextView description;
     @BindView(R.id.checkbox_row_item)
-    CheckBox checkbox;
+    private CheckBox checkbox;
 
     private Listener checkboxItemListener;
 

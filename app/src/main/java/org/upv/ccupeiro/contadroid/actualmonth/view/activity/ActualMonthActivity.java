@@ -20,9 +20,10 @@ import butterknife.OnClick;
 
 public class ActualMonthActivity extends BasicActivity {
 
+    public static final int ADD_EXPENSE_REQUEST_CODE = 101;
     @Nullable
     @BindView(R.id.tabs_view)
-    ViewPager tabs_view;
+    private ViewPager tabsView;
     private MainTabAdapter mainTabAdapter;
 
     @Override
@@ -43,12 +44,7 @@ public class ActualMonthActivity extends BasicActivity {
 
     @OnClick(R.id.fab)
     void clickOnFab(View view) {
-        openAddActivity();
-    }
-
-    private void openAddActivity() {
-        Intent intent = new Intent(this, AddExpenseActivity.class);
-        startActivity(intent);
+        AddExpenseActivity.openWithResult(this, ADD_EXPENSE_REQUEST_CODE);
     }
 
     protected void initializeTabLayout() {
@@ -56,8 +52,8 @@ public class ActualMonthActivity extends BasicActivity {
         tabsNames.add(getString(R.string.actual_month_tab_expenses_paid));
         tabsNames.add(getString(R.string.actual_month_tab_expenses_not_paid));
         mainTabAdapter = new MainTabAdapter(getSupportFragmentManager(),tabsNames.size());
-        tabs_view.setAdapter(mainTabAdapter);
-        super.initializeTabLayout(tabsNames, tabs_view);
+        tabsView.setAdapter(mainTabAdapter);
+        super.initializeTabLayout(tabsNames, tabsView);
     }
 
 }
