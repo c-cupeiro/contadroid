@@ -6,11 +6,11 @@ import android.view.View;
 public class SnackBarUtils {
 
     public static void showShortSnackBar(View parentView, String message){
-        Snackbar.make(parentView,message,Snackbar.LENGTH_SHORT);
+        Snackbar.make(parentView,message,Snackbar.LENGTH_SHORT).show();
     }
 
     public static void showLongSnackBar(View parentView, String message){
-        Snackbar.make(parentView,message,Snackbar.LENGTH_LONG);
+        Snackbar.make(parentView,message,Snackbar.LENGTH_LONG).show();
     }
 
 

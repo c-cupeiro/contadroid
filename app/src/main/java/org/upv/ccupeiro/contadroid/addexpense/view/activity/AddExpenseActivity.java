@@ -115,7 +115,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         et_name.setText(editionExpense.getName());
         if(!editionExpense.getDescription().isEmpty())
             et_description.setText(editionExpense.getDescription());
-        et_amount.setText(StringUtils.formatAmount(editionExpense.getAmount()));
+        et_amount.setText(editionExpense.getAmount()+"");
         markGroupInAdapter(editionExpense.getGroup());
     }
 
