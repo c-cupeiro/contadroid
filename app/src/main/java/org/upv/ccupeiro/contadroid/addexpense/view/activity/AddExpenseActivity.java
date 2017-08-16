@@ -143,7 +143,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     }
 
     private void showSnackBar(String text){
-        new SnackBarUtils(toolbar,text).showShortSnackBar();
+        SnackBarUtils.showShortSnackBar(toolbar,text);
     }
 
 

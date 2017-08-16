@@ -68,7 +68,7 @@ public class ActualMonthActivity extends BasicActivity {
                         AddExpenseActivity.openSendDataWithResult(activity,expenseFromCardExpense(cardExpense),EDIT_EXPENSE_REQUEST_CODE);
                         break;
                     case DELETE_OPTION:
-                        new SnackBarUtils(tabsView,"Borrar elemento").showShortSnackBar();
+                        SnackBarUtils.showShortSnackBar(tabsView,"Borrar elemento");
                         break;
                 }
             }
@@ -102,12 +102,12 @@ public class ActualMonthActivity extends BasicActivity {
         switch (requestCode){
             case ADD_EXPENSE_REQUEST_CODE:
                 if(resultCode == RESULT_OK){
-                    new SnackBarUtils(tabsView,"Gasto Guardado").showShortSnackBar();
+                    SnackBarUtils.showShortSnackBar(tabsView,"Gasto Guardado");
                 }
                 break;
             case EDIT_EXPENSE_REQUEST_CODE:
                 if(resultCode == RESULT_OK){
-                    new SnackBarUtils(tabsView,"Gasto Editado").showShortSnackBar();
+                    SnackBarUtils.showShortSnackBar(tabsView,"Gasto Editado");
                 }
                 break;
 

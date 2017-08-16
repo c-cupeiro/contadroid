@@ -94,7 +94,7 @@ public abstract class BasicActivity extends AppCompatActivity
     }
 
     public void showSnakcbar(String text){
-        new SnackBarUtils(mDrawer,text).showShortSnackBar();
+        SnackBarUtils.showShortSnackBar(mDrawer,text);
     }
 
     private void initializeButterKnife() {

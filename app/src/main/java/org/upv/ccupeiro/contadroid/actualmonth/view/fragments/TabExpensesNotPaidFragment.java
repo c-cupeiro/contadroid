@@ -58,7 +58,8 @@ public class TabExpensesNotPaidFragment extends Fragment {
         RendererBuilder<CardExpenseItem> rendererBuilder = new CardExpenseItemBuilder(new CardExpenseRowRenderer.Listener() {
             @Override
             public void onCheckboxClicked(CardExpenseItem expense) {
-                new SnackBarUtils(rvNotPaidExpenses,"Checkbox clickado: "+expense.getName()).showShortSnackBar();
+                SnackBarUtils.showShortSnackBar(rvNotPaidExpenses,
+                        "Checkbox clickado: "+expense.getName());
             }
 
             @Override
