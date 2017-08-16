@@ -16,6 +16,8 @@
     <string name="actual_month_tab_expenses_paid">Realizados</string>
     <string name="actual_month_tab_expenses_not_paid">Pendientes</string>
     <string name="actual_month_activity_title">Mes Actual</string>
+    <string name="actual_month_dialog_edit">Editar</string>
+    <string name="actual_month_dialog_delete">Eliminar</string>
 
 
     <string name="action_settings">Settings</string>

@@ -16,6 +16,7 @@ import com.pedrogomez.renderers.RendererBuilder;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.model.SimpleCardExpenseItemCollection;
+import org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity;
 import org.upv.ccupeiro.contadroid.actualmonth.view.builder.CardExpenseItemBuilder;
 import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseRowRenderer;
 import org.upv.ccupeiro.contadroid.common.view.BasicActivity;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
 public class TabExpensesPaidFragment extends Fragment {
     @Nullable
     @BindView(R.id.rv_card_paid_expenses)
-    private RecyclerView rvPaidExpenses;
+    protected RecyclerView rvPaidExpenses;
 
     private RVRendererAdapter<CardExpenseItem> adapter;
 
@@ -51,6 +52,11 @@ public class TabExpensesPaidFragment extends Fragment {
             @Override
             public void onCheckboxClicked(CardExpenseItem expense) {
                 ((BasicActivity)getActivity()).showSnakcbar("Checkbox clickado: "+expense.getName());
+            }
+
+            @Override
+            public void OnLongPressRow(CardExpenseItem expense) {
+                ((ActualMonthActivity)getActivity()).showActionDialog(expense);
             }
         });
 

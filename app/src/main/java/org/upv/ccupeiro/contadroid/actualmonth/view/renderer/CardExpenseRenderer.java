@@ -20,9 +20,9 @@ import butterknife.ButterKnife;
 
 public abstract class CardExpenseRenderer extends Renderer<CardExpenseItem> {
     @BindView(R.id.tv_row_item_name)
-    private TextView name;
+    protected TextView name;
     @BindView(R.id.tv_row_item_amount)
-    private TextView amount;
+    protected TextView amount;
 
 
     @Override

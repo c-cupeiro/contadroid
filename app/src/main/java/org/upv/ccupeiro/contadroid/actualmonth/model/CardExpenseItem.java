@@ -1,5 +1,7 @@
 package org.upv.ccupeiro.contadroid.actualmonth.model;
 
+import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
+
 import static android.R.attr.id;
 
 public class CardExpenseItem {
@@ -8,6 +10,7 @@ public class CardExpenseItem {
     private boolean isExpenseRow;
     private int expenseId;
     private int icon;
+    private ExpensesGroup group;
     private String name;
     private float amount;
     private String description;
@@ -39,6 +42,14 @@ public class CardExpenseItem {
 
     public void setIcon(int icon) {
         this.icon = icon;
+    }
+
+    public ExpensesGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(ExpensesGroup group) {
+        this.group = group;
     }
 
     public void setExpenseId(int expenseId) {
@@ -85,6 +96,7 @@ public class CardExpenseItem {
                     && amount == other.amount
                     && description.equals(other.description)
                     && expenseId == other.expenseId
+                    && group == other.group
                     && icon == other.icon
                     && isPaid == other.isPaid
                     && isGroupHeader == other.isGroupHeader

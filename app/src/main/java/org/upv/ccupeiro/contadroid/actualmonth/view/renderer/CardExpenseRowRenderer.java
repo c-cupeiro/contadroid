@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.upv.ccupeiro.contadroid.R;
@@ -13,21 +14,25 @@ import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 public class CardExpenseRowRenderer extends CardExpenseRenderer {
     @BindView(R.id.tv_row_description)
-    private TextView description;
+    protected TextView description;
     @BindView(R.id.checkbox_row_item)
-    private CheckBox checkbox;
+    protected CheckBox checkbox;
+    @BindView(R.id.ll_row_item)
+    protected LinearLayout row_item;
 
-    private Listener checkboxItemListener;
+    private Listener itemListener;
 
     public interface Listener{
         void onCheckboxClicked(CardExpenseItem expense);
+        void OnLongPressRow(CardExpenseItem expense);
     }
 
-    public CardExpenseRowRenderer(Listener checkboxItemListener) {
-        this.checkboxItemListener = checkboxItemListener;
+    public CardExpenseRowRenderer(Listener itemListener) {
+        this.itemListener = itemListener;
     }
 
     @Override
@@ -59,7 +64,12 @@ public class CardExpenseRowRenderer extends CardExpenseRenderer {
     }
 
     @OnClick(R.id.checkbox_row_item) void clickCheckbox(){
-        checkboxItemListener.onCheckboxClicked(getContent());
+        itemListener.onCheckboxClicked(getContent());
+    }
+
+    @OnLongClick(R.id.ll_row_item) boolean longClickOnItem(){
+        itemListener.OnLongPressRow(getContent());
+        return true;
     }
 
 }

@@ -32,22 +32,22 @@ public abstract class BasicActivity extends AppCompatActivity
 
     @Nullable
     @BindView(R.id.toolbar)
-    private Toolbar toolbar;
+    protected Toolbar toolbar;
     @Nullable
     @BindView(R.id.tabs)
-    private TabLayout tabLayout;
+    protected TabLayout tabLayout;
     @Nullable
     @BindView(R.id.nav_view)
-    private NavigationView navigationView;
+    protected NavigationView navigationView;
     @Nullable
     @BindView(R.id.drawer_layout)
-    private DrawerLayout mDrawer;
+    protected DrawerLayout mDrawer;
     @Nullable
     @BindView(R.id.content_frame)
-    private FrameLayout content_Layout;
+    protected FrameLayout content_Layout;
     @Nullable
     @BindView(R.id.fab)
-    private FloatingActionButton fab;
+    protected FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

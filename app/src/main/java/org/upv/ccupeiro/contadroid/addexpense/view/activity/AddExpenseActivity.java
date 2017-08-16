@@ -38,15 +38,15 @@ public class AddExpenseActivity extends AppCompatActivity {
     public static final String ADD_EXPENSE_SEND_EXPENSE = "AddExpenseSendExpense";
     public static final String ADD_EXPENSE_RETURN_EXPENSE = "addExpenseReturnExpense";
     @BindView(R.id.toolbar)
-    private Toolbar toolbar;
+    protected Toolbar toolbar;
     @BindView(R.id.et_expense_title)
-    private EditText et_title;
+    protected EditText et_title;
     @BindView(R.id.et_expense_description)
-    private EditText et_description;
+    protected EditText et_description;
     @BindView(R.id.et_expense_amount)
-    private EditText et_amount;
+    protected EditText et_amount;
     @BindView(R.id.rv_category_expenses)
-    private RecyclerView rv_category;
+    protected RecyclerView rv_category;
     private RVRendererAdapter<ExpenseGroupView> adapter;
 
     private boolean isEdition=false;
