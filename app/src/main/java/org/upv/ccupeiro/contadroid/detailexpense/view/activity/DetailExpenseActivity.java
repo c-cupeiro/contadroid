@@ -26,6 +26,9 @@ import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -64,6 +67,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
         initializeToolbar();
         initializeAdapter();
         initializePresenter();
+        initializeRecyclerView();
     }
 
 
@@ -90,7 +94,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
 
     private void initializeAdapter() {
         final AdapteeCollection<ExpenseGroupView> expenseGroupViewCollection =
-                new ExpenseGroupViewCollection(SimpleExpenseGroup.getListExpenseGroup());
+                new ExpenseGroupViewCollection(new ArrayList<ExpenseGroupView>());
         RendererBuilder<ExpenseGroupView> rendererBuilder = new RendererBuilder<ExpenseGroupView>().withPrototype(
             new ExpenseGroupViewRenderer(new ExpenseGroupViewRenderer.Listener() {
                 @Override
@@ -110,9 +114,11 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
     }
 
     @Override
-    public void showExpenseInfo() {
+    public void showExpenseInfo(List<ExpenseGroupView> expenseGroupViewList) {
         checkEdition();
-        initializeRecyclerView();
+        adapter.clear();
+        adapter.addAll(expenseGroupViewList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

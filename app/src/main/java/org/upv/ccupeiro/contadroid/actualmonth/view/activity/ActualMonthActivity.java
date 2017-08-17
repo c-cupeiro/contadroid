@@ -11,10 +11,11 @@ import android.view.View;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
-import org.upv.ccupeiro.contadroid.common.view.BasicActivity;
+import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
 import org.upv.ccupeiro.contadroid.actualmonth.view.adapter.MainTabAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ActualMonthActivity extends BasicActivity {
+public class ActualMonthActivity extends BasicActivity implements ActualMonthPresenter.View{
     public static final int EDIT_OPTION = 0;
     public static final int DELETE_OPTION = 1;
     public static final int ADD_EXPENSE_REQUEST_CODE = 101;
@@ -32,12 +33,15 @@ public class ActualMonthActivity extends BasicActivity {
     @BindView(R.id.tabs_view)
     ViewPager tabsView;
     private MainTabAdapter mainTabAdapter;
+    private ActualMonthPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new ActualMonthPresenter();
         initializeFrameLayout(R.layout.activity_main);
-        setTitle(R.string.actual_month_title);
+        initializePresenter();
+        initToolbar();
         initializeTabLayout();
         showFloatingButton();
     }
@@ -49,11 +53,38 @@ public class ActualMonthActivity extends BasicActivity {
         activity.finish();
     }
 
+    private void initializePresenter(){
+        presenter.setView(this);
+    }
+
+    private void initToolbar() {
+        setTitle(R.string.actual_month_title);
+    }
+
+    private void initializeTabLayout() {
+        List<String> tabsNames = new ArrayList<>();
+        tabsNames.add(getString(R.string.actual_month_tab_expenses_paid));
+        tabsNames.add(getString(R.string.actual_month_tab_expenses_not_paid));
+        mainTabAdapter = new MainTabAdapter(getSupportFragmentManager(),tabsNames.size());
+        tabsView.setAdapter(mainTabAdapter);
+        super.initializeTabLayout(tabsNames, tabsView);
+    }
+
     @OnClick(R.id.fab)
     void clickOnFab(View view) {
+        presenter.onFabClicked();
+    }
+
+    @Override
+    public void startFabAction() {
         DetailExpenseActivity.openWithResult(this, ADD_EXPENSE_REQUEST_CODE);
     }
 
+    public void showDialog(CardExpenseItem cardExpenseItem){
+        presenter.showDialog(cardExpenseItem);
+    }
+
+    @Override
     public void showActionDialog(final CardExpenseItem cardExpense) {
         final Activity activity = this;
         AlertDialog.Builder menu = new AlertDialog.Builder(activity);
@@ -85,15 +116,6 @@ public class ActualMonthActivity extends BasicActivity {
         if(cardExpense.isPaid())
             expense.isPaid();
         return expense.build();
-    }
-
-    protected void initializeTabLayout() {
-        List<String> tabsNames = new ArrayList<>();
-        tabsNames.add(getString(R.string.actual_month_tab_expenses_paid));
-        tabsNames.add(getString(R.string.actual_month_tab_expenses_not_paid));
-        mainTabAdapter = new MainTabAdapter(getSupportFragmentManager(),tabsNames.size());
-        tabsView.setAdapter(mainTabAdapter);
-        super.initializeTabLayout(tabsNames, tabsView);
     }
 
     @Override

@@ -14,7 +14,9 @@
 
     <string name="actual_month_title">Mes Actual</string>
     <string name="actual_month_tab_expenses_paid">Realizados</string>
+    <string name="actual_month_tab_expenses_paid_empty_case">No hay pagos realizados</string>
     <string name="actual_month_tab_expenses_not_paid">Pendientes</string>
+    <string name="actual_month_tab_expenses_not_paid_empty_case">No hay gastos pendientes</string>
     <string name="actual_month_activity_title">Mes Actual</string>
     <string name="actual_month_dialog_edit">Editar</string>
     <string name="actual_month_dialog_delete">Eliminar</string>
@@ -40,5 +42,6 @@
     <string name="detail_expense_name_error">el nombre del gasto</string>
     <string name="detail_expense_amount_error">la cantidad de dinero</string>
     <string name="detail_expense_group_error">el tipo de gasto</string>
+
 
 </resources>

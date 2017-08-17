@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.upv.ccupeiro.contadroid.common.view.BasicActivity"
+    tools:context="org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity"
     tools:showIn="@layout/app_bar_basic">
 
 </android.support.constraint.ConstraintLayout>

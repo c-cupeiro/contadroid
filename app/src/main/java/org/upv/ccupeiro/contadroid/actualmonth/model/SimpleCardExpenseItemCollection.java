@@ -11,6 +11,12 @@ import static android.R.attr.name;
 public class SimpleCardExpenseItemCollection {
 
     public static CardExpenseCollection getPaidCollection(){
+
+        return new CardExpenseCollection(getPaidExpenseList());
+    }
+
+    public static List<CardExpenseItem> getPaidExpenseList(){
+
         List<CardExpenseItem> cardExpenseItemsList = new ArrayList<>();
         cardExpenseItemsList.add(generateGroupHeader(R.drawable.icon_income,"Ingresos",2000));
         cardExpenseItemsList.add(generateExpenseRow(ExpensesGroup.INCOME,"Sueldo","ingreso del trabajo",2000,true));
@@ -27,10 +33,15 @@ public class SimpleCardExpenseItemCollection {
         cardExpenseItemsList.add(generateGroupHeader(R.drawable.icon_other,"Otros",50));
         cardExpenseItemsList.add(generateExpenseRow(ExpensesGroup.OTHER,"Regalos","Regalo para Javi",50,true));
 
-        return new CardExpenseCollection(cardExpenseItemsList);
+        return cardExpenseItemsList;
     }
 
     public static CardExpenseCollection getNotPaidCollection(){
+
+        return new CardExpenseCollection(getNotPaidExpenseList());
+    }
+
+    public static List<CardExpenseItem> getNotPaidExpenseList(){
         List<CardExpenseItem> cardExpenseItemsList = new ArrayList<>();
         cardExpenseItemsList.add(generateGroupHeader(R.drawable.icon_transport,"Transporte",250));
         cardExpenseItemsList.add(generateExpenseRow(ExpensesGroup.TRANSPORT,"Coche","Letra mensual",250,false));
@@ -40,9 +51,8 @@ public class SimpleCardExpenseItemCollection {
         cardExpenseItemsList.add(generateGroupHeader(R.drawable.icon_leisure,"Ocio",50));
         cardExpenseItemsList.add(generateExpenseRow(ExpensesGroup.LEISURE,"Cervezas Amigos","",50,false));
 
-        return new CardExpenseCollection(cardExpenseItemsList);
+        return cardExpenseItemsList;
     }
-
 
     private static CardExpenseItem generateGroupHeader(int icon,String name,float amount){
         return new CardExpenseItem.Builder()

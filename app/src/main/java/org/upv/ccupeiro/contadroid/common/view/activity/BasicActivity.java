@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.common.view;
+package org.upv.ccupeiro.contadroid.common.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import butterknife.ButterKnife;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -77,23 +76,23 @@ public abstract class BasicActivity extends AppCompatActivity
 
         if (id == R.id.nav_actual_month) {
             ActualMonthActivity.open(this);
-            showSnakcbar("Has pulsado el mes Actual");
+            showSnackBar("Has pulsado el mes Actual");
         } else if (id == R.id.nav_chart) {
-            showSnakcbar("Has pulsado la grafica");
+            showSnackBar("Has pulsado la grafica");
         } else if (id == R.id.nav_template) {
-            showSnakcbar("Has pulsado la plantilla");
+            showSnackBar("Has pulsado la plantilla");
         } else if (id == R.id.nav_settings) {
-            showSnakcbar("Has pulsado las opciones");
+            showSnackBar("Has pulsado las opciones");
         } else if (id == R.id.nav_login) {
-            showSnakcbar("Has pulsado login");
+            showSnackBar("Has pulsado login");
         } else if (id == R.id.nav_logout) {
-            showSnakcbar("Has pulsado logout");
+            showSnackBar("Has pulsado logout");
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void showSnakcbar(String text){
+    public void showSnackBar(String text){
         SnackBarUtils.showShortSnackBar(mDrawer,text);
     }
 
