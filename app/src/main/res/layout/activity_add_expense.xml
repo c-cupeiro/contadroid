@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.upv.ccupeiro.contadroid.addexpense.view.activity.AddExpenseActivity">
+    tools:context="org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -29,7 +29,7 @@
         android:inputType="text"
         android:layout_below="@id/appbar"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="@string/add_expense_name_hint" />
+        android:hint="@string/detail_expense_name_hint" />
 
     <EditText
         android:id="@+id/et_expense_description"
@@ -38,7 +38,7 @@
         android:inputType="text"
         android:layout_below="@id/et_expense_title"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="@string/add_expense_description_hint" />
+        android:hint="@string/detail_expense_description_hint" />
     <LinearLayout
         android:id="@+id/ll_amount_group"
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
             android:layout_weight="1"
-            android:hint="@string/add_expense_amount_hint" />
+            android:hint="@string/detail_expense_amount_hint" />
         <TextView
             android:id="@+id/tv_currency"
             android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_expense_category_card_title"
+                android:text="@string/detail_expense_category_card_title"
                 android:gravity="center"
                 android:textColor="@color/textColor"
                 android:textStyle="bold"

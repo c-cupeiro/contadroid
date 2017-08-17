@@ -1,11 +1,7 @@
-package org.upv.ccupeiro.contadroid.addexpense.model;
-
-import android.support.v7.app.AlertDialog;
+package org.upv.ccupeiro.contadroid.detailexpense.model;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
-
-import static android.R.attr.id;
 
 public class ExpenseGroupView {
     private ExpensesGroup groupType;

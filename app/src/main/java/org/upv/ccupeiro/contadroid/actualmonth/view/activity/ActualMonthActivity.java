@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -12,7 +11,7 @@ import android.view.View;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.addexpense.view.activity.AddExpenseActivity;
+import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.BasicActivity;
@@ -52,7 +51,7 @@ public class ActualMonthActivity extends BasicActivity {
 
     @OnClick(R.id.fab)
     void clickOnFab(View view) {
-        AddExpenseActivity.openWithResult(this, ADD_EXPENSE_REQUEST_CODE);
+        DetailExpenseActivity.openWithResult(this, ADD_EXPENSE_REQUEST_CODE);
     }
 
     public void showActionDialog(final CardExpenseItem cardExpense) {
@@ -65,7 +64,7 @@ public class ActualMonthActivity extends BasicActivity {
             public void onClick(DialogInterface dialog, int option) {
                 switch (option){
                     case EDIT_OPTION:
-                        AddExpenseActivity.openSendDataWithResult(activity,expenseFromCardExpense(cardExpense),EDIT_EXPENSE_REQUEST_CODE);
+                        DetailExpenseActivity.openSendDataWithResult(activity,expenseFromCardExpense(cardExpense),EDIT_EXPENSE_REQUEST_CODE);
                         break;
                     case DELETE_OPTION:
                         SnackBarUtils.showShortSnackBar(tabsView,"Borrar elemento");

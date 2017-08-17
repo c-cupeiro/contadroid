@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.addexpense.model;
+package org.upv.ccupeiro.contadroid.detailexpense.model;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;

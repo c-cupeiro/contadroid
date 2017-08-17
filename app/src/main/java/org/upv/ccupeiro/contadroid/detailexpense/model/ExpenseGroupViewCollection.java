@@ -1,8 +1,6 @@
-package org.upv.ccupeiro.contadroid.addexpense.model;
+package org.upv.ccupeiro.contadroid.detailexpense.model;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
-
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
 
 import java.util.List;
 

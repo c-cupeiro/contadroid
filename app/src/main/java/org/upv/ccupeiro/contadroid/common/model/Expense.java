@@ -1,6 +1,5 @@
 package org.upv.ccupeiro.contadroid.common.model;
 
-import org.upv.ccupeiro.contadroid.addexpense.model.ExpenseGroupView;
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import java.io.Serializable;
