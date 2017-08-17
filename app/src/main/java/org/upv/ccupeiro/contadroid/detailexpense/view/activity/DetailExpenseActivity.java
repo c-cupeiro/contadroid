@@ -115,9 +115,9 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
 
     @Override
     public void showExpenseInfo(List<ExpenseGroupView> expenseGroupViewList) {
-        checkEdition();
         adapter.clear();
         adapter.addAll(expenseGroupViewList);
+        checkEdition();
         adapter.notifyDataSetChanged();
     }
 
