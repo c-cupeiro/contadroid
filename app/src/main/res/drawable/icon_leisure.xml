@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval" >
+            <size android:width="@dimen/circle_icon_size"
+                android:height="@dimen/circle_icon_size"/>
+            <stroke
+                android:width="@dimen/circle_icon_stroke_width"
+                android:color="@color/iconBackgroundLeisureColor"/>
+            <solid android:color="@color/iconBackgroundLeisureColor"/>
+        </shape>
+    </item>
+    <item android:drawable="@drawable/airballoon"
+        android:bottom="@dimen/icon_drawable_margin"
+        android:top="@dimen/icon_drawable_margin"
+        android:right="@dimen/icon_drawable_margin"
+        android:left="@dimen/icon_drawable_margin"
+        android:gravity="center"/>
+</layer-list>
