@@ -10,8 +10,15 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import org.upv.ccupeiro.contadroid.R;
+import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
+import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
+import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
 import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
+import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.domain.usecase.DeleteExpense;
+import org.upv.ccupeiro.contadroid.common.domain.usecase.SaveExpense;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
@@ -27,8 +34,7 @@ import butterknife.OnClick;
 public class ActualMonthActivity extends BasicActivity implements ActualMonthPresenter.View{
     public static final int EDIT_OPTION = 0;
     public static final int DELETE_OPTION = 1;
-    public static final int ADD_EXPENSE_REQUEST_CODE = 101;
-    public static final int EDIT_EXPENSE_REQUEST_CODE = 102;
+    public static final int DETAIL_EXPENSE_REQUEST_CODE = 101;
     @Nullable
     @BindView(R.id.tabs_view)
     ViewPager tabsView;
@@ -38,7 +44,6 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ActualMonthPresenter();
         initializeFrameLayout(R.layout.activity_main);
         initializePresenter();
         initToolbar();
@@ -54,6 +59,12 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     }
 
     private void initializePresenter(){
+        ContadroidRepository repository = SimpleContadroidRepository.getInstance();
+        presenter = new ActualMonthPresenter(new SaveExpense(repository),
+                new DeleteExpense(repository),
+                new ChangePaidStatus(repository),
+                new GetPaidExpenses(repository),
+                new GetNotPaidExpenses(repository));
         presenter.setView(this);
     }
 
@@ -77,11 +88,7 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
 
     @Override
     public void startFabAction() {
-        DetailExpenseActivity.openWithResult(this, ADD_EXPENSE_REQUEST_CODE);
-    }
-
-    public void showDialog(CardExpenseItem cardExpenseItem){
-        presenter.showDialog(cardExpenseItem);
+        DetailExpenseActivity.openWithResult(this, DETAIL_EXPENSE_REQUEST_CODE);
     }
 
     @Override
@@ -95,10 +102,10 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
             public void onClick(DialogInterface dialog, int option) {
                 switch (option){
                     case EDIT_OPTION:
-                        DetailExpenseActivity.openSendDataWithResult(activity,expenseFromCardExpense(cardExpense),EDIT_EXPENSE_REQUEST_CODE);
+                        DetailExpenseActivity.openSendDataWithResult(activity,expenseFromCardExpense(cardExpense),DETAIL_EXPENSE_REQUEST_CODE);
                         break;
                     case DELETE_OPTION:
-                        SnackBarUtils.showShortSnackBar(tabsView,"Borrar elemento");
+                        presenter.deleteExpense(cardExpense.getExpenseId());
                         break;
                 }
             }
@@ -119,20 +126,52 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
-            case ADD_EXPENSE_REQUEST_CODE:
-                if(resultCode == RESULT_OK){
-                    SnackBarUtils.showShortSnackBar(tabsView,"Gasto Guardado");
-                }
-                break;
-            case EDIT_EXPENSE_REQUEST_CODE:
-                if(resultCode == RESULT_OK){
-                    SnackBarUtils.showShortSnackBar(tabsView,"Gasto Editado");
-                }
-                break;
+    public void redrawTabs() {
+        mainTabAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void showSaveError() {
+        SnackBarUtils.showShortSnackBar(tabsView,getString(R.string.save_error));
+    }
+
+    @Override
+    public void showDeleteError() {
+        SnackBarUtils.showShortSnackBar(tabsView,getString(R.string.delete_error));
+    }
+
+    @Override
+    public void showChangeStatusError() {
+        SnackBarUtils.showShortSnackBar(tabsView,getString(R.string.changePaid_error));
+    }
+
+    @Override
+    public void showSaveCorrect() {
+        SnackBarUtils.showShortSnackBar(tabsView,getString(R.string.save_correct));
+    }
+
+    @Override
+    public void showDeleteCorrect() {
+        SnackBarUtils.showShortSnackBar(tabsView,getString(R.string.delete_correct));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            if(requestCode == DETAIL_EXPENSE_REQUEST_CODE){
+                saveExpense(data);
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void saveExpense(Intent data) {
+        Expense expense = (Expense) data.getExtras()
+                .getSerializable(DetailExpenseActivity.DETAIL_EXPENSE_RETURN_EXPENSE);
+        presenter.saveExpense(expense);
+    }
+
+    public ActualMonthPresenter getPresenter() {
+        return presenter;
     }
 }

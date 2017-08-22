@@ -47,7 +47,6 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab_expenses_not_paid, container, false);
-        presenter = new TabExpenseNotPaidPresenter();
         initializaButterKnife(rootView);
         initializeAdapter();
         initializePresenter();
@@ -61,6 +60,7 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
     }
 
     private void initializePresenter(){
+        presenter = new TabExpenseNotPaidPresenter(((ActualMonthActivity)getActivity()).getPresenter());
         presenter.setView(this);
         presenter.initialize();
     }
@@ -71,12 +71,12 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
         RendererBuilder<CardExpenseItem> rendererBuilder = new CardExpenseItemBuilder(new CardExpenseRowRenderer.Listener() {
             @Override
             public void onCheckboxClicked(CardExpenseItem expense) {
-                presenter.showSnackBar("Checkbox clickado: "+expense.getName());
+                presenter.changePaidStatusExpense(expense.getExpenseId(),expense.isPaid());
             }
 
             @Override
             public void OnLongPressRow(CardExpenseItem expense) {
-                ((ActualMonthActivity)getActivity()).showDialog(expense);
+                presenter.showDialogExpense(expense);
             }
         });
         adapter = new RVRendererAdapter<>(rendererBuilder,cardExpenseItemCollection);
@@ -104,10 +104,5 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
         adapter.clear();
         adapter.addAll(cardExpenseItemList);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showSnackBar(String text) {
-        SnackBarUtils.showShortSnackBar(rvNotPaidExpenses,text);
     }
 }

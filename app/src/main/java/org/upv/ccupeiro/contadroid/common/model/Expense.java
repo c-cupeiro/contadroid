@@ -1,10 +1,12 @@
 package org.upv.ccupeiro.contadroid.common.model;
 
+import android.support.annotation.NonNull;
+
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import java.io.Serializable;
 
-public class Expense implements Serializable{
+public class Expense implements Serializable,Comparable<Expense>{
     private int id;
     private String name;
     private String description;
@@ -20,6 +22,9 @@ public class Expense implements Serializable{
         this.isPaid = isPaid;
         this.group = group;
     }
+
+
+
     public static class Builder{
         private int id = -1;
         private String name = "";
@@ -115,5 +120,17 @@ public class Expense implements Serializable{
 
     public void setGroup(ExpensesGroup group) {
         this.group = group;
+    }
+
+    @Override
+    public int compareTo(@NonNull Expense expenseToCompare) {
+        int groupComp = group.compareTo(expenseToCompare.getGroup());
+        if(groupComp!=0)
+            return groupComp;
+        else{
+            return id < expenseToCompare.getId() ? -1
+                    : id > expenseToCompare.getId() ? 1
+                    : 0;
+        }
     }
 }
