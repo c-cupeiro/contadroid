@@ -8,6 +8,8 @@
         android:id="@+id/rv_card_paid_expenses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/padding_for_fab"
+        android:clipToPadding="false"
         android:scrollbars="vertical"/>
 
     <TextView
