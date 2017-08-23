@@ -42,6 +42,11 @@
     <string name="detail_expense_name_error">el nombre del gasto</string>
     <string name="detail_expense_amount_error">la cantidad de dinero</string>
     <string name="detail_expense_group_error">el tipo de gasto</string>
+    <string name="save_error">Error al guardar el Gasto</string>
+    <string name="delete_error">Error al borrar el gasto</string>
+    <string name="changePaid_error">Error al cambiar el estado del gasto</string>
+    <string name="save_correct">Gasto guardado correctamente</string>
+    <string name="delete_correct">Gasto borrado correctamente</string>
 
 
 </resources>

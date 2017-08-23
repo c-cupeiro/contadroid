@@ -36,7 +36,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
 
     public static final int GRID_COLUMN = 2;
     public static final String ADD_EXPENSE_SEND_EXPENSE = "AddExpenseSendExpense";
-    public static final String ADD_EXPENSE_RETURN_EXPENSE = "addExpenseReturnExpense";
+    public static final String DETAIL_EXPENSE_RETURN_EXPENSE = "addExpenseReturnExpense";
     public static final String STRING_SEPARATOR = ",";
     public static final String STRING_BLANK = "";
     public static final String STRING_SPACE = " ";
@@ -139,7 +139,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
                     expense.isPaid();
             }
             Intent returnIntent = new Intent();
-            returnIntent.putExtra(ADD_EXPENSE_RETURN_EXPENSE,expense.build());
+            returnIntent.putExtra(DETAIL_EXPENSE_RETURN_EXPENSE,expense.build());
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
         }
