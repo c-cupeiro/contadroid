@@ -11,16 +11,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".actualmonth.view.activity.ActualMonthActivity"
-            android:label="@string/actual_month_activity_title"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.NoAnimation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".detailexpense.view.activity.DetailExpenseActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".detailexpense.view.activity.DetailExpenseActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".template.view.activity.TemplateActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoAnimation"></activity>
     </application>
 
 </manifest>
