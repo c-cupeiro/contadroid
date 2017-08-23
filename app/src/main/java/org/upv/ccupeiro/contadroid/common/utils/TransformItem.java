@@ -76,6 +76,7 @@ public class TransformItem {
     private static CardExpenseItem generateGroupHeader(ExpensesGroup group){
         return new CardExpenseItem.Builder()
                 .isGroupHeader()
+                .withGroup(group)
                 .withIcon(getIcon(group))
                 .withName(getGroupName(group))
                 .withAmount(0)
@@ -84,6 +85,7 @@ public class TransformItem {
     private static CardExpenseItem generateExpenseRow(Expense expense){
         CardExpenseItem.Builder expenseRow = new CardExpenseItem.Builder()
                 .isExpenseRow()
+                .withExpenseId(expense.getId())
                 .withGroup(expense.getGroup())
                 .withName(expense.getName())
                 .withDescription(expense.getDescription())

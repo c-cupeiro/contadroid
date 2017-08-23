@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class SimpleContadroidRepository implements ContadroidRepository {
-    private final List<Expense> expenseList;
+    private List<Expense> expenseList;
 
     private static SimpleContadroidRepository instance;
 

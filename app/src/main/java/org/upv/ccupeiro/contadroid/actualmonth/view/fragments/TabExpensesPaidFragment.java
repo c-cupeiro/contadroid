@@ -70,7 +70,7 @@ public class TabExpensesPaidFragment extends Fragment implements TabExpensePaidP
         RendererBuilder<CardExpenseItem> rendererBuilder = new CardExpenseItemBuilder(new CardExpenseRowRenderer.Listener() {
             @Override
             public void onCheckboxClicked(CardExpenseItem expense) {
-                presenter.changePaidStatusExpense(expense.getExpenseId(),expense.isPaid());
+                presenter.changePaidStatusExpense(expense.getExpenseId(),!expense.isPaid());
             }
 
             @Override
