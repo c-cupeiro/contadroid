@@ -85,11 +85,16 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getTemplate() {
-        return null;
+        return expenseList;
     }
 
     @Override
-    public boolean saveTemplate(List<Expense> template) {
+    public boolean saveTemplateExpense(Expense expense) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteTemplateExpense(int id) {
         return false;
     }
 

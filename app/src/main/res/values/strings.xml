@@ -47,6 +47,8 @@
     <string name="changePaid_error">Error al cambiar el estado del gasto</string>
     <string name="save_correct">Gasto guardado correctamente</string>
     <string name="delete_correct">Gasto borrado correctamente</string>
+    <string name="template_empty_case">No hay gastos en la plantilla</string>
+    <string name="template_title">Plantilla</string>
 
 
 </resources>

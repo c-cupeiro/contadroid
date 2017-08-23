@@ -9,7 +9,8 @@ public interface ContadroidRepository {
     List<Expense> getNotPaidExpensesInMonth(int year, int month);
     List<Expense> getYearExpenses(int year);
     List<Expense> getTemplate();
-    boolean saveTemplate(List<Expense> template);
+    boolean saveTemplateExpense(Expense expense);
+    boolean deleteTemplateExpense(int id);
     boolean saveExpense(Expense expense);
     boolean deleteExpense(int id);
     boolean changePaidState(int id,boolean paid);

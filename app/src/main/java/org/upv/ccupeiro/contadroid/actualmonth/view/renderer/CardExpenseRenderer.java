@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.pedrogomez.renderers.Renderer;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import butterknife.BindView;

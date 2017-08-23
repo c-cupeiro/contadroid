@@ -1,9 +1,6 @@
-package org.upv.ccupeiro.contadroid.actualmonth.model;
+package org.upv.ccupeiro.contadroid.common.model;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
-
-import static android.R.attr.id;
 
 public class CardExpenseItem {
 

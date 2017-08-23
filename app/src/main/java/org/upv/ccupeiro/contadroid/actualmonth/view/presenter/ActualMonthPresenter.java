@@ -3,14 +3,12 @@ package org.upv.ccupeiro.contadroid.actualmonth.view.presenter;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.DeleteExpense;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.SaveExpense;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ActualMonthPresenter {

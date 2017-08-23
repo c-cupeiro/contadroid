@@ -13,7 +13,7 @@ import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleContadroidRepository;
@@ -31,10 +31,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity.DETAIL_EXPENSE_REQUEST_CODE;
+
 public class ActualMonthActivity extends BasicActivity implements ActualMonthPresenter.View{
     public static final int EDIT_OPTION = 0;
     public static final int DELETE_OPTION = 1;
-    public static final int DETAIL_EXPENSE_REQUEST_CODE = 101;
     @Nullable
     @BindView(R.id.tabs_view)
     ViewPager tabsView;
