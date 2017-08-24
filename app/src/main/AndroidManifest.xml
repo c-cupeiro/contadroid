@@ -21,8 +21,10 @@
         <activity
             android:name=".detailexpense.view.activity.DetailExpenseActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".template.view.activity.TemplateActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoAnimation"></activity>
+        <activity
+            android:name=".template.view.activity.TemplateActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoAnimation" />
+        <activity android:name=".summary.view.activity.SummaryActivity"></activity>
     </application>
 
 </manifest>

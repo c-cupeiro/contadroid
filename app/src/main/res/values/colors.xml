@@ -17,4 +17,7 @@
     <color name="iconBackgroundLeisureColor">#006600</color>
     <color name="iconBackgroundOtherColor">#cc0000</color>
     <color name="categorySelected">#EF3131</color>
+    <color name="summary_positive_color">#3eef31</color>
+    <color name="summary_negative_color">#ec2323</color>
+    <color name="summary_neutral_color">#2b2a2a</color>
 </resources>
