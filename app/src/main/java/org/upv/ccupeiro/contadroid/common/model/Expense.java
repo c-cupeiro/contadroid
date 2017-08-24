@@ -12,14 +12,16 @@ public class Expense implements Serializable,Comparable<Expense>{
     private String description;
     private float amount;
     private boolean isPaid;
+    private boolean isTemplate;
     private ExpensesGroup group;
 
-    private Expense(int id, String name, String description, float amount, boolean isPaid, ExpensesGroup group) {
+    private Expense(int id, String name, String description, float amount, boolean isPaid, boolean isTemplate, ExpensesGroup group) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.amount = amount;
         this.isPaid = isPaid;
+        this.isTemplate = isTemplate;
         this.group = group;
     }
 
@@ -31,6 +33,7 @@ public class Expense implements Serializable,Comparable<Expense>{
         private String description = "";
         private float amount = 0;
         private boolean isPaid = false;
+        private boolean isTemplate = false;
         private ExpensesGroup group = ExpensesGroup.EMPTY;
 
         public Builder withId(int id){
@@ -58,13 +61,18 @@ public class Expense implements Serializable,Comparable<Expense>{
             return this;
         }
 
+        public Builder isTemplate(){
+            this.isTemplate = true;
+            return this;
+        }
+
         public Builder withGroup(ExpensesGroup group){
             this.group = group;
             return this;
         }
 
         public Expense build(){
-            return new Expense(id, name, description, amount, isPaid, group);
+            return new Expense(id, name, description, amount, isPaid,isTemplate, group);
         }
     }
 
@@ -112,6 +120,14 @@ public class Expense implements Serializable,Comparable<Expense>{
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+    }
+
+    public boolean isTemplate() {
+        return isTemplate;
+    }
+
+    public void setTemplate(boolean template) {
+        isTemplate = template;
     }
 
     public ExpensesGroup getGroup() {
