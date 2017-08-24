@@ -1,7 +1,7 @@
 package org.upv.ccupeiro.contadroid.common.utils;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 

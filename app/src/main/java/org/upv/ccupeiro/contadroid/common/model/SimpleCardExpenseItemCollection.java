@@ -1,12 +1,9 @@
-package org.upv.ccupeiro.contadroid.actualmonth.model;
+package org.upv.ccupeiro.contadroid.common.model;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.name;
 
 public class SimpleCardExpenseItemCollection {
 

@@ -24,6 +24,7 @@ import android.widget.FrameLayout;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
+import org.upv.ccupeiro.contadroid.template.view.activity.TemplateActivity;
 
 import java.util.List;
 
@@ -76,11 +77,10 @@ public abstract class BasicActivity extends AppCompatActivity
 
         if (id == R.id.nav_actual_month) {
             ActualMonthActivity.open(this);
-            showSnackBar("Has pulsado el mes Actual");
         } else if (id == R.id.nav_chart) {
             showSnackBar("Has pulsado la grafica");
         } else if (id == R.id.nav_template) {
-            showSnackBar("Has pulsado la plantilla");
+            TemplateActivity.open(this);
         } else if (id == R.id.nav_settings) {
             showSnackBar("Has pulsado las opciones");
         } else if (id == R.id.nav_login) {

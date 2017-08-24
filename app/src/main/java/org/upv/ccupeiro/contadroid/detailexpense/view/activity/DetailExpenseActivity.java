@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 
 public class DetailExpenseActivity extends AppCompatActivity implements DetailExpensePresenter.View {
 
+    public static final int DETAIL_EXPENSE_REQUEST_CODE = 101;
     public static final int GRID_COLUMN = 2;
     public static final String ADD_EXPENSE_SEND_EXPENSE = "AddExpenseSendExpense";
     public static final String DETAIL_EXPENSE_RETURN_EXPENSE = "addExpenseReturnExpense";

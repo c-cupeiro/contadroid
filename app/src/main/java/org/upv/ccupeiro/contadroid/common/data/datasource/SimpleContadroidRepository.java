@@ -22,30 +22,55 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     private SimpleContadroidRepository() {
         this.expenseList = new LinkedList<>();
+        fillTemplate();
         fillPaid();
         fillNotPaid();
     }
 
+    private void fillTemplate(){
+        expenseList.add(createTemplate(0,"Sueldo","ingreso del trabajo",2000,ExpensesGroup.INCOME));
+        expenseList.add(createTemplate(1,"Alquiler","",300,ExpensesGroup.HOME));
+        expenseList.add(createTemplate(2,"Fijo e Interne","Jazztel",40,ExpensesGroup.HOME));
+        expenseList.add(createTemplate(3,"Agua","Canal de Isabel II",15,ExpensesGroup.HOME));
+        expenseList.add(createTemplate(4,"Gas","HolaGas",20,ExpensesGroup.HOME));
+        expenseList.add(createTemplate(5,"Abono","Metro",56,ExpensesGroup.TRANSPORT));
+        expenseList.add(createTemplate(6,"Coche","Letra",250,ExpensesGroup.TRANSPORT));
+    }
+
     private void fillPaid(){
-        expenseList.add(createExpense(0,"Sueldo","ingreso del trabajo",2000,true,ExpensesGroup.INCOME));
-        expenseList.add(createExpense(1,"Alquiler","",300,true,ExpensesGroup.HOME));
-        expenseList.add(createExpense(2,"Fijo e Interne","Jazztel",40,true,ExpensesGroup.HOME));
-        expenseList.add(createExpense(3,"Agua","Canal de Isabel II",15,true,ExpensesGroup.HOME));
-        expenseList.add(createExpense(4,"Gas","HolaGas",20,true,ExpensesGroup.HOME));
-        expenseList.add(createExpense(5,"Abono","Metro",56,true,ExpensesGroup.TRANSPORT));
-        expenseList.add(createExpense(6,"Mercadona","Primer finde de mes",89,true,ExpensesGroup.FOOD));
-        expenseList.add(createExpense(7,"Alcampo","Segundo finde de mes",74,true,ExpensesGroup.FOOD));
-        expenseList.add(createExpense(8,"Regalos","Regalo para Javi",50,true,ExpensesGroup.OTHER));
+        expenseList.add(createExpense(7,"Sueldo","ingreso del trabajo",2000,true,ExpensesGroup.INCOME));
+        expenseList.add(createExpense(8,"Alquiler","",300,true,ExpensesGroup.HOME));
+        expenseList.add(createExpense(9,"Fijo e Interne","Jazztel",40,true,ExpensesGroup.HOME));
+        expenseList.add(createExpense(10,"Agua","Canal de Isabel II",15,true,ExpensesGroup.HOME));
+        expenseList.add(createExpense(11,"Gas","HolaGas",20,true,ExpensesGroup.HOME));
+        expenseList.add(createExpense(12,"Abono","Metro",56,true,ExpensesGroup.TRANSPORT));
+        expenseList.add(createExpense(13,"Mercadona","Primer finde de mes",89,true,ExpensesGroup.FOOD));
+        expenseList.add(createExpense(14,"Alcampo","Segundo finde de mes",74,true,ExpensesGroup.FOOD));
+        expenseList.add(createExpense(15,"Regalos","Regalo para Javi",50,true,ExpensesGroup.OTHER));
     }
 
     private void fillNotPaid(){
-        expenseList.add(createExpense(9,"H&M","camiseta y pantalon",95,false,ExpensesGroup.SHOPPING));
-        expenseList.add(createExpense(10,"Game","Ps4",300,false,ExpensesGroup.SHOPPING));
-        expenseList.add(createExpense(11,"Cervezas Amigos","",50,false,ExpensesGroup.LEISURE));
-        expenseList.add(createExpense(12,"Coche","Letra",250,false,ExpensesGroup.TRANSPORT));
+        expenseList.add(createExpense(16,"H&M","camiseta y pantalon",95,false,ExpensesGroup.SHOPPING));
+        expenseList.add(createExpense(17,"Game","Ps4",300,false,ExpensesGroup.SHOPPING));
+        expenseList.add(createExpense(18,"Cervezas Amigos","",50,false,ExpensesGroup.LEISURE));
+        expenseList.add(createExpense(19,"Coche","Letra",250,false,ExpensesGroup.TRANSPORT));
     }
 
-    private Expense createExpense(int id, String name, String description, float amount, boolean isPaid, ExpensesGroup group){
+    private Expense createTemplate(int id, String name, String description, float amount,
+                                  ExpensesGroup group){
+        Expense.Builder expense = new Expense.Builder()
+                .withId(id)
+                .withName(name)
+                .withDescription(description)
+                .withAmount(amount)
+                .isTemplate()
+                .withGroup(group);
+
+        return expense.build();
+    }
+
+    private Expense createExpense(int id, String name, String description, float amount,
+                                  boolean isPaid, ExpensesGroup group){
         Expense.Builder expense = new Expense.Builder()
                 .withId(id)
                 .withName(name)
@@ -61,7 +86,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
     public List<Expense> getPaidExpensesInMonth(int year, int month) {
         List<Expense> paidList = new LinkedList<>();
         for(Expense expense: expenseList){
-            if(expense.isPaid())
+            if(expense.isPaid() && !expense.isTemplate())
                 paidList.add(expense);
         }
         return paidList;
@@ -71,7 +96,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
     public List<Expense> getNotPaidExpensesInMonth(int year, int month) {
         List<Expense> notPaidList = new LinkedList<>();
         for(Expense expense: expenseList){
-            if(!expense.isPaid())
+            if(!expense.isPaid() && !expense.isTemplate())
                 notPaidList.add(expense);
         }
         return notPaidList;
@@ -85,12 +110,23 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getTemplate() {
-        return null;
+        List<Expense> templateList = new LinkedList<>();
+        for(Expense expense: expenseList){
+            if(!expense.isTemplate())
+                templateList.add(expense);
+        }
+        return templateList;
     }
 
     @Override
-    public boolean saveTemplate(List<Expense> template) {
-        return false;
+    public boolean saveTemplateExpense(Expense expense) {
+        expense.setTemplate(true);
+        return saveExpense(expense);
+    }
+
+    @Override
+    public boolean deleteTemplateExpense(int id) {
+        return deleteExpense(id);
     }
 
     @Override

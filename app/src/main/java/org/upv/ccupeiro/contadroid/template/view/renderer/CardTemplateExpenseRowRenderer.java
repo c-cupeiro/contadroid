@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.actualmonth.view.renderer;
+package org.upv.ccupeiro.contadroid.template.view.renderer;
 
 
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import org.upv.ccupeiro.contadroid.R;
+import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseRenderer;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 
@@ -16,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 
-public class CardExpenseRowRenderer extends CardExpenseRenderer {
+public class CardTemplateExpenseRowRenderer extends CardExpenseRenderer {
     @BindView(R.id.tv_row_description)
     TextView description;
     @BindView(R.id.checkbox_row_item)
@@ -24,8 +25,7 @@ public class CardExpenseRowRenderer extends CardExpenseRenderer {
 
     private CardExpenseListener itemListener;
 
-
-    public CardExpenseRowRenderer(CardExpenseListener itemListener) {
+    public CardTemplateExpenseRowRenderer(CardExpenseListener itemListener) {
         this.itemListener = itemListener;
     }
 
@@ -54,7 +54,7 @@ public class CardExpenseRowRenderer extends CardExpenseRenderer {
     }
 
     private void renderCheckBox(CardExpenseItem item) {
-        checkbox.setChecked(item.isPaid());
+        checkbox.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.checkbox_row_item) void clickCheckbox(){

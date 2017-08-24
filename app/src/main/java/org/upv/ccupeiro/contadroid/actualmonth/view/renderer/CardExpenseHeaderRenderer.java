@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

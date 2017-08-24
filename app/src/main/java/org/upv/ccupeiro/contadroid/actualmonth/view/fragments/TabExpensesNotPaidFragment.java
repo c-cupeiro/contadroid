@@ -15,15 +15,14 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseCollection;
-import org.upv.ccupeiro.contadroid.actualmonth.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.actualmonth.model.SimpleCardExpenseItemCollection;
+import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
+import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.model.SimpleCardExpenseItemCollection;
 import org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity;
 import org.upv.ccupeiro.contadroid.actualmonth.view.builder.CardExpenseItemBuilder;
 import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.TabExpenseNotPaidPresenter;
-import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.TabExpensePaidPresenter;
 import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseRowRenderer;
-import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
+import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
     RecyclerView rvNotPaidExpenses;
     @Nullable
     @BindView(R.id.tv_empty_case)
-    TextView empty_case;
+    TextView emptyCase;
 
     private RVRendererAdapter<CardExpenseItem> adapter;
     private TabExpenseNotPaidPresenter presenter;
@@ -67,8 +66,8 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
 
     private void initializeAdapter() {
         final AdapteeCollection<CardExpenseItem> cardExpenseItemCollection =
-                SimpleCardExpenseItemCollection.getNotPaidCollection();
-        RendererBuilder<CardExpenseItem> rendererBuilder = new CardExpenseItemBuilder(new CardExpenseRowRenderer.Listener() {
+                EMPTY_COLLECTION;
+        RendererBuilder<CardExpenseItem> rendererBuilder = new CardExpenseItemBuilder(new CardExpenseListener() {
             @Override
             public void onCheckboxClicked(CardExpenseItem expense) {
                 presenter.changePaidStatusExpense(expense.getExpenseId(),!expense.isPaid());
@@ -89,13 +88,13 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
 
     @Override
     public void showEmptyCase() {
-        empty_case.setVisibility(View.VISIBLE);
+        emptyCase.setVisibility(View.VISIBLE);
         rvNotPaidExpenses.setVisibility(View.GONE);
     }
 
     @Override
     public void hideEmptyCase() {
-        empty_case.setVisibility(View.GONE);
+        emptyCase.setVisibility(View.GONE);
         rvNotPaidExpenses.setVisibility(View.VISIBLE);
     }
 
