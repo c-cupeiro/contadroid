@@ -1,6 +1,7 @@
 package org.upv.ccupeiro.contadroid.summary.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +18,6 @@ import com.pedrogomez.renderers.RendererBuilder;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
 import org.upv.ccupeiro.contadroid.summary.domain.usecase.GetYearSummary;
 import org.upv.ccupeiro.contadroid.summary.view.presenter.SummaryPresenter;
@@ -48,6 +48,13 @@ public class SummaryActivity extends BasicActivity implements SummaryPresenter.V
         initializeAdapter();
         initializeRecyclerView();
         initializePresenter();
+    }
+
+    public static void open(Activity activity){
+        Intent intent = new Intent(activity, SummaryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
+        activity.finish();
     }
 
     private void initializePresenter(){

@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class TransformItem {
 
-    public static final int INT_DECEMBER = 11;
+    public static final int INT_POST_DECEMBER = 12;
 
     public static List<CardExpenseItem> transformExpenseToCardExpense(List<Expense> expenseList){
         Collections.sort(expenseList, new ExpenseGroupComparator());
@@ -116,15 +116,17 @@ public class TransformItem {
         int initMonth = 0;
         for(Expense expense : expenseList){
             int expenseMonth = getMonthFromDate(expense.getCreationDate());
-            if(expenseMonth>initMonth){
-                insertMissingMonths(initMonth, expenseMonth,summaryItemList);
+            if(expenseMonth>initMonth) {
+                insertMissingMonths(initMonth, expenseMonth, summaryItemList);
+            }
+            if(summaryItemList.size()==0 || (expenseMonth!=initMonth)){
                 initMonth = expenseMonth;
                 createNewMonth(expense,expenseMonth,summaryItemList);
             }else{
-                addExpenseToMonth(expense,summaryItemList.get(initMonth));
+                addExpenseToMonth(expense,summaryItemList,initMonth);
             }
         }
-        validateSummaryItemListAllMonths(initMonth,summaryItemList);
+        validateSummaryItemListAllMonths(initMonth+1,summaryItemList);
         return summaryItemList;
     }
 
@@ -142,16 +144,18 @@ public class TransformItem {
     }
 
     private static void addExpenseToMonth(Expense expense,
-                                          SummaryItem summaryItem) {
+                                          List<SummaryItem> summaryItemList, int month_pos) {
+        SummaryItem summaryItemUpdated = summaryItemList.get(month_pos);
         float correctAmount = getCorrectAmount(expense);
-        summaryItem.addAmount(correctAmount);
-        SummaryItemStatus correctStatus = getCorrectStatus(summaryItem.getAmount());
-        summaryItem.setStatus(correctStatus);
+        summaryItemUpdated.addAmount(correctAmount);
+        SummaryItemStatus correctStatus = getCorrectStatus(summaryItemUpdated.getAmount());
+        summaryItemUpdated.setStatus(correctStatus);
+        summaryItemList.set(month_pos,summaryItemUpdated);
     }
 
     private static void validateSummaryItemListAllMonths(int initMonth,
                                                          List<SummaryItem> summaryItemList) {
-        insertMissingMonths(initMonth,INT_DECEMBER,summaryItemList);
+        insertMissingMonths(initMonth, INT_POST_DECEMBER,summaryItemList);
     }
 
     private static float getCorrectAmount(Expense expense){

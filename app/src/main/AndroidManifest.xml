@@ -24,7 +24,8 @@
         <activity
             android:name=".template.view.activity.TemplateActivity"
             android:theme="@style/AppTheme.NoActionBar.NoAnimation" />
-        <activity android:name=".summary.view.activity.SummaryActivity"></activity>
+        <activity android:name=".summary.view.activity.SummaryActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoAnimation"></activity>
     </application>
 
 </manifest>

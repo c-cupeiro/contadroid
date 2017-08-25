@@ -104,7 +104,12 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getYearExpenses(int year) {
-        return expenseList;
+        List<Expense> yearExpense = new LinkedList<>();
+        for(Expense expense: expenseList){
+            if(expense.isPaid() && !expense.isTemplate())
+                yearExpense.add(expense);
+        }
+        return yearExpense;
     }
 
 
