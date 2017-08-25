@@ -5,17 +5,21 @@ import android.support.annotation.NonNull;
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import java.io.Serializable;
+import java.util.Comparator;
+import java.util.Date;
 
-public class Expense implements Serializable,Comparable<Expense>{
+public class Expense implements Serializable{
     private int id;
     private String name;
     private String description;
     private float amount;
     private boolean isPaid;
     private boolean isTemplate;
+    private Date creationDate;
     private ExpensesGroup group;
 
-    private Expense(int id, String name, String description, float amount, boolean isPaid, boolean isTemplate, ExpensesGroup group) {
+    private Expense(int id, String name, String description, float amount, boolean isPaid,
+                    boolean isTemplate, ExpensesGroup group, Date creationDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,6 +27,7 @@ public class Expense implements Serializable,Comparable<Expense>{
         this.isPaid = isPaid;
         this.isTemplate = isTemplate;
         this.group = group;
+        this.creationDate = creationDate;
     }
 
 
@@ -35,6 +40,7 @@ public class Expense implements Serializable,Comparable<Expense>{
         private boolean isPaid = false;
         private boolean isTemplate = false;
         private ExpensesGroup group = ExpensesGroup.EMPTY;
+        private Date creationDate = new Date(0);
 
         public Builder withId(int id){
             this.id = id;
@@ -71,8 +77,14 @@ public class Expense implements Serializable,Comparable<Expense>{
             return this;
         }
 
+        public Builder withDate(Date creationDate){
+            this.creationDate = creationDate;
+            return this;
+        }
+
         public Expense build(){
-            return new Expense(id, name, description, amount, isPaid,isTemplate, group);
+            return new Expense(id, name, description, amount, isPaid,
+                    isTemplate, group, creationDate);
         }
     }
 
@@ -138,15 +150,12 @@ public class Expense implements Serializable,Comparable<Expense>{
         this.group = group;
     }
 
-    @Override
-    public int compareTo(@NonNull Expense expenseToCompare) {
-        int groupComp = group.compareTo(expenseToCompare.getGroup());
-        if(groupComp!=0)
-            return groupComp;
-        else{
-            return id < expenseToCompare.getId() ? -1
-                    : id > expenseToCompare.getId() ? 1
-                    : 0;
-        }
+    public Date getCreationDate() {
+        return creationDate;
     }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
 }

@@ -49,6 +49,8 @@
     <string name="delete_correct">Gasto borrado correctamente</string>
     <string name="template_empty_case">No hay gastos en la plantilla</string>
     <string name="template_title">Plantilla</string>
+    <string name="summary_emtpy_case">No hay datos para sacar el resumen anual</string>
+    <string name="summary_title">Resumen anual</string>
 
 
 </resources>

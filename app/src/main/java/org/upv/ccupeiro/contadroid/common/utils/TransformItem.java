@@ -4,15 +4,31 @@ import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
+import org.upv.ccupeiro.contadroid.common.model.comparator.ExpenseDateComparator;
+import org.upv.ccupeiro.contadroid.common.model.comparator.ExpenseGroupComparator;
+import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
+import org.upv.ccupeiro.contadroid.template.model.SummaryItemStatus;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class TransformItem {
+
+    public static final int INT_POST_DECEMBER = 12;
+
     public static List<CardExpenseItem> transformExpenseToCardExpense(List<Expense> expenseList){
-        Collections.sort(expenseList);
+        Collections.sort(expenseList, new ExpenseGroupComparator());
         return createCardExpenseItemList(expenseList);
+    }
+
+    public static List<SummaryItem> transformExpenseToSummary(List<Expense> expenseList){
+        Collections.sort(expenseList, new ExpenseDateComparator());
+        return createSummaryItemList(expenseList);
     }
 
     private static List<CardExpenseItem> createCardExpenseItemList(List<Expense> expenseList){
@@ -93,5 +109,95 @@ public class TransformItem {
         if(expense.isPaid())
             expenseRow.isPaid();
         return expenseRow.build();
+    }
+
+    private static List<SummaryItem> createSummaryItemList(List<Expense> expenseList){
+        List<SummaryItem> summaryItemList = new LinkedList<>();
+        int initMonth = 0;
+        for(Expense expense : expenseList){
+            int expenseMonth = getMonthFromDate(expense.getCreationDate());
+            if(expenseMonth>initMonth) {
+                insertMissingMonths(initMonth, expenseMonth, summaryItemList);
+            }
+            if(summaryItemList.size()==0 || (expenseMonth!=initMonth)){
+                initMonth = expenseMonth;
+                createNewMonth(expense,expenseMonth,summaryItemList);
+            }else{
+                addExpenseToMonth(expense,summaryItemList,initMonth);
+            }
+        }
+        validateSummaryItemListAllMonths(initMonth+1,summaryItemList);
+        return summaryItemList;
+    }
+
+    private static void createNewMonth(Expense expense,int expenseMonth,
+                                       List<SummaryItem> summaryItemList) {
+        float correctAmount = getCorrectAmount(expense);
+        SummaryItemStatus correctStatus = getCorrectStatus(correctAmount);
+
+        SummaryItem month = new SummaryItem.Builder()
+                .withName(getMonthName(expenseMonth))
+                .withAmount(correctAmount)
+                .withSummaryStatus(correctStatus)
+                .build();
+        summaryItemList.add(month);
+    }
+
+    private static void addExpenseToMonth(Expense expense,
+                                          List<SummaryItem> summaryItemList, int month_pos) {
+        SummaryItem summaryItemUpdated = summaryItemList.get(month_pos);
+        float correctAmount = getCorrectAmount(expense);
+        summaryItemUpdated.addAmount(correctAmount);
+        SummaryItemStatus correctStatus = getCorrectStatus(summaryItemUpdated.getAmount());
+        summaryItemUpdated.setStatus(correctStatus);
+        summaryItemList.set(month_pos,summaryItemUpdated);
+    }
+
+    private static void validateSummaryItemListAllMonths(int initMonth,
+                                                         List<SummaryItem> summaryItemList) {
+        insertMissingMonths(initMonth, INT_POST_DECEMBER,summaryItemList);
+    }
+
+    private static float getCorrectAmount(Expense expense){
+        if(isPositiveExpense(expense.getGroup()))
+            return expense.getAmount();
+        return (-expense.getAmount());
+    }
+
+    private static SummaryItemStatus getCorrectStatus(float amount){
+        return amount > 0 ? SummaryItemStatus.POSITIVE
+                : amount < 0 ? SummaryItemStatus.NEGATIVE
+                : SummaryItemStatus.NEUTRAL;
+    }
+
+    private static boolean isPositiveExpense(ExpensesGroup group){
+        return group == ExpensesGroup.INCOME;
+    }
+
+    private static void insertMissingMonths(int initMonth, int expenseMonth,
+                                            List<SummaryItem> summaryItemList) {
+        while(initMonth<expenseMonth){
+            summaryItemList.add(getEmptyMonth(initMonth));
+            initMonth++;
+        }
+    }
+
+    private static SummaryItem getEmptyMonth(int initMonth) {
+        return new SummaryItem.Builder()
+                        .withName(getMonthName(initMonth))
+                        .build();
+    }
+
+    private static int getMonthFromDate(Date creationDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(creationDate);
+        return calendar.get(Calendar.MONTH);
+    }
+
+    private static String getMonthName(int monthInt){
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "LLLL", new Locale("es","ES"));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MONTH,monthInt);
+        return dateFormat.format(calendar.getTime());
     }
 }
