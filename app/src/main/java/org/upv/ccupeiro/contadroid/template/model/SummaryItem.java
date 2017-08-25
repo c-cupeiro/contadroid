@@ -12,10 +12,10 @@ public class SummaryItem {
         this.status = status;
     }
 
-    public class Builder{
+    public static class Builder{
         private String name = "";
         private float amount = 0;
-        private SummaryItemStatus status = SummaryItemStatus.NEUTRAL;
+        private SummaryItemStatus status = SummaryItemStatus.EMPTY;
 
         public Builder withName(String name){
             this.name = name;
@@ -49,6 +49,10 @@ public class SummaryItem {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public void addAmount(float amount) {
+        this.amount += amount;
     }
 
     public SummaryItemStatus getStatus() {
