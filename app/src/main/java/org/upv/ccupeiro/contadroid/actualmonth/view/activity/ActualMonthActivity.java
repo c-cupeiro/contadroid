@@ -32,7 +32,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static org.upv.ccupeiro.contadroid.ContadroidApplication.getContadroidRepository;
 import static org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity.DETAIL_EXPENSE_REQUEST_CODE;
 
 public class ActualMonthActivity extends BasicActivity implements ActualMonthPresenter.View{
