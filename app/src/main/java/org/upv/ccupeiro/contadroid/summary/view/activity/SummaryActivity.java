@@ -15,6 +15,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 
+import org.upv.ccupeiro.contadroid.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleMockContadroidRepository;
@@ -58,7 +59,7 @@ public class SummaryActivity extends BasicActivity implements SummaryPresenter.V
     }
 
     private void initializePresenter(){
-        ContadroidRepository repository = SimpleMockContadroidRepository.getInstance();
+        ContadroidRepository repository = ((ContadroidApplication) getApplication()).getContadroidRepository();
         presenter = new SummaryPresenter(new GetYearSummary(repository));
         presenter.setView(this);
         presenter.initialize();

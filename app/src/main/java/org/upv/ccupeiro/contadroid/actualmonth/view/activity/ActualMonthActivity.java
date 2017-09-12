@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import org.upv.ccupeiro.contadroid.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
@@ -31,6 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static org.upv.ccupeiro.contadroid.ContadroidApplication.getContadroidRepository;
 import static org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity.DETAIL_EXPENSE_REQUEST_CODE;
 
 public class ActualMonthActivity extends BasicActivity implements ActualMonthPresenter.View{
@@ -60,7 +62,7 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     }
 
     private void initializePresenter(){
-        ContadroidRepository repository = SimpleMockContadroidRepository.getInstance();
+        ContadroidRepository repository = ((ContadroidApplication) getApplication()).getContadroidRepository();
         presenter = new ActualMonthPresenter(new SaveExpense(repository),
                 new DeleteExpense(repository),
                 new ChangePaidStatus(repository),
