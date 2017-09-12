@@ -20,6 +20,7 @@ import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.detailexpense.model.ExpenseGroupView;
 import org.upv.ccupeiro.contadroid.detailexpense.model.ExpenseGroupViewCollection;
 import org.upv.ccupeiro.contadroid.detailexpense.model.SimpleExpenseGroup;
+import org.upv.ccupeiro.contadroid.detailexpense.view.adapter.DetailGroupAdapter;
 import org.upv.ccupeiro.contadroid.detailexpense.view.presenter.DetailExpensePresenter;
 import org.upv.ccupeiro.contadroid.detailexpense.view.renderer.ExpenseGroupViewRenderer;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
@@ -51,7 +52,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
     EditText et_amount;
     @BindView(R.id.rv_category_expenses)
     RecyclerView rv_category;
-    private RVRendererAdapter<ExpenseGroupView> adapter;
+    private DetailGroupAdapter adapter;
 
     private DetailExpensePresenter presenter;
 
@@ -106,7 +107,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
                 }
             })
         ).bind(ExpenseGroupView.class, ExpenseGroupViewRenderer.class);
-        adapter = new RVRendererAdapter(rendererBuilder,expenseGroupViewCollection);
+        adapter = new DetailGroupAdapter(rendererBuilder,expenseGroupViewCollection);
     }
 
     private void initializePresenter(){
@@ -128,7 +129,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
             String name = et_name.getText().toString();
             String description = et_description.getText().toString();
             float amount = Float.parseFloat(et_amount.getText().toString());
-            ExpensesGroup group = getSelectedGroup();
+            ExpensesGroup group = adapter.getSelectedGroup();
             Expense.Builder expense = new Expense.Builder()
                     .withName(name)
                     .withDescription(description)
@@ -154,7 +155,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
         if(et_amount.getText().toString().isEmpty()){
             error+=addSeparator(error)+getString(R.string.detail_expense_amount_error);
         }
-        if(getSelectedGroup()==ExpensesGroup.EMPTY){
+        if(adapter.getSelectedGroup()==ExpensesGroup.EMPTY){
             error+=addSeparator(error)+getString(R.string.detail_expense_group_error);
         }
 
@@ -198,18 +199,10 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
         if(!editionExpense.getDescription().isEmpty())
             et_description.setText(editionExpense.getDescription());
         et_amount.setText(Float.toString(editionExpense.getAmount()));
-        markGroupInAdapter(editionExpense.getGroup());
+        adapter.markGroupInAdapter(editionExpense.getGroup());
     }
 
-    private void markGroupInAdapter(ExpensesGroup group) {
-        for(int positionGroup = 0; positionGroup<adapter.getItemCount();positionGroup++){
-            ExpenseGroupView item = adapter.getItem(positionGroup);
-            if(item.getGroupType() == group) {
-                item.setSelected(true);
-                break;
-            }
-        }
-    }
+
 
     private void initializeRecyclerView() {
         rv_category.setLayoutManager(new GridLayoutManager(this, GRID_COLUMN));
@@ -242,14 +235,4 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
             return STRING_SEPARATOR;
         return STRING_BLANK;
     }
-
-    private ExpensesGroup getSelectedGroup(){
-        for(int positionGroup = 0; positionGroup<adapter.getItemCount();positionGroup++){
-            ExpenseGroupView item = adapter.getItem(positionGroup);
-            if(item.isSelected())
-                return item.getGroupType();
-        }
-        return ExpensesGroup.EMPTY;
-    }
-
 }
