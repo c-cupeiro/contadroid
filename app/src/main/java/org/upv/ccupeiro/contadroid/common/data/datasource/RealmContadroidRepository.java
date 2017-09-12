@@ -46,7 +46,18 @@ public class RealmContadroidRepository implements ContadroidRepository {
     }
 
     @Override
-    public boolean saveTemplateExpense(final Expense expense) {
+    public boolean saveTemplateExpense(Expense expense) {
+        expense.setTemplate(true);
+        return saveExpense(expense);
+    }
+
+    @Override
+    public boolean deleteTemplateExpense(int id) {
+        return deleteExpense(id);
+    }
+
+    @Override
+    public boolean saveExpense(final Expense expense) {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -57,7 +68,7 @@ public class RealmContadroidRepository implements ContadroidRepository {
     }
 
     @Override
-    public boolean deleteTemplateExpense(final int id) {
+    public boolean deleteExpense(final int id) {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -67,16 +78,6 @@ public class RealmContadroidRepository implements ContadroidRepository {
             }
         });
         return true; //TODO Look how to handle this return
-    }
-
-    @Override
-    public boolean saveExpense(Expense expense) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteExpense(int id) {
-        return false;
     }
 
     @Override
