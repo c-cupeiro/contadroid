@@ -14,6 +14,7 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
 public class Expense extends RealmObject implements Serializable{
+
     @PrimaryKey
     @Index
     private int id;
