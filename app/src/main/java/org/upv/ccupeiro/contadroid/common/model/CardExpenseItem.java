@@ -10,20 +10,24 @@ public class CardExpenseItem {
     private int icon;
     private ExpensesGroup group;
     private String name;
+    private int groupName;
     private float amount;
     private String description;
     private boolean isPaid;
 
     public final static CardExpenseItem CARD_EXPENSE_ITEM_EMPTY = new CardExpenseItem(false,false,
-            -1, R.drawable.icon_other,ExpensesGroup.EMPTY,"",0,"",false);
+            -1, R.drawable.icon_other,ExpensesGroup.EMPTY,"",R.string.group_empty,0,"",false);
 
-    private CardExpenseItem(boolean isGroupHeader, boolean isExpenseRow, int expenseId, int icon, ExpensesGroup group, String name, float amount, String description, boolean isPaid) {
+    private CardExpenseItem(boolean isGroupHeader, boolean isExpenseRow, int expenseId,
+                            int icon, ExpensesGroup group, String name,int groupName, float amount,
+                            String description, boolean isPaid) {
         this.isGroupHeader = isGroupHeader;
         this.isExpenseRow = isExpenseRow;
         this.expenseId = expenseId;
         this.icon = icon;
         this.group = group;
         this.name = name;
+        this.groupName = groupName;
         this.amount = amount;
         this.description = description;
         this.isPaid = isPaid;
@@ -36,6 +40,7 @@ public class CardExpenseItem {
         private int icon = R.drawable.icon_other;
         private ExpensesGroup group = ExpensesGroup.EMPTY;
         private String name = "";
+        private int groupName = R.string.group_empty;
         private float amount = 0;
         private String description = "";
         private boolean isPaid = false;
@@ -65,6 +70,11 @@ public class CardExpenseItem {
             return this;
         }
 
+        public Builder withGroupName(int groupName){
+            this.groupName = groupName;
+            return this;
+        }
+
         public Builder withName(String name){
             this.name = name;
             return this;
@@ -87,7 +97,7 @@ public class CardExpenseItem {
 
         public CardExpenseItem build(){
             return new CardExpenseItem(isGroupHeader, isExpenseRow, expenseId, icon,
-                    group, name, amount, description, isPaid);
+                    group, name, groupName,  amount, description, isPaid);
         }
 
     }
@@ -97,16 +107,8 @@ public class CardExpenseItem {
         return isGroupHeader;
     }
 
-    public void setGroupHeader(boolean groupHeader) {
-        isGroupHeader = groupHeader;
-    }
-
     public boolean isExpenseRow() {
         return isExpenseRow;
-    }
-
-    public void setExpenseRow(boolean expenseRow) {
-        isExpenseRow = expenseRow;
     }
 
     public int getExpenseId() {
@@ -125,20 +127,12 @@ public class CardExpenseItem {
         return group;
     }
 
-    public void setGroup(ExpensesGroup group) {
-        this.group = group;
-    }
-
-    public void setExpenseId(int expenseId) {
-        this.expenseId = expenseId;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getGroupName() {
+        return groupName;
     }
 
     public float getAmount() {
@@ -153,16 +147,8 @@ public class CardExpenseItem {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public boolean isPaid() {
         return isPaid;
-    }
-
-    public void setPaid(boolean paid) {
-        isPaid = paid;
     }
 
     @Override

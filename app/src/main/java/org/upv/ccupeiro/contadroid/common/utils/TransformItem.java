@@ -45,26 +45,26 @@ public class TransformItem {
         return cardExpenseItemList;
     }
 
-    private static String getGroupName(ExpensesGroup group ){
+    private static int getGroupName(ExpensesGroup group ){
         switch (group){
             case INCOME:
-                return "Ingresos";
+                return R.string.group_income;
             case HOME:
-                return "Casa";
+                return R.string.group_home;
             case TRANSPORT:
-                return "Transporte";
+                return R.string.group_transport;
             case FOOD:
-                return "Comida";
+                return R.string.group_food;
             case SHOPPING:
-                return "Compras";
+                return R.string.group_shopping;
             case LEISURE:
-                return "Ocio";
+                return R.string.group_leisure;
             case OTHER:
-                return "Otros";
+                return R.string.group_other;
             case EMPTY:
-                return "Vacío";
+                return R.string.group_empty;
         }
-        return "";
+        return R.string.group_empty;
     }
 
     private static int getIcon(ExpensesGroup group ){
@@ -94,7 +94,7 @@ public class TransformItem {
                 .isGroupHeader()
                 .withGroup(group)
                 .withIcon(getIcon(group))
-                .withName(getGroupName(group))
+                .withGroupName(getGroupName(group))
                 .withAmount(0)
                 .build();
     }
@@ -165,9 +165,13 @@ public class TransformItem {
     }
 
     private static SummaryItemStatus getCorrectStatus(float amount){
-        return amount > 0 ? SummaryItemStatus.POSITIVE
-                : amount < 0 ? SummaryItemStatus.NEGATIVE
-                : SummaryItemStatus.NEUTRAL;
+        if(amount > 0){
+            return SummaryItemStatus.POSITIVE;
+        }else if(amount < 0){
+            return SummaryItemStatus.NEGATIVE;
+        }else{
+            return SummaryItemStatus.NEUTRAL;
+        }
     }
 
     private static boolean isPositiveExpense(ExpensesGroup group){

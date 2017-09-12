@@ -20,10 +20,11 @@ public class TabExpenseNotPaidPresenter {
 
     public void initialize(){
         expenseNotPaidList = activityPresenter.getNotPaidExpense();
-        if(expenseNotPaidList.size()==0)
+        if(expenseNotPaidList.size()==0) {
             view.showEmptyCase();
-        else
+        }else{
             view.showCardExpenses(expenseNotPaidList);
+        }
     }
 
     public void showDialogExpense(CardExpenseItem expense){

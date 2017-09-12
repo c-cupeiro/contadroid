@@ -9,8 +9,12 @@ public class ExpenseDateComparator  implements Comparator<Expense>{
 
     @Override
     public int compare(Expense expenseActual, Expense expenseToCompare) {
-        return expenseActual.getCreationDate().before(expenseToCompare.getCreationDate()) ? -1
-                : expenseActual.getCreationDate().after(expenseToCompare.getCreationDate()) ? 1
-                : 0;
+        if(expenseActual.getCreationDate().before(expenseToCompare.getCreationDate())){
+            return -1;
+        }else if(expenseActual.getCreationDate().after(expenseToCompare.getCreationDate())){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

@@ -102,24 +102,12 @@ public class Expense implements Serializable{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public float getAmount() {
         return amount;
-    }
-
-    public String getAmountEuroString(){
-        return StringUtils.formatAmount(amount);
     }
 
     public void setAmount(float amount) {
@@ -146,16 +134,8 @@ public class Expense implements Serializable{
         return group;
     }
 
-    public void setGroup(ExpensesGroup group) {
-        this.group = group;
-    }
-
     public Date getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
     }
 
 }

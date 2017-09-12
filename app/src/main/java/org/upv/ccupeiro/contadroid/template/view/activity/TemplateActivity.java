@@ -15,11 +15,12 @@ import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
+import org.upv.ccupeiro.contadroid.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleMockContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
@@ -77,7 +78,7 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
     }
 
     private void initializePresenter(){
-        ContadroidRepository repository = SimpleContadroidRepository.getInstance();
+        ContadroidRepository repository = ((ContadroidApplication) getApplication()).getContadroidRepository();
         presenter = new TemplatePresenter(new GetTemplateExpenses(repository),
                 new SaveTemplateExpenses(repository),
                 new DeleteTemplateExpenses(repository));
