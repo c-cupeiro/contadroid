@@ -4,30 +4,31 @@ import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class SimpleContadroidRepository implements ContadroidRepository {
+public class SimpleMockContadroidRepository implements ContadroidRepository {
     private List<Expense> expenseList;
 
-    private static SimpleContadroidRepository instance;
+    private static SimpleMockContadroidRepository instance;
 
-    public static SimpleContadroidRepository getInstance(){
+    public static SimpleMockContadroidRepository getInstance(){
         if(instance == null){
-            instance = new SimpleContadroidRepository();
+            instance = new SimpleMockContadroidRepository();
         }
         return instance;
     }
 
-    private SimpleContadroidRepository() {
-        this.expenseList = new LinkedList<>();
-        fillTemplate();
-        fillPaid();
-        fillNotPaid();
+    private SimpleMockContadroidRepository() {
+        this.expenseList = new ArrayList<>();
+        fillMockTemplate();
+        fillMockPaid();
+        fillMockNotPaid();
     }
 
-    private void fillTemplate(){
+    private void fillMockTemplate(){
         expenseList.add(createTemplate(0,"Sueldo","ingreso del trabajo",2000,ExpensesGroup.INCOME));
         expenseList.add(createTemplate(1,"Alquiler","",300,ExpensesGroup.HOME));
         expenseList.add(createTemplate(2,"Fijo e Interne","Jazztel",40,ExpensesGroup.HOME));
@@ -37,7 +38,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
         expenseList.add(createTemplate(6,"Coche","Letra",250,ExpensesGroup.TRANSPORT));
     }
 
-    private void fillPaid(){
+    private void fillMockPaid(){
         expenseList.add(createExpense(7,"Sueldo","ingreso del trabajo",2000,true,ExpensesGroup.INCOME));
         expenseList.add(createExpense(8,"Alquiler","",300,true,ExpensesGroup.HOME));
         expenseList.add(createExpense(9,"Fijo e Interne","Jazztel",40,true,ExpensesGroup.HOME));
@@ -49,7 +50,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
         expenseList.add(createExpense(15,"Regalos","Regalo para Javi",50,true,ExpensesGroup.OTHER));
     }
 
-    private void fillNotPaid(){
+    private void fillMockNotPaid(){
         expenseList.add(createExpense(16,"H&M","camiseta y pantalon",95,false,ExpensesGroup.SHOPPING));
         expenseList.add(createExpense(17,"Game","Ps4",300,false,ExpensesGroup.SHOPPING));
         expenseList.add(createExpense(18,"Cervezas Amigos","",50,false,ExpensesGroup.LEISURE));
@@ -84,7 +85,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getPaidExpensesInMonth(int year, int month) {
-        List<Expense> paidList = new LinkedList<>();
+        List<Expense> paidList = new ArrayList<>();
         for(Expense expense: expenseList){
             if(expense.isPaid() && !expense.isTemplate())
                 paidList.add(expense);
@@ -94,7 +95,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getNotPaidExpensesInMonth(int year, int month) {
-        List<Expense> notPaidList = new LinkedList<>();
+        List<Expense> notPaidList = new ArrayList<>();
         for(Expense expense: expenseList){
             if(!expense.isPaid() && !expense.isTemplate())
                 notPaidList.add(expense);
@@ -104,7 +105,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getYearExpenses(int year) {
-        List<Expense> yearExpense = new LinkedList<>();
+        List<Expense> yearExpense = new ArrayList<>();
         for(Expense expense: expenseList){
             if(expense.isPaid() && !expense.isTemplate())
                 yearExpense.add(expense);
@@ -115,7 +116,7 @@ public class SimpleContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getTemplate() {
-        List<Expense> templateList = new LinkedList<>();
+        List<Expense> templateList = new ArrayList<>();
         for(Expense expense: expenseList){
             if(!expense.isTemplate())
                 templateList.add(expense);

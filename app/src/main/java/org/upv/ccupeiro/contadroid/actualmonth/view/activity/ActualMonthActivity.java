@@ -16,7 +16,7 @@ import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleMockContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.DeleteExpense;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.SaveExpense;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
@@ -60,7 +60,7 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     }
 
     private void initializePresenter(){
-        ContadroidRepository repository = SimpleContadroidRepository.getInstance();
+        ContadroidRepository repository = SimpleMockContadroidRepository.getInstance();
         presenter = new ActualMonthPresenter(new SaveExpense(repository),
                 new DeleteExpense(repository),
                 new ChangePaidStatus(repository),

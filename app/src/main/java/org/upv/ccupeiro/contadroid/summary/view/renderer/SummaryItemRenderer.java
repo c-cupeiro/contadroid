@@ -2,6 +2,8 @@ package org.upv.ccupeiro.contadroid.summary.view.renderer;
 
 
 import android.graphics.Color;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SummaryItemRenderer extends Renderer<SummaryItem>{
-    private final int colorPositive = Color.parseColor("#3eef31");
-    private final int colorNegative = Color.parseColor("#ec2323");
-    private final int colorNeutral = Color.parseColor("#2b2a2a");
-
     @BindView(R.id.tv_summary_month)
     TextView month;
     @BindView(R.id.tv_summary_amount)
@@ -53,19 +51,23 @@ public class SummaryItemRenderer extends Renderer<SummaryItem>{
         switch (summaryItem.getStatus()){
             case POSITIVE:
                 amount.setText(StringUtils.formatAmount(summaryItem.getAmount()));
-                amount.setTextColor(colorPositive);
+                amount.setTextColor(ContextCompat.getColor(getContext(),
+                        R.color.summary_positive_color));
                 break;
             case NEGATIVE:
                 amount.setText(StringUtils.formatAmount(summaryItem.getAmount()));
-                amount.setTextColor(colorNegative);
+                amount.setTextColor(ContextCompat.getColor(getContext(),
+                        R.color.summary_negative_color));
                 break;
             case NEUTRAL:
                 amount.setText(StringUtils.formatAmount(summaryItem.getAmount()));
-                amount.setTextColor(colorNegative);
+                amount.setTextColor(ContextCompat.getColor(getContext(),
+                        R.color.summary_neutral_color));
                 break;
             default:
                 amount.setText("No hay datos");
-                amount.setTextColor(colorNegative);
+                amount.setTextColor(ContextCompat.getColor(getContext(),
+                    R.color.summary_neutral_color));
                 break;
         }
     }

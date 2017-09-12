@@ -41,7 +41,12 @@ public abstract class CardExpenseRenderer extends Renderer<CardExpenseItem> {
     }
 
     protected void renderName(CardExpenseItem item){
-        name.setText(item.getName());
+        if(item.isGroupHeader()){
+            name.setText(getContext().getText(item.getGroupName()));
+        }else{
+            name.setText(item.getName());
+        }
+
     }
 
     protected void renderAmount(CardExpenseItem item){

@@ -148,8 +148,9 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
     @Override
     public boolean validateExpense(){
         String error = "";
-        if(et_name.getText().toString().isEmpty())
-            error+=getString(R.string.detail_expense_name_error);
+        if(et_name.getText().toString().isEmpty()) {
+            error += getString(R.string.detail_expense_name_error);
+        }
         if(et_amount.getText().toString().isEmpty()){
             error+=addSeparator(error)+getString(R.string.detail_expense_amount_error);
         }
