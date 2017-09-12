@@ -8,13 +8,22 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
 
-public class Expense implements Serializable{
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
+public class Expense extends RealmObject implements Serializable{
+    @PrimaryKey
+    @Index
     private int id;
+    @Required
     private String name;
     private String description;
     private float amount;
     private boolean isPaid;
     private boolean isTemplate;
+    @Index
     private Date creationDate;
     private ExpensesGroup group;
 
