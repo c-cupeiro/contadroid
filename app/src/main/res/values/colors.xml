@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#5AC3C1</color>
+    <color name="colorPrimaryLight">#7fc9c7</color>
+    <color name="colorPrimaryDark">#1D9090</color>
+    <color name="colorBackCard">#EFF2F7</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="colorAccent">#EF3131</color>
+    <color name="fabColor">#3B4859</color>
+    <color name="iconColor">#FFFFFF</color>
+    <color name="headerNavigationColor">#006262</color>
+    <color name="iconBackgroundIncomeColor">#ff9933</color>
+    <color name="iconBackgroundHomeColor">#00cc00</color>
+    <color name="iconBackgroundTransportColor">#0099ff</color>
+    <color name="iconBackgroundFoodColor">#cc66ff</color>
+    <color name="iconBackgroundShoppingColor">#990033</color>
+    <color name="iconBackgroundLeisureColor">#006600</color>
+    <color name="iconBackgroundOtherColor">#cc0000</color>
+    <color name="categorySelected">#EF3131</color>
+    <color name="summary_positive_color">#3eef31</color>
+    <color name="summary_negative_color">#ec2323</color>
+    <color name="summary_neutral_color">#2b2a2a</color>
 </resources>
