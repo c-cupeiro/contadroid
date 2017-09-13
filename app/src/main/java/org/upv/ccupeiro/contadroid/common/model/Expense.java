@@ -1,14 +1,11 @@
 package org.upv.ccupeiro.contadroid.common.model;
 
-import android.support.annotation.NonNull;
-
-import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -26,7 +23,11 @@ public class Expense extends RealmObject implements Serializable{
     private boolean isTemplate;
     @Index
     private Date creationDate;
+    @Ignore
     private ExpensesGroup group;
+    private String groupRealm;
+
+    public Expense(){}
 
     private Expense(int id, String name, String description, float amount, boolean isPaid,
                     boolean isTemplate, ExpensesGroup group, Date creationDate) {
@@ -37,6 +38,7 @@ public class Expense extends RealmObject implements Serializable{
         this.isPaid = isPaid;
         this.isTemplate = isTemplate;
         this.group = group;
+        this.groupRealm = group.name();
         this.creationDate = creationDate;
     }
 
@@ -141,7 +143,15 @@ public class Expense extends RealmObject implements Serializable{
     }
 
     public ExpensesGroup getGroup() {
-        return group;
+        return ExpensesGroup.valueOf(getGroupRealm().toUpperCase());
+    }
+
+    public String getGroupRealm() {
+        return groupRealm;
+    }
+
+    public void setGroupRealm(String groupRealm) {
+        this.groupRealm = groupRealm;
     }
 
     public Date getCreationDate() {

@@ -28,6 +28,7 @@ import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -139,6 +140,8 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
                 expense.withId(expenseEditionId);
                 if(isExpenseEditionPaid)
                     expense.isPaid();
+            }else{
+                expense.withDate(Calendar.getInstance().getTime());
             }
             Intent returnIntent = new Intent();
             returnIntent.putExtra(DETAIL_EXPENSE_RETURN_EXPENSE,expense.build());
