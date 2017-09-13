@@ -116,31 +116,31 @@ public class RealmContadroidRepository implements ContadroidRepository {
 
     @Override
     public boolean saveExpense(final Expense expense) {
-        /*realm.executeTransactionAsync(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 realm.insertOrUpdate(expense);
             }
-        });*/
+        });
         return true; //TODO Look how to handle this return
     }
 
     @Override
     public boolean deleteExpense(final int id) {
-        /*realm.executeTransactionAsync(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 RealmResults<Expense> results = realm.where(Expense.class)
                         .equalTo(EXPENSE_FIELD_ID,id).findAll();
                 results.deleteAllFromRealm();
             }
-        });*/
+        });
         return true; //TODO Look how to handle this return
     }
 
     @Override
     public boolean changePaidState(final int id, final boolean paid) {
-       /* realm.executeTransactionAsync(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 Expense expense = realm.where(Expense.class)
@@ -148,7 +148,7 @@ public class RealmContadroidRepository implements ContadroidRepository {
                 expense.setPaid(paid);
                 realm.insertOrUpdate(expense);
             }
-        });*/
+        });
         return true; //TODO Look how to handle this return
     }
 }
