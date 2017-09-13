@@ -83,12 +83,6 @@ public abstract class BasicActivity extends AppCompatActivity
             SummaryActivity.open(this);
         } else if (id == R.id.nav_template) {
             TemplateActivity.open(this);
-        } else if (id == R.id.nav_settings) {
-            showSnackBar("Has pulsado las opciones");
-        } else if (id == R.id.nav_login) {
-            showSnackBar("Has pulsado login");
-        } else if (id == R.id.nav_logout) {
-            showSnackBar("Has pulsado logout");
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
