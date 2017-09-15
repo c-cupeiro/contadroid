@@ -1,15 +1,10 @@
 package org.upv.ccupeiro.contadroid.common.model;
 
-import android.support.annotation.NonNull;
-
-import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
-
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Date;
 
 public class Expense implements Serializable{
-    private int id;
+    private long id;
     private String name;
     private String description;
     private float amount;
@@ -18,7 +13,7 @@ public class Expense implements Serializable{
     private Date creationDate;
     private ExpensesGroup group;
 
-    private Expense(int id, String name, String description, float amount, boolean isPaid,
+    private Expense(long id, String name, String description, float amount, boolean isPaid,
                     boolean isTemplate, ExpensesGroup group, Date creationDate) {
         this.id = id;
         this.name = name;
@@ -33,7 +28,7 @@ public class Expense implements Serializable{
 
 
     public static class Builder{
-        private int id = -1;
+        private long id = -1;
         private String name = "";
         private String description = "";
         private float amount = 0;
@@ -42,7 +37,7 @@ public class Expense implements Serializable{
         private ExpensesGroup group = ExpensesGroup.EMPTY;
         private Date creationDate = new Date(0);
 
-        public Builder withId(int id){
+        public Builder withId(long id){
             this.id = id;
             return this;
         }
@@ -90,11 +85,11 @@ public class Expense implements Serializable{
 
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

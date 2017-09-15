@@ -30,7 +30,7 @@ public class TabExpensePaidPresenter {
         activityPresenter.showDialog(expense);
     }
 
-    public void changePaidStatusExpense(int id,boolean paid){
+    public void changePaidStatusExpense(long id,boolean paid){
         activityPresenter.changePaidStatus(id,paid);
     }
 

@@ -5,7 +5,6 @@ import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -131,7 +130,7 @@ public class SimpleMockContadroidRepository implements ContadroidRepository {
     }
 
     @Override
-    public boolean deleteTemplateExpense(int id) {
+    public boolean deleteTemplateExpense(long id) {
         return deleteExpense(id);
     }
 
@@ -161,7 +160,7 @@ public class SimpleMockContadroidRepository implements ContadroidRepository {
     }
 
     @Override
-    public boolean deleteExpense(int id) {
+    public boolean deleteExpense(long id) {
         int position = getPosition(id);
         if(position != -1){
             expenseList.remove(position);
@@ -171,7 +170,7 @@ public class SimpleMockContadroidRepository implements ContadroidRepository {
     }
 
     @Override
-    public boolean changePaidState(int id, boolean paid) {
+    public boolean changePaidState(long id, boolean paid) {
         int position = getPosition(id);
         if(position != -1){
             Expense expense = expenseList.get(position);
@@ -182,7 +181,7 @@ public class SimpleMockContadroidRepository implements ContadroidRepository {
         return false;
     }
 
-    private int getPosition(int idExpense){
+    private int getPosition(long idExpense){
         for(int pos = 0; pos < expenseList.size();pos++){
             if(expenseList.get(pos).getId()==idExpense){
                 return pos;

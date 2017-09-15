@@ -9,7 +9,7 @@ public class ChangePaidStatus {
     public ChangePaidStatus(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
-    public boolean execute(int id, boolean paid){
+    public boolean execute(long id, boolean paid){
         return expenseRepository.changePaidState(id,paid);
     }
 }
