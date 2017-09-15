@@ -10,6 +10,6 @@ public class SaveTemplateExpenses {
         this.expenseRepository = expenseRepository;
     }
     public boolean execute(Expense expense){
-        return expenseRepository.saveExpense(expense);
+        return expenseRepository.saveTemplateExpense(expense);
     }
 }

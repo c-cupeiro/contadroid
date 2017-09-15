@@ -181,6 +181,21 @@ public class SimpleMockContadroidRepository implements ContadroidRepository {
         return false;
     }
 
+    @Override
+    public boolean addTemplateToMonth(int year, int month) {
+        List<Expense> templateList = getTemplate();
+        for(Expense templateExpense : templateList){
+           Expense newExpense = new Expense.Builder()
+                   .withName(templateExpense.getName())
+                   .withDescription(templateExpense.getDescription())
+                   .withAmount(templateExpense.getAmount())
+                   .withGroup(templateExpense.getGroup())
+                   .build();
+            saveNewExpense(newExpense);
+        }
+        return true;
+    }
+
     private int getPosition(long idExpense){
         for(int pos = 0; pos < expenseList.size();pos++){
             if(expenseList.get(pos).getId()==idExpense){

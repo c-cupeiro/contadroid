@@ -43,29 +43,31 @@ public class RealmContadroidRepository implements ContadroidRepository {
     public List<Expense> getPaidExpensesInMonth(int year, int month) {
         return getExpenseinMonthByPaidState(year, month, IS_PAID);
     }
+
     @Override
     public List<Expense> getNotPaidExpensesInMonth(int year, int month) {
         return getExpenseinMonthByPaidState(year, month, IS_NOT_PAID);
     }
 
     private List<Expense> getExpenseinMonthByPaidState(int year, int month, boolean isPaid) {
-        Date startDate = getDate(year,month,FIRST_DAY);
-        Date endDate = getEndDate(year,month);
+        Date startDate = getDate(year, month, FIRST_DAY);
+        Date endDate = getEndDate(year, month);
         RealmResults<ExpenseRealm> results = realm
                 .where(ExpenseRealm.class)
-                .between(EXPENSE_FIELD_CREATION_DATE,startDate,endDate)
-                .equalTo(EXPENSE_FIELD_IS_PAID,isPaid)
+                .between(EXPENSE_FIELD_CREATION_DATE, startDate, endDate)
+                .equalTo(EXPENSE_FIELD_IS_PAID, isPaid)
+                .equalTo(EXPENSE_FIELD_IS_TEMPLATE, IS_NOT_TEMPLATE)
                 .findAll();
         return getExpenseListFromRealmList(realm.copyFromRealm(results));
     }
 
     private Date getEndDate(int year, int month) {
         month++;
-        if(month> DECEMBER){
+        if (month > DECEMBER) {
             month = JANUARY;
             year++;
         }
-        return getDate(year,month,FIRST_DAY);
+        return getDate(year, month, FIRST_DAY);
     }
 
     private Date getDate(int year, int month, int day) {
@@ -80,18 +82,18 @@ public class RealmContadroidRepository implements ContadroidRepository {
         return cal.getTime();
     }
 
-    private int getMonthForCalendar(int month){
-        return month-1;
+    private int getMonthForCalendar(int month) {
+        return month - 1;
     }
 
     @Override
     public List<Expense> getYearExpenses(int year) {
-        Date startDate = getDate(year,JANUARY,FIRST_DAY);
-        Date endDate = getEndDate(year,DECEMBER);
+        Date startDate = getDate(year, JANUARY, FIRST_DAY);
+        Date endDate = getEndDate(year, DECEMBER);
         RealmResults<ExpenseRealm> results = realm
                 .where(ExpenseRealm.class)
-                .between(EXPENSE_FIELD_CREATION_DATE,startDate,endDate)
-                .equalTo(EXPENSE_FIELD_IS_PAID,IS_PAID)
+                .between(EXPENSE_FIELD_CREATION_DATE, startDate, endDate)
+                .equalTo(EXPENSE_FIELD_IS_PAID, IS_PAID)
                 .findAll();
         return getExpenseListFromRealmList(realm.copyFromRealm(results));
 
@@ -101,7 +103,7 @@ public class RealmContadroidRepository implements ContadroidRepository {
     public List<Expense> getTemplate() {
         RealmResults<ExpenseRealm> results = realm
                 .where(ExpenseRealm.class)
-                .equalTo(EXPENSE_FIELD_IS_TEMPLATE,IS_TEMPLATE)
+                .equalTo(EXPENSE_FIELD_IS_TEMPLATE, IS_TEMPLATE)
                 .findAll();
         return getExpenseListFromRealmList(realm.copyFromRealm(results));
     }
@@ -119,12 +121,12 @@ public class RealmContadroidRepository implements ContadroidRepository {
 
     @Override
     public boolean saveExpense(Expense expense) {
-        try{
+        try {
             realm.beginTransaction();
             realm.insertOrUpdate(getExpenseRealmFromExpense(expense));
             realm.commitTransaction();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e(TAG_REALM_REPOSITORY, "saveExpense: ", e);
             return false;
         }
@@ -132,14 +134,14 @@ public class RealmContadroidRepository implements ContadroidRepository {
 
     @Override
     public boolean deleteExpense(long id) {
-        try{
+        try {
             realm.beginTransaction();
             RealmResults<ExpenseRealm> results = realm.where(ExpenseRealm.class)
-                    .equalTo(EXPENSE_FIELD_ID,id).findAll();
+                    .equalTo(EXPENSE_FIELD_ID, id).findAll();
             results.deleteAllFromRealm();
             realm.commitTransaction();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e(TAG_REALM_REPOSITORY, "deleteExpense: ", e);
             return false;
         }
@@ -147,29 +149,51 @@ public class RealmContadroidRepository implements ContadroidRepository {
 
     @Override
     public boolean changePaidState(long id, final boolean paid) {
-        try{
+        try {
             realm.beginTransaction();
             ExpenseRealm expenseRealm = realm.where(ExpenseRealm.class)
-                    .equalTo(EXPENSE_FIELD_ID,id).findFirst();
+                    .equalTo(EXPENSE_FIELD_ID, id).findFirst();
             expenseRealm.setPaid(paid);
             realm.insertOrUpdate(expenseRealm);
             realm.commitTransaction();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e(TAG_REALM_REPOSITORY, "changePaidState: ", e);
             return false;
         }
     }
 
-    private List<Expense> getExpenseListFromRealmList(List<ExpenseRealm> expenseRealmList){
+    @Override
+    public boolean addTemplateToMonth(int year, int month) {
+        try {
+            Date templateDateOnMonthYear = getDate(year, month, FIRST_DAY);
+            List<Expense> templateExpenseList = getTemplate();
+            for (Expense templateExpense : templateExpenseList) {
+                Expense newExpense = new Expense.Builder()
+                        .withName(templateExpense.getName())
+                        .withDescription(templateExpense.getDescription())
+                        .withAmount(templateExpense.getAmount())
+                        .withGroup(templateExpense.getGroup())
+                        .withDate(templateDateOnMonthYear)
+                        .build();
+                saveExpense(newExpense);
+            }
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG_REALM_REPOSITORY, "addTemplateToMonth: ", e);
+            return false;
+        }
+    }
+
+    private List<Expense> getExpenseListFromRealmList(List<ExpenseRealm> expenseRealmList) {
         List<Expense> expenseList = new ArrayList<>();
-        for(ExpenseRealm expenseRealm:expenseRealmList){
+        for (ExpenseRealm expenseRealm : expenseRealmList) {
             expenseList.add(expenseRealm.getExpense());
         }
         return expenseList;
     }
 
-    private ExpenseRealm getExpenseRealmFromExpense(Expense expense){
+    private ExpenseRealm getExpenseRealmFromExpense(Expense expense) {
         ExpenseRealm expenseRealm = new ExpenseRealm();
         expenseRealm.setId(getIdFromExpense(expense));
         expenseRealm.setName(expense.getName());
@@ -181,16 +205,24 @@ public class RealmContadroidRepository implements ContadroidRepository {
         expenseRealm.setGroup(expense.getGroup().name().toUpperCase());
         return expenseRealm;
     }
-    private long getIdFromExpense(Expense expense){
-        if(expense.getId() == -1){
-            if ( realm.where(ExpenseRealm.class).findAll().size()>0){
-                long lastId = (long) realm.where(ExpenseRealm.class).max(EXPENSE_FIELD_ID);
-                return lastId+1;
-            }else{
+
+    private long getIdFromExpense(Expense expense) {
+        if (expense.getId() == -1) {
+            if (getSizeExpenseTable() > 0) {
+                return getMaxId() + 1;
+            } else {
                 return 0;
             }
-        }else{
+        } else {
             return expense.getId();
         }
+    }
+
+    private long getMaxId() {
+        return (long) realm.where(ExpenseRealm.class).max(EXPENSE_FIELD_ID);
+    }
+
+    private int getSizeExpenseTable() {
+        return realm.where(ExpenseRealm.class).findAll().size();
     }
 }

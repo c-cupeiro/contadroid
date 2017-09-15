@@ -14,5 +14,6 @@ public interface ContadroidRepository {
     boolean saveExpense(Expense expense);
     boolean deleteExpense(long id);
     boolean changePaidState(long id,boolean paid);
+    boolean addTemplateToMonth(int year, int month);
 
 }
