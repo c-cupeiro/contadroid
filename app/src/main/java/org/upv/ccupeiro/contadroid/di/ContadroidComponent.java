@@ -20,7 +20,6 @@ public interface ContadroidComponent {
     Context context();
     ContadroidRepository contadroidRepository();
 
-    void inject(ActualMonthActivity activity);
     void inject(DetailExpenseActivity activity);
     void inject(SummaryActivity activity);
     void inject(TemplateActivity activity);

@@ -26,6 +26,8 @@ import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -40,25 +42,29 @@ public class TabExpensesPaidFragment extends Fragment implements TabExpensePaidP
     TextView emptyCase;
 
     private RVRendererAdapter<CardExpenseItem> adapter;
-    private TabExpensePaidPresenter presenter;
+    @Inject
+    TabExpensePaidPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab_expenses_paid, container, false);
-        initializaButterKnife(rootView);
+        initializeDependencyInjection();
+        initializeButterKnife(rootView);
         initializeAdapter();
         initializePresenter();
         initializeRecyclerView();
         return rootView;
     }
+    private void initializeDependencyInjection() {
+        ((ActualMonthActivity)getActivity()).getActivityComponent().inject(this);
+    }
 
-    private void initializaButterKnife(View view) {
+    private void initializeButterKnife(View view) {
         ButterKnife.bind(this, view);
     }
 
     private void initializePresenter(){
-        presenter = new TabExpensePaidPresenter(((ActualMonthActivity)getActivity()).getPresenter());
         presenter.setView(this);
         presenter.initialize();
     }

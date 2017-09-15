@@ -9,16 +9,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
+import org.upv.ccupeiro.contadroid.actualmonth.di.ActualMonthComponent;
+import org.upv.ccupeiro.contadroid.actualmonth.di.ActualMonthModule;
+import org.upv.ccupeiro.contadroid.actualmonth.di.DaggerActualMonthComponent;
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
-import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
-import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
-import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.domain.usecase.DeleteExpense;
-import org.upv.ccupeiro.contadroid.common.domain.usecase.SaveExpense;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
@@ -42,6 +38,7 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     @BindView(R.id.tabs_view)
     ViewPager tabsView;
     private MainTabAdapter mainTabAdapter;
+    private ActualMonthComponent actualMonthComponent;
     @Inject
     ActualMonthPresenter presenter;
 
@@ -64,7 +61,15 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     }
 
     private void initializeDependencyInjection(){
-        getAppComponent().inject(this);
+        actualMonthComponent = DaggerActualMonthComponent.builder()
+                .contadroidComponent(getAppComponent())
+                .actualMonthModule(new ActualMonthModule(presenter))
+                .build();
+        actualMonthComponent.inject(this);
+    }
+
+    public ActualMonthComponent getActivityComponent(){
+        return actualMonthComponent;
     }
 
     private void initializePresenter(){

@@ -15,6 +15,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
 import org.upv.ccupeiro.contadroid.R;
+import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.model.SimpleCardExpenseItemCollection;
@@ -26,6 +27,8 @@ import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,13 +43,15 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
     TextView emptyCase;
 
     private RVRendererAdapter<CardExpenseItem> adapter;
-    private TabExpenseNotPaidPresenter presenter;
+    @Inject
+    TabExpenseNotPaidPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab_expenses_not_paid, container, false);
-        initializaButterKnife(rootView);
+        initializeDependencyInjection();
+        initializeButterKnife(rootView);
         initializeAdapter();
         initializePresenter();
         initializeRecyclerView();
@@ -54,12 +59,15 @@ public class TabExpensesNotPaidFragment extends Fragment implements TabExpenseNo
 
     }
 
-    private void initializaButterKnife(View view){
+    private void initializeDependencyInjection() {
+        ((ActualMonthActivity)getActivity()).getActivityComponent().inject(this);
+    }
+
+    private void initializeButterKnife(View view){
         ButterKnife.bind(this,view);
     }
 
     private void initializePresenter(){
-        presenter = new TabExpenseNotPaidPresenter(((ActualMonthActivity)getActivity()).getPresenter());
         presenter.setView(this);
         presenter.initialize();
     }
