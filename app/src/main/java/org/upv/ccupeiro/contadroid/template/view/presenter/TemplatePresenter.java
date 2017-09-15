@@ -49,7 +49,7 @@ public class TemplatePresenter {
         }
     }
 
-    public void deleteTemplateExpense(int id){
+    public void deleteTemplateExpense(long id){
         if(deleteTemplateExpenses.execute(id)){
             view.showDeleteCorrect();
             showInfo(getTemplateExpenses.execute());

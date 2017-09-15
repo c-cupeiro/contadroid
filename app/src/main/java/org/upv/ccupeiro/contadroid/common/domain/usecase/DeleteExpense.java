@@ -9,7 +9,7 @@ public class DeleteExpense {
     public DeleteExpense(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
-    public boolean execute(int id){
+    public boolean execute(long id){
         return expenseRepository.deleteExpense(id);
     }
 }

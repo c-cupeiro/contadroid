@@ -8,7 +8,7 @@ public class DeleteTemplateExpenses {
     public DeleteTemplateExpenses(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
-    public boolean execute(int id){
+    public boolean execute(long id){
         return expenseRepository.deleteTemplateExpense(id);
     }
 }

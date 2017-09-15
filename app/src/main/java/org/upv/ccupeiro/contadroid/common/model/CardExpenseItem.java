@@ -6,7 +6,7 @@ public class CardExpenseItem {
 
     private boolean isGroupHeader;
     private boolean isExpenseRow;
-    private int expenseId;
+    private long expenseId;
     private int icon;
     private ExpensesGroup group;
     private String name;
@@ -18,7 +18,7 @@ public class CardExpenseItem {
     public final static CardExpenseItem CARD_EXPENSE_ITEM_EMPTY = new CardExpenseItem(false,false,
             -1, R.drawable.icon_other,ExpensesGroup.EMPTY,"",R.string.group_empty,0,"",false);
 
-    private CardExpenseItem(boolean isGroupHeader, boolean isExpenseRow, int expenseId,
+    private CardExpenseItem(boolean isGroupHeader, boolean isExpenseRow, long expenseId,
                             int icon, ExpensesGroup group, String name,int groupName, float amount,
                             String description, boolean isPaid) {
         this.isGroupHeader = isGroupHeader;
@@ -36,7 +36,7 @@ public class CardExpenseItem {
     public static class Builder{
         private boolean isGroupHeader = false;
         private boolean isExpenseRow = false;
-        private int expenseId = -1;
+        private long expenseId = -1;
         private int icon = R.drawable.icon_other;
         private ExpensesGroup group = ExpensesGroup.EMPTY;
         private String name = "";
@@ -55,7 +55,7 @@ public class CardExpenseItem {
             return this;
         }
 
-        public Builder withExpenseId(int expenseId){
+        public Builder withExpenseId(long expenseId){
             this.expenseId = expenseId;
             return this;
         }
@@ -111,7 +111,7 @@ public class CardExpenseItem {
         return isExpenseRow;
     }
 
-    public int getExpenseId() {
+    public long getExpenseId() {
         return expenseId;
     }
 

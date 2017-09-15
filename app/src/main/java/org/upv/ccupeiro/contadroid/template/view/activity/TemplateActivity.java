@@ -20,7 +20,6 @@ import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleMockContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
