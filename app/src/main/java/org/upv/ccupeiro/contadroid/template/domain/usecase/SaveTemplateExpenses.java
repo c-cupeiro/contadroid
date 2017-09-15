@@ -1,6 +1,7 @@
 package org.upv.ccupeiro.contadroid.template.domain.usecase;
 
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 
 public class SaveTemplateExpenses {
@@ -9,7 +10,7 @@ public class SaveTemplateExpenses {
     public SaveTemplateExpenses(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
-    public boolean execute(Expense expense){
-        return expenseRepository.saveTemplateExpense(expense);
+    public void execute(Expense expense, RepositoryCallback callback){
+        expenseRepository.saveTemplateExpense(expense,callback);
     }
 }

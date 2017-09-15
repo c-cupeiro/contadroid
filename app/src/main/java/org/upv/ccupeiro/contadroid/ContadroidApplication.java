@@ -14,18 +14,11 @@ public class ContadroidApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        initializeRealm();
         initializeRepository();
     }
 
-    private void initializeRealm() {
-        Realm.init(this);
-        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
-        Realm.setDefaultConfiguration(configuration);
-    }
-
     private void initializeRepository() {
-        contadroidRepository = new RealmContadroidRepository(Realm.getDefaultInstance());
+        contadroidRepository = new RealmContadroidRepository(this);
     }
 
     public static ContadroidRepository getContadroidRepository() {

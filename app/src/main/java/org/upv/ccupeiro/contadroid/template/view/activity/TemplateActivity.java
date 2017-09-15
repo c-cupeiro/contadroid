@@ -47,6 +47,7 @@ import static org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpe
 
 public class TemplateActivity extends BasicActivity implements TemplatePresenter.View{
     public static final CardExpenseCollection EMPTY_COLLECTION = new CardExpenseCollection(new ArrayList<CardExpenseItem>());
+    public static final int FROM_EMPTY = 2;
     @Nullable
     @BindView(R.id.rv_template)
     RecyclerView rvTemplate;
@@ -174,6 +175,12 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
     public void showEmptyCase() {
         emptyCase.setVisibility(View.VISIBLE);
         rvTemplate.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideEmptyCase() {
+        emptyCase.setVisibility(View.GONE);
+        rvTemplate.setVisibility(View.VISIBLE);
     }
 
     @Override

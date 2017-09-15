@@ -3,6 +3,7 @@ package org.upv.ccupeiro.contadroid.actualmonth.view.presenter;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
+import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.DeleteExpense;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.SaveExpense;
@@ -43,28 +44,46 @@ public class ActualMonthPresenter {
     }
 
     public void saveExpense(Expense expense){
-        if(saveExpense.execute(expense)){
-            view.redrawTabs();
-            view.showSaveCorrect();
-        }else{
-            view.showSaveError();
-        }
+        saveExpense.execute(expense, new RepositoryCallback() {
+            @Override
+            public void onSuccess() {
+                view.redrawTabs();
+                view.showSaveCorrect();
+            }
+
+            @Override
+            public void onError() {
+                view.showSaveError();
+            }
+        });
     }
     public void deleteExpense(long id){
-        if(deleteExpense.execute(id)){
-            view.redrawTabs();
-            view.showDeleteCorrect();
-        }else{
-            view.showDeleteError();
-        }
+        deleteExpense.execute(id, new RepositoryCallback() {
+            @Override
+            public void onSuccess() {
+                view.redrawTabs();
+                view.showDeleteCorrect();
+            }
+
+            @Override
+            public void onError() {
+                view.showDeleteError();
+            }
+        });
     }
 
     public void changePaidStatus(long id, boolean paid){
-        if(changePaidStatus.execute(id,paid)){
-            view.redrawTabs();
-        }else{
-            view.showChangeStatusError();
-        }
+        changePaidStatus.execute(id, paid, new RepositoryCallback() {
+            @Override
+            public void onSuccess() {
+                view.redrawTabs();
+            }
+
+            @Override
+            public void onError() {
+                view.showChangeStatusError();
+            }
+        });
     }
 
     public List<CardExpenseItem> getPaidExpense(){

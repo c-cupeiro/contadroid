@@ -1,8 +1,10 @@
 package org.upv.ccupeiro.contadroid.common.data.datasource;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
 import org.upv.ccupeiro.contadroid.common.data.realm.ExpenseRealm;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 
@@ -12,9 +14,11 @@ import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
+import static android.R.attr.id;
 import static android.content.ContentValues.TAG;
 import static org.upv.ccupeiro.contadroid.common.data.realm.ExpenseRealm.EXPENSE_FIELD_CREATION_DATE;
 import static org.upv.ccupeiro.contadroid.common.data.realm.ExpenseRealm.EXPENSE_FIELD_ID;
@@ -33,10 +37,10 @@ public class RealmContadroidRepository implements ContadroidRepository {
     private static final boolean IS_NOT_TEMPLATE = false;
     private static final String TAG_REALM_REPOSITORY = "Realm_REPO";
 
-    private Realm realm;
-
-    public RealmContadroidRepository(Realm realm) {
-        this.realm = realm;
+    public RealmContadroidRepository(Context context) {
+        Realm.init(context);
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        Realm.setDefaultConfiguration(configuration);
     }
 
     @Override
@@ -50,15 +54,23 @@ public class RealmContadroidRepository implements ContadroidRepository {
     }
 
     private List<Expense> getExpenseinMonthByPaidState(int year, int month, boolean isPaid) {
-        Date startDate = getDate(year, month, FIRST_DAY);
-        Date endDate = getEndDate(year, month);
-        RealmResults<ExpenseRealm> results = realm
-                .where(ExpenseRealm.class)
-                .between(EXPENSE_FIELD_CREATION_DATE, startDate, endDate)
-                .equalTo(EXPENSE_FIELD_IS_PAID, isPaid)
-                .equalTo(EXPENSE_FIELD_IS_TEMPLATE, IS_NOT_TEMPLATE)
-                .findAll();
-        return getExpenseListFromRealmList(realm.copyFromRealm(results));
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            Date startDate = getDate(year, month, FIRST_DAY);
+            Date endDate = getEndDate(year, month);
+            RealmResults<ExpenseRealm> results = realm
+                    .where(ExpenseRealm.class)
+                    .between(EXPENSE_FIELD_CREATION_DATE, startDate, endDate)
+                    .equalTo(EXPENSE_FIELD_IS_PAID, isPaid)
+                    .equalTo(EXPENSE_FIELD_IS_TEMPLATE, IS_NOT_TEMPLATE)
+                    .findAll();
+            return getExpenseListFromRealmList(realm.copyFromRealm(results));
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
     }
 
     private Date getEndDate(int year, int month) {
@@ -88,100 +100,178 @@ public class RealmContadroidRepository implements ContadroidRepository {
 
     @Override
     public List<Expense> getYearExpenses(int year) {
-        Date startDate = getDate(year, JANUARY, FIRST_DAY);
-        Date endDate = getEndDate(year, DECEMBER);
-        RealmResults<ExpenseRealm> results = realm
-                .where(ExpenseRealm.class)
-                .between(EXPENSE_FIELD_CREATION_DATE, startDate, endDate)
-                .equalTo(EXPENSE_FIELD_IS_PAID, IS_PAID)
-                .findAll();
-        return getExpenseListFromRealmList(realm.copyFromRealm(results));
-
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            Date startDate = getDate(year, JANUARY, FIRST_DAY);
+            Date endDate = getEndDate(year, DECEMBER);
+            RealmResults<ExpenseRealm> results = realm
+                    .where(ExpenseRealm.class)
+                    .between(EXPENSE_FIELD_CREATION_DATE, startDate, endDate)
+                    .equalTo(EXPENSE_FIELD_IS_PAID, IS_PAID)
+                    .findAll();
+            return getExpenseListFromRealmList(realm.copyFromRealm(results));
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
     }
 
     @Override
     public List<Expense> getTemplate() {
-        RealmResults<ExpenseRealm> results = realm
-                .where(ExpenseRealm.class)
-                .equalTo(EXPENSE_FIELD_IS_TEMPLATE, IS_TEMPLATE)
-                .findAll();
-        return getExpenseListFromRealmList(realm.copyFromRealm(results));
-    }
-
-    @Override
-    public boolean saveTemplateExpense(Expense expense) {
-        expense.setTemplate(true);
-        return saveExpense(expense);
-    }
-
-    @Override
-    public boolean deleteTemplateExpense(long id) {
-        return deleteExpense(id);
-    }
-
-    @Override
-    public boolean saveExpense(Expense expense) {
+        Realm realm = null;
         try {
-            realm.beginTransaction();
-            realm.insertOrUpdate(getExpenseRealmFromExpense(expense));
-            realm.commitTransaction();
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG_REALM_REPOSITORY, "saveExpense: ", e);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean deleteExpense(long id) {
-        try {
-            realm.beginTransaction();
-            RealmResults<ExpenseRealm> results = realm.where(ExpenseRealm.class)
-                    .equalTo(EXPENSE_FIELD_ID, id).findAll();
-            results.deleteAllFromRealm();
-            realm.commitTransaction();
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG_REALM_REPOSITORY, "deleteExpense: ", e);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean changePaidState(long id, final boolean paid) {
-        try {
-            realm.beginTransaction();
-            ExpenseRealm expenseRealm = realm.where(ExpenseRealm.class)
-                    .equalTo(EXPENSE_FIELD_ID, id).findFirst();
-            expenseRealm.setPaid(paid);
-            realm.insertOrUpdate(expenseRealm);
-            realm.commitTransaction();
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG_REALM_REPOSITORY, "changePaidState: ", e);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean addTemplateToMonth(int year, int month) {
-        try {
-            Date templateDateOnMonthYear = getDate(year, month, FIRST_DAY);
-            List<Expense> templateExpenseList = getTemplate();
-            for (Expense templateExpense : templateExpenseList) {
-                Expense newExpense = new Expense.Builder()
-                        .withName(templateExpense.getName())
-                        .withDescription(templateExpense.getDescription())
-                        .withAmount(templateExpense.getAmount())
-                        .withGroup(templateExpense.getGroup())
-                        .withDate(templateDateOnMonthYear)
-                        .build();
-                saveExpense(newExpense);
+            realm = Realm.getDefaultInstance();
+            RealmResults<ExpenseRealm> results = realm
+                    .where(ExpenseRealm.class)
+                    .equalTo(EXPENSE_FIELD_IS_TEMPLATE, IS_TEMPLATE)
+                    .findAll();
+            return getExpenseListFromRealmList(realm.copyFromRealm(results));
+        } finally {
+            if (realm != null) {
+                realm.close();
             }
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG_REALM_REPOSITORY, "addTemplateToMonth: ", e);
-            return false;
+        }
+    }
+
+    @Override
+    public void saveTemplateExpense(Expense expense, RepositoryCallback callback) {
+        expense.setTemplate(true);
+        saveExpense(expense, callback);
+    }
+
+    @Override
+    public void deleteTemplateExpense(long id, RepositoryCallback callback) {
+        deleteExpense(id, callback);
+    }
+
+    @Override
+    public void saveExpense(final Expense expense, final RepositoryCallback callback) {
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            realm.executeTransactionAsync(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.insertOrUpdate(getExpenseRealmFromExpense(expense,realm));
+                }
+            }, new Realm.Transaction.OnSuccess() {
+                @Override
+                public void onSuccess() {
+                    callback.onSuccess();
+                }
+            }, new Realm.Transaction.OnError() {
+                @Override
+                public void onError(Throwable error) {
+                    callback.onError();
+                }
+            });
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
+    }
+
+    @Override
+    public void deleteExpense(final long id, final RepositoryCallback callback) {
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            realm.executeTransactionAsync(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmResults<ExpenseRealm> results = realm.where(ExpenseRealm.class)
+                            .equalTo(EXPENSE_FIELD_ID, id).findAll();
+                    results.deleteAllFromRealm();
+                }
+            }, new Realm.Transaction.OnSuccess() {
+                @Override
+                public void onSuccess() {
+                    callback.onSuccess();
+                }
+            }, new Realm.Transaction.OnError() {
+                @Override
+                public void onError(Throwable error) {
+                    callback.onError();
+                }
+            });
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
+    }
+
+    @Override
+    public void changePaidState(final long id, final boolean paid,
+                                final RepositoryCallback callback) {
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            realm.executeTransactionAsync(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    ExpenseRealm expenseRealm = realm.where(ExpenseRealm.class)
+                            .equalTo(EXPENSE_FIELD_ID, id).findFirst();
+                    expenseRealm.setPaid(paid);
+                    realm.insertOrUpdate(expenseRealm);
+                }
+            }, new Realm.Transaction.OnSuccess() {
+                @Override
+                public void onSuccess() {
+                    callback.onSuccess();
+                }
+            }, new Realm.Transaction.OnError() {
+                @Override
+                public void onError(Throwable error) {
+                    callback.onError();
+                }
+            });
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
+    }
+
+    @Override
+    public void addTemplateToMonth(int year, int month, final RepositoryCallback callback) {
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            final Date templateDateOnMonthYear = getDate(year, month, FIRST_DAY);
+            realm.executeTransactionAsync(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    List<Expense> templateExpenseList = getTemplate();
+                    for (Expense templateExpense : templateExpenseList) {
+                        Expense newExpense = new Expense.Builder()
+                                .withName(templateExpense.getName())
+                                .withDescription(templateExpense.getDescription())
+                                .withAmount(templateExpense.getAmount())
+                                .withGroup(templateExpense.getGroup())
+                                .withDate(templateDateOnMonthYear)
+                                .build();
+                        realm.insertOrUpdate(getExpenseRealmFromExpense(newExpense,realm));
+                    }
+                }
+            }, new Realm.Transaction.OnSuccess() {
+                @Override
+                public void onSuccess() {
+                    callback.onSuccess();
+                }
+            }, new Realm.Transaction.OnError() {
+                @Override
+                public void onError(Throwable error) {
+                    callback.onError();
+                }
+            });
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
         }
     }
 
@@ -193,9 +283,9 @@ public class RealmContadroidRepository implements ContadroidRepository {
         return expenseList;
     }
 
-    private ExpenseRealm getExpenseRealmFromExpense(Expense expense) {
+    private ExpenseRealm getExpenseRealmFromExpense(Expense expense, Realm realm) {
         ExpenseRealm expenseRealm = new ExpenseRealm();
-        expenseRealm.setId(getIdFromExpense(expense));
+        expenseRealm.setId(getIdFromExpense(expense,realm));
         expenseRealm.setName(expense.getName());
         expenseRealm.setDescription(expense.getDescription());
         expenseRealm.setAmount(expense.getAmount());
@@ -206,10 +296,10 @@ public class RealmContadroidRepository implements ContadroidRepository {
         return expenseRealm;
     }
 
-    private long getIdFromExpense(Expense expense) {
+    private long getIdFromExpense(Expense expense, Realm realm) {
         if (expense.getId() == -1) {
-            if (getSizeExpenseTable() > 0) {
-                return getMaxId() + 1;
+            if (getSizeExpenseTable(realm) > 0) {
+                return getMaxId(realm) + 1;
             } else {
                 return 0;
             }
@@ -218,11 +308,12 @@ public class RealmContadroidRepository implements ContadroidRepository {
         }
     }
 
-    private long getMaxId() {
+    private long getMaxId(Realm realm) {
+
         return (long) realm.where(ExpenseRealm.class).max(EXPENSE_FIELD_ID);
     }
 
-    private int getSizeExpenseTable() {
+    private int getSizeExpenseTable(Realm realm) {
         return realm.where(ExpenseRealm.class).findAll().size();
     }
 }

@@ -1,6 +1,7 @@
 package org.upv.ccupeiro.contadroid.template.domain.usecase;
 
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
 
 public class AddTemplateExpensesToActualMonth {
     private final ContadroidRepository expenseRepository;
@@ -8,7 +9,7 @@ public class AddTemplateExpensesToActualMonth {
     public AddTemplateExpensesToActualMonth(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
-    public boolean execute(int year, int month){
-        return expenseRepository.addTemplateToMonth(year,month);
+    public void execute(int year, int month, RepositoryCallback callback){
+        expenseRepository.addTemplateToMonth(year,month,callback);
     }
 }
