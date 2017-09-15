@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.pedrogomez.renderers.AdapteeCollection;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
 import org.upv.ccupeiro.contadroid.R;
@@ -59,7 +58,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
 
     private boolean isEdition=false;
     private boolean isExpenseEditionPaid = false;
-    private int expenseEditionId = -1;
+    private long expenseEditionId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

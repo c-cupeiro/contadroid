@@ -50,7 +50,7 @@ public class ActualMonthPresenter {
             view.showSaveError();
         }
     }
-    public void deleteExpense(int id){
+    public void deleteExpense(long id){
         if(deleteExpense.execute(id)){
             view.redrawTabs();
             view.showDeleteCorrect();
@@ -59,7 +59,7 @@ public class ActualMonthPresenter {
         }
     }
 
-    public void changePaidStatus(int id, boolean paid){
+    public void changePaidStatus(long id, boolean paid){
         if(changePaidStatus.execute(id,paid)){
             view.redrawTabs();
         }else{

@@ -19,7 +19,8 @@ import java.util.Locale;
 
 public class TransformItem {
 
-    public static final int INT_POST_DECEMBER = 12;
+    private static final int INT_DECEMBER = 12;
+    private static final int INT_JANUARY = 0;
 
     public static List<CardExpenseItem> transformExpenseToCardExpense(List<Expense> expenseList){
         Collections.sort(expenseList, new ExpenseGroupComparator());
@@ -113,7 +114,7 @@ public class TransformItem {
 
     private static List<SummaryItem> createSummaryItemList(List<Expense> expenseList){
         List<SummaryItem> summaryItemList = new LinkedList<>();
-        int initMonth = 0;
+        int initMonth = -1;
         for(Expense expense : expenseList){
             int expenseMonth = getMonthFromDate(expense.getCreationDate());
             if(expenseMonth>initMonth) {
@@ -155,7 +156,7 @@ public class TransformItem {
 
     private static void validateSummaryItemListAllMonths(int initMonth,
                                                          List<SummaryItem> summaryItemList) {
-        insertMissingMonths(initMonth, INT_POST_DECEMBER,summaryItemList);
+        insertMissingMonths(initMonth, INT_DECEMBER,summaryItemList);
     }
 
     private static float getCorrectAmount(Expense expense){
@@ -180,6 +181,9 @@ public class TransformItem {
 
     private static void insertMissingMonths(int initMonth, int expenseMonth,
                                             List<SummaryItem> summaryItemList) {
+        if(initMonth< INT_JANUARY){
+            initMonth = INT_JANUARY;
+        }
         while(initMonth<expenseMonth){
             summaryItemList.add(getEmptyMonth(initMonth));
             initMonth++;

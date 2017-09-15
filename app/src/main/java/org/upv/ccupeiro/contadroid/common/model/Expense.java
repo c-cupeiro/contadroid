@@ -1,34 +1,19 @@
 package org.upv.ccupeiro.contadroid.common.model;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
-import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
-import io.realm.annotations.Index;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
-
-public class Expense extends RealmObject implements Serializable{
-
-    @PrimaryKey
-    private int id;
-    @Required
+public class Expense implements Serializable{
+    private long id;
     private String name;
     private String description;
     private float amount;
     private boolean isPaid;
     private boolean isTemplate;
-    @Index
     private Date creationDate;
-    @Ignore
     private ExpensesGroup group;
-    private String groupRealm;
 
-    public Expense(){}
-
-    private Expense(int id, String name, String description, float amount, boolean isPaid,
+    private Expense(long id, String name, String description, float amount, boolean isPaid,
                     boolean isTemplate, ExpensesGroup group, Date creationDate) {
         this.id = id;
         this.name = name;
@@ -37,14 +22,13 @@ public class Expense extends RealmObject implements Serializable{
         this.isPaid = isPaid;
         this.isTemplate = isTemplate;
         this.group = group;
-        this.groupRealm = group.name();
         this.creationDate = creationDate;
     }
 
 
 
     public static class Builder{
-        private int id = -1;
+        private long id = -1;
         private String name = "";
         private String description = "";
         private float amount = 0;
@@ -53,7 +37,7 @@ public class Expense extends RealmObject implements Serializable{
         private ExpensesGroup group = ExpensesGroup.EMPTY;
         private Date creationDate = new Date(0);
 
-        public Builder withId(int id){
+        public Builder withId(long id){
             this.id = id;
             return this;
         }
@@ -101,11 +85,11 @@ public class Expense extends RealmObject implements Serializable{
 
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -142,15 +126,7 @@ public class Expense extends RealmObject implements Serializable{
     }
 
     public ExpensesGroup getGroup() {
-        return ExpensesGroup.valueOf(getGroupRealm().toUpperCase());
-    }
-
-    public String getGroupRealm() {
-        return groupRealm;
-    }
-
-    public void setGroupRealm(String groupRealm) {
-        this.groupRealm = groupRealm;
+        return group;
     }
 
     public Date getCreationDate() {
