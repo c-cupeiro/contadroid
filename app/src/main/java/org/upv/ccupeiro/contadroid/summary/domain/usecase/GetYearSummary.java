@@ -8,9 +8,12 @@ import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class GetYearSummary {
     private final ContadroidRepository expenseRepository;
 
+    @Inject
     public GetYearSummary(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }

@@ -11,6 +11,8 @@ import org.upv.ccupeiro.contadroid.common.model.Expense;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class ActualMonthPresenter {
 
     private final SaveExpense saveExpense;
@@ -20,6 +22,7 @@ public class ActualMonthPresenter {
     private final GetNotPaidExpenses getNotPaidExpenses;
     private View view;
 
+    @Inject
     public ActualMonthPresenter(SaveExpense saveExpense, DeleteExpense deleteExpense,
                                 ChangePaidStatus changePaidStatus, GetPaidExpenses getPaidExpenses,
                                 GetNotPaidExpenses getNotPaidExpenses) {

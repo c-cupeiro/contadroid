@@ -5,10 +5,15 @@ import org.upv.ccupeiro.contadroid.detailexpense.model.SimpleExpenseGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DetailExpensePresenter {
 
     private View view;
     private List<ExpenseGroupView> expenseGroupViewList;
+
+    @Inject
+    public DetailExpensePresenter() {}
 
     public void initialize(){
         expenseGroupViewList = SimpleExpenseGroup.getListExpenseGroup();

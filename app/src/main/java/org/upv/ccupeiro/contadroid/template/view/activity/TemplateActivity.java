@@ -15,7 +15,7 @@ import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
-import org.upv.ccupeiro.contadroid.ContadroidApplication;
+import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
 import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
@@ -33,6 +33,8 @@ import org.upv.ccupeiro.contadroid.template.view.presenter.TemplatePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -52,12 +54,15 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
     TextView emptyCase;
 
     private RVRendererAdapter<CardExpenseItem> adapter;
-    private TemplatePresenter presenter;
+
+    @Inject
+    TemplatePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeFrameLayout(R.layout.activity_template);
+        initializeDependencyInjection();
         initToolbar();
         initializeAdapter();
         initializeRecyclerView();
@@ -72,15 +77,15 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
         activity.finish();
     }
 
+    private void initializeDependencyInjection() {
+        getAppComponent().inject(this);
+    }
+
     private void initToolbar() {
         setTitle(R.string.template_title);
     }
 
     private void initializePresenter(){
-        ContadroidRepository repository = ((ContadroidApplication) getApplication()).getContadroidRepository();
-        presenter = new TemplatePresenter(new GetTemplateExpenses(repository),
-                new SaveTemplateExpenses(repository),
-                new DeleteTemplateExpenses(repository));
         presenter.setView(this);
         presenter.initialize();
     }

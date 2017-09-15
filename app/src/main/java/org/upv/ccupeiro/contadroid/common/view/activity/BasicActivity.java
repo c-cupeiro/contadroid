@@ -24,6 +24,8 @@ import android.widget.FrameLayout;
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
+import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
+import org.upv.ccupeiro.contadroid.di.ContadroidComponent;
 import org.upv.ccupeiro.contadroid.summary.view.activity.SummaryActivity;
 import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
 import org.upv.ccupeiro.contadroid.template.view.activity.TemplateActivity;
@@ -86,6 +88,10 @@ public abstract class BasicActivity extends AppCompatActivity
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    protected ContadroidComponent getAppComponent(){
+        return ((ContadroidApplication) getApplication()).getComponent();
     }
 
     public void showSnackBar(String text){

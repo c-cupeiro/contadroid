@@ -9,6 +9,8 @@ import org.upv.ccupeiro.contadroid.template.domain.usecase.SaveTemplateExpenses;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class TemplatePresenter {
 
     private final GetTemplateExpenses getTemplateExpenses;
@@ -16,6 +18,7 @@ public class TemplatePresenter {
     private final DeleteTemplateExpenses deleteTemplateExpenses;
     private View view;
 
+    @Inject
     public TemplatePresenter(GetTemplateExpenses getTemplateExpenses,
                              SaveTemplateExpenses saveTemplateExpenses,
                              DeleteTemplateExpenses deleteTemplateExpenses) {

@@ -5,11 +5,14 @@ import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import static org.upv.ccupeiro.contadroid.common.utils.TransformItem.transformExpenseToCardExpense;
 
 public class GetNotPaidExpenses {
     private final ContadroidRepository expenseRepository;
 
+    @Inject
     public GetNotPaidExpenses(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }

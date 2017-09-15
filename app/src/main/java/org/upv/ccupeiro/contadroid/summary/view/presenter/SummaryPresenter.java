@@ -7,11 +7,14 @@ import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class SummaryPresenter {
 
     private GetYearSummary getYearSummary;
     private View view;
 
+    @Inject
     public SummaryPresenter(GetYearSummary getYearSummary) {
         this.getYearSummary = getYearSummary;
     }

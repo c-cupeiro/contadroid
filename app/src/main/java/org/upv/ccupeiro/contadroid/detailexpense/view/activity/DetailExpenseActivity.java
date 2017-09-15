@@ -25,10 +25,13 @@ import org.upv.ccupeiro.contadroid.detailexpense.view.renderer.ExpenseGroupViewR
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
+import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +57,8 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
     RecyclerView rv_category;
     private DetailGroupAdapter adapter;
 
-    private DetailExpensePresenter presenter;
+    @Inject
+    DetailExpensePresenter presenter;
 
     private boolean isEdition=false;
     private boolean isExpenseEditionPaid = false;
@@ -65,6 +69,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
         presenter = new DetailExpensePresenter();
+        initializeDependencyInjection();
         initializeButterKnife();
         initializeToolbar();
         initializeAdapter();
@@ -81,6 +86,10 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
         Intent intent = new Intent(activity, DetailExpenseActivity.class);
         intent.putExtra(ADD_EXPENSE_SEND_EXPENSE,expense);
         activity.startActivityForResult(intent,idResult);
+    }
+
+    private void initializeDependencyInjection() {
+        ((ContadroidApplication) getApplication()).getComponent().inject(this);
     }
 
     private void initializeButterKnife() {
