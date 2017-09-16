@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.common.model;
+package org.upv.ccupeiro.contadroid.common.view.model;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
 

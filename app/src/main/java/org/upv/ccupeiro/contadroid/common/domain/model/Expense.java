@@ -1,4 +1,6 @@
-package org.upv.ccupeiro.contadroid.common.model;
+package org.upv.ccupeiro.contadroid.common.data.model;
+
+import org.upv.ccupeiro.contadroid.common.domain.model.ExpensesGroup;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.common.model;
+package org.upv.ccupeiro.contadroid.common.view.model;
 
 public enum ExpensesGroup {
     INCOME,
