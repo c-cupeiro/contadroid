@@ -15,14 +15,11 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.common.model.SimpleCardExpenseItemCollection;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseCollection;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.view.activity.ActualMonthActivity;
 import org.upv.ccupeiro.contadroid.actualmonth.view.builder.CardExpenseItemBuilder;
 import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.TabExpenseNotPaidPresenter;
-import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseRowRenderer;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 
 import java.util.ArrayList;

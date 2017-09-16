@@ -1,11 +1,9 @@
 package org.upv.ccupeiro.contadroid.template.view.presenter;
 
 
-import android.support.v7.app.AlertDialog;
-
 import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.AddTemplateExpensesToActualMonth;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.DeleteTemplateExpenses;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.GetTemplateExpenses;

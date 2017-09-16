@@ -27,7 +27,6 @@ import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.di.ContadroidComponent;
 import org.upv.ccupeiro.contadroid.summary.view.activity.SummaryActivity;
-import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
 import org.upv.ccupeiro.contadroid.template.view.activity.TemplateActivity;
 
 import java.util.List;

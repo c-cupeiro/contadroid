@@ -15,14 +15,11 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 
-import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
-import org.upv.ccupeiro.contadroid.summary.domain.usecase.GetYearSummary;
 import org.upv.ccupeiro.contadroid.summary.view.presenter.SummaryPresenter;
 import org.upv.ccupeiro.contadroid.summary.view.renderer.SummaryItemRenderer;
-import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
+import org.upv.ccupeiro.contadroid.template.domain.model.SummaryItem;
 
 import java.util.List;
 

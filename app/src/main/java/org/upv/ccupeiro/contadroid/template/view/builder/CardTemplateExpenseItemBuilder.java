@@ -4,8 +4,7 @@ import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 
 import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseHeaderRenderer;
-import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseRowRenderer;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 import org.upv.ccupeiro.contadroid.template.view.renderer.CardTemplateExpenseRowRenderer;
 

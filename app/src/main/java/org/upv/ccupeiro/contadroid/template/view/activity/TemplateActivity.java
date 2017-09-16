@@ -17,20 +17,14 @@ import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
-import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseCollection;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.AddTemplateExpensesToActualMonth;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.DeleteTemplateExpenses;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.GetTemplateExpenses;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.SaveTemplateExpenses;
 import org.upv.ccupeiro.contadroid.template.view.builder.CardTemplateExpenseItemBuilder;
 import org.upv.ccupeiro.contadroid.template.view.presenter.TemplatePresenter;
 

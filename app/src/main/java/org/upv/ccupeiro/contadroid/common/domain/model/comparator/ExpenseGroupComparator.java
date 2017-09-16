@@ -1,7 +1,7 @@
-package org.upv.ccupeiro.contadroid.common.view.model.comparator;
+package org.upv.ccupeiro.contadroid.common.domain.model.comparator;
 
 
-import org.upv.ccupeiro.contadroid.common.data.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 
 import java.util.Comparator;
 

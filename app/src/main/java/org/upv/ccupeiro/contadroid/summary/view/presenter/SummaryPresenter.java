@@ -2,7 +2,7 @@ package org.upv.ccupeiro.contadroid.summary.view.presenter;
 
 
 import org.upv.ccupeiro.contadroid.summary.domain.usecase.GetYearSummary;
-import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
+import org.upv.ccupeiro.contadroid.template.domain.model.SummaryItem;
 
 import java.util.Calendar;
 import java.util.List;

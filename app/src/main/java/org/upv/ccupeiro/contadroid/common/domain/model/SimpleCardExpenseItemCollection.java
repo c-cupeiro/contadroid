@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.common.view.model;
+package org.upv.ccupeiro.contadroid.common.domain.model;
 
 import org.upv.ccupeiro.contadroid.R;
 

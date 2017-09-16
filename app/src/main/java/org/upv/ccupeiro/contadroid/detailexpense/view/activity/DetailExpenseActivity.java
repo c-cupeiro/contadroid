@@ -22,8 +22,8 @@ import org.upv.ccupeiro.contadroid.detailexpense.model.SimpleExpenseGroup;
 import org.upv.ccupeiro.contadroid.detailexpense.view.adapter.DetailGroupAdapter;
 import org.upv.ccupeiro.contadroid.detailexpense.view.presenter.DetailExpensePresenter;
 import org.upv.ccupeiro.contadroid.detailexpense.view.renderer.ExpenseGroupViewRenderer;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
-import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.ExpensesGroup;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
 

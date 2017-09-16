@@ -1,13 +1,13 @@
 package org.upv.ccupeiro.contadroid.common.utils;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
-import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
-import org.upv.ccupeiro.contadroid.common.model.comparator.ExpenseDateComparator;
-import org.upv.ccupeiro.contadroid.common.model.comparator.ExpenseGroupComparator;
-import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
-import org.upv.ccupeiro.contadroid.template.model.SummaryItemStatus;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.ExpensesGroup;
+import org.upv.ccupeiro.contadroid.common.domain.model.comparator.ExpenseDateComparator;
+import org.upv.ccupeiro.contadroid.common.domain.model.comparator.ExpenseGroupComparator;
+import org.upv.ccupeiro.contadroid.template.domain.model.SummaryItem;
+import org.upv.ccupeiro.contadroid.template.domain.model.SummaryItemStatus;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

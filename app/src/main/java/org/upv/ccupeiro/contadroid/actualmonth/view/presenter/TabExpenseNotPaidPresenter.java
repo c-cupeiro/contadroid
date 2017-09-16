@@ -1,6 +1,6 @@
 package org.upv.ccupeiro.contadroid.actualmonth.view.presenter;
 
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package org.upv.ccupeiro.contadroid.detailexpense.model;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
+import org.upv.ccupeiro.contadroid.common.domain.model.ExpensesGroup;
 
 import java.util.ArrayList;
 import java.util.List;

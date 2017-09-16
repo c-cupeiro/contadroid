@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.template.view.model;
+package org.upv.ccupeiro.contadroid.template.domain.model;
 
 
 public class SummaryItem {
