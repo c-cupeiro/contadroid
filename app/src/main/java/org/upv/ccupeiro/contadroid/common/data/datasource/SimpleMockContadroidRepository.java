@@ -1,6 +1,7 @@
 package org.upv.ccupeiro.contadroid.common.data.datasource;
 
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
+import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
 import org.upv.ccupeiro.contadroid.common.model.Expense;
 import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
 
@@ -124,23 +125,26 @@ public class SimpleMockContadroidRepository implements ContadroidRepository {
     }
 
     @Override
-    public boolean saveTemplateExpense(Expense expense) {
+    public void saveTemplateExpense(Expense expense, RepositoryCallback callback) {
         expense.setTemplate(true);
-        return saveExpense(expense);
+        saveExpense(expense,callback);
+        callback.onSuccess();
     }
 
     @Override
-    public boolean deleteTemplateExpense(long id) {
-        return deleteExpense(id);
+    public void deleteTemplateExpense(long id, RepositoryCallback callback) {
+        deleteExpense(id,callback);
+        callback.onSuccess();
     }
 
     @Override
-    public boolean saveExpense(Expense expense) {
+    public void saveExpense(Expense expense, RepositoryCallback callback) {
         if(expense.getId()!=-1){
-            return updateEditedExpense(expense);
+            updateEditedExpense(expense);
         }else{
-            return saveNewExpense(expense);
+            saveNewExpense(expense);
         }
+        callback.onSuccess();
     }
 
     private boolean saveNewExpense(Expense expense) {
@@ -160,25 +164,40 @@ public class SimpleMockContadroidRepository implements ContadroidRepository {
     }
 
     @Override
-    public boolean deleteExpense(long id) {
+    public void deleteExpense(long id, RepositoryCallback callback) {
         int position = getPosition(id);
         if(position != -1){
             expenseList.remove(position);
-            return true;
+            callback.onSuccess();
         }
-        return false;
+        callback.onError();
     }
 
     @Override
-    public boolean changePaidState(long id, boolean paid) {
+    public void changePaidState(long id, boolean paid, RepositoryCallback callback) {
         int position = getPosition(id);
         if(position != -1){
             Expense expense = expenseList.get(position);
             expense.setPaid(paid);
             expenseList.set(position,expense);
-            return true;
+            callback.onSuccess();
         }
-        return false;
+        callback.onError();
+    }
+
+    @Override
+    public void addTemplateToMonth(int year, int month, RepositoryCallback callback) {
+        List<Expense> templateList = getTemplate();
+        for(Expense templateExpense : templateList){
+           Expense newExpense = new Expense.Builder()
+                   .withName(templateExpense.getName())
+                   .withDescription(templateExpense.getDescription())
+                   .withAmount(templateExpense.getAmount())
+                   .withGroup(templateExpense.getGroup())
+                   .build();
+            saveNewExpense(newExpense);
+        }
+        callback.onSuccess();
     }
 
     private int getPosition(long idExpense){

@@ -50,8 +50,13 @@
     <string name="delete_correct">Gasto borrado correctamente</string>
     <string name="template_empty_case">No hay gastos en la plantilla</string>
     <string name="template_title">Plantilla</string>
+    <string name="add_template_to_month_correct">Gastos de la plantilla guardados correctamente</string>
+    <string name="add_template_to_month_error">Error al guardar los gastos de la plantilla en el mes</string>
     <string name="summary_emtpy_case">No hay datos para sacar el resumen anual</string>
     <string name="summary_title">Resumen anual</string>
+    <string name="add_template_to_month_alert_title">¿Añadir la plantilla al mes actual?</string>
+    <string name="add_template_to_month_alert_yes_option">Sí</string>
+    <string name="add_template_to_month_alert_no_option">No</string>
 
 
 </resources>

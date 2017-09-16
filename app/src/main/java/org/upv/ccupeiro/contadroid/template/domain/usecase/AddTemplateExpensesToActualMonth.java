@@ -2,18 +2,17 @@ package org.upv.ccupeiro.contadroid.template.domain.usecase;
 
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
 
 import javax.inject.Inject;
 
-public class SaveTemplateExpenses {
+public class AddTemplateExpensesToActualMonth {
     private final ContadroidRepository expenseRepository;
 
     @Inject
-    public SaveTemplateExpenses(ContadroidRepository expenseRepository) {
+    public AddTemplateExpensesToActualMonth(ContadroidRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
-    public void execute(Expense expense, RepositoryCallback callback){
-        expenseRepository.saveTemplateExpense(expense,callback);
+    public void execute(int year, int month, RepositoryCallback callback){
+        expenseRepository.addTemplateToMonth(year,month,callback);
     }
 }

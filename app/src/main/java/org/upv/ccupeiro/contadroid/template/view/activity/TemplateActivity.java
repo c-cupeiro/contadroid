@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
+import org.upv.ccupeiro.contadroid.template.domain.usecase.AddTemplateExpensesToActualMonth;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.DeleteTemplateExpenses;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.GetTemplateExpenses;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.SaveTemplateExpenses;
@@ -46,6 +49,7 @@ import static org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpe
 
 public class TemplateActivity extends BasicActivity implements TemplatePresenter.View{
     public static final CardExpenseCollection EMPTY_COLLECTION = new CardExpenseCollection(new ArrayList<CardExpenseItem>());
+    public static final int FROM_EMPTY = 2;
     @Nullable
     @BindView(R.id.rv_template)
     RecyclerView rvTemplate;
@@ -178,6 +182,42 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
     }
 
     @Override
+    public void hideEmptyCase() {
+        emptyCase.setVisibility(View.GONE);
+        rvTemplate.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showAlertDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.add_template_to_month_alert_title)
+                .setPositiveButton(R.string.add_template_to_month_alert_yes_option,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.addTemplateCurrentMonth();
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton(R.string.add_template_to_month_alert_no_option,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+    }
+
+    @Override
+    public void showAddTemplateToMonthError() {
+        SnackBarUtils.showShortSnackBar(rvTemplate,getString(R.string.add_template_to_month_error));
+    }
+
+    @Override
+    public void showAddTemplateToMonthCorrect() {
+        SnackBarUtils.showShortSnackBar(rvTemplate,getString(R.string.add_template_to_month_correct));
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK){
             if(requestCode == DETAIL_EXPENSE_REQUEST_CODE){
@@ -203,5 +243,22 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
         if(cardExpense.isPaid())
             expense.isPaid();
         return expense.build();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_templeate_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_add_template:
+                presenter.showAlertDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

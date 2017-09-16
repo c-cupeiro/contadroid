@@ -9,10 +9,11 @@ public interface ContadroidRepository {
     List<Expense> getNotPaidExpensesInMonth(int year, int month);
     List<Expense> getYearExpenses(int year);
     List<Expense> getTemplate();
-    boolean saveTemplateExpense(Expense expense);
-    boolean deleteTemplateExpense(long id);
-    boolean saveExpense(Expense expense);
-    boolean deleteExpense(long id);
-    boolean changePaidState(long id,boolean paid);
+    void saveTemplateExpense(Expense expense, RepositoryCallback callback);
+    void deleteTemplateExpense(long id, RepositoryCallback callback);
+    void saveExpense(Expense expense, RepositoryCallback callback);
+    void deleteExpense(long id, RepositoryCallback callback);
+    void changePaidState(long id,boolean paid, RepositoryCallback callback);
+    void addTemplateToMonth(int year, int month, RepositoryCallback callback);
 
 }

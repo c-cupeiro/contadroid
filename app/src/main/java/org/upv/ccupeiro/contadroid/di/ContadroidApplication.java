@@ -11,17 +11,9 @@ public class ContadroidApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        initializeRealm();
         initializeDependencyInjection();
     }
 
-
-
-    private void initializeRealm() {
-        Realm.init(this);
-        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
-        Realm.setDefaultConfiguration(configuration);
-    }
 
     private void initializeDependencyInjection() {
         component = DaggerContadroidComponent.builder()

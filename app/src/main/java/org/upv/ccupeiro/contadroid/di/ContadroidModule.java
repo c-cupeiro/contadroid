@@ -29,13 +29,7 @@ public class ContadroidModule {
 
     @Provides
     @Singleton
-    public Realm providesRealm(){
-        return Realm.getDefaultInstance();
-    }
-
-    @Provides
-    @Singleton
-    public ContadroidRepository providesContadroidRepository(Realm realm){
-        return new RealmContadroidRepository(realm);
+    public ContadroidRepository providesContadroidRepository(Context context){
+        return new RealmContadroidRepository(context);
     }
 }

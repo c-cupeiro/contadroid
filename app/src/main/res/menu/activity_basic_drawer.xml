@@ -12,7 +12,7 @@
             android:title="@string/navigation_drawer_menu_chart" />
         <item
             android:id="@+id/nav_template"
-            android:icon="@drawable/file_document_box"
+            android:icon="@drawable/file_document"
             android:title="@string/navigation_drawer_menu_template" />
     </group>
 </menu>
