@@ -4,12 +4,15 @@ import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class TabExpensePaidPresenter {
 
     private View view;
     private List<CardExpenseItem> expensePaidList;
     private ActualMonthPresenter activityPresenter;
 
+    @Inject
     public TabExpensePaidPresenter(ActualMonthPresenter activityPresenter) {
         this.activityPresenter = activityPresenter;
     }
