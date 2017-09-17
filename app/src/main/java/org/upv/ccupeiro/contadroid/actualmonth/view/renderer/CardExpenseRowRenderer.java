@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 
 import butterknife.BindView;

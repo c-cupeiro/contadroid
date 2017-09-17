@@ -15,17 +15,15 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 
-import org.upv.ccupeiro.contadroid.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.data.datasource.SimpleMockContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
-import org.upv.ccupeiro.contadroid.summary.domain.usecase.GetYearSummary;
 import org.upv.ccupeiro.contadroid.summary.view.presenter.SummaryPresenter;
 import org.upv.ccupeiro.contadroid.summary.view.renderer.SummaryItemRenderer;
-import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
+import org.upv.ccupeiro.contadroid.template.domain.model.SummaryItem;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -39,16 +37,20 @@ public class SummaryActivity extends BasicActivity implements SummaryPresenter.V
     TextView emptyCase;
 
     private RVRendererAdapter<SummaryItem> adapter;
-    private SummaryPresenter presenter;
+
+    @Inject
+    SummaryPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeFrameLayout(R.layout.activity_summary);
+        initializeDependencyInjection();
         initToolbar();
         initializeAdapter();
         initializeRecyclerView();
         initializePresenter();
+        hideFloatingButton();
     }
 
     public static void open(Activity activity){
@@ -58,9 +60,11 @@ public class SummaryActivity extends BasicActivity implements SummaryPresenter.V
         activity.finish();
     }
 
+    private void initializeDependencyInjection() {
+        getAppComponent().inject(this);
+    }
+
     private void initializePresenter(){
-        ContadroidRepository repository = ((ContadroidApplication) getApplication()).getContadroidRepository();
-        presenter = new SummaryPresenter(new GetYearSummary(repository));
         presenter.setView(this);
         presenter.initialize();
     }

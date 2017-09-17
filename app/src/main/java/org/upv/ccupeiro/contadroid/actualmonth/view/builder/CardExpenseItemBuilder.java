@@ -3,7 +3,7 @@ package org.upv.ccupeiro.contadroid.actualmonth.view.builder;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseHeaderRenderer;
 import org.upv.ccupeiro.contadroid.actualmonth.view.renderer.CardExpenseRowRenderer;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;

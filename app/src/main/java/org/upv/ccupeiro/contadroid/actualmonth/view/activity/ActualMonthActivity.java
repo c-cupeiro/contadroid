@@ -9,24 +9,22 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import org.upv.ccupeiro.contadroid.ContadroidApplication;
+import org.upv.ccupeiro.contadroid.actualmonth.di.ActualMonthComponent;
+import org.upv.ccupeiro.contadroid.actualmonth.di.ActualMonthModule;
+import org.upv.ccupeiro.contadroid.actualmonth.di.DaggerActualMonthComponent;
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
-import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
-import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.actualmonth.view.presenter.ActualMonthPresenter;
-import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.domain.usecase.DeleteExpense;
-import org.upv.ccupeiro.contadroid.common.domain.usecase.SaveExpense;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
 import org.upv.ccupeiro.contadroid.actualmonth.view.adapter.MainTabAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,12 +38,15 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     @BindView(R.id.tabs_view)
     ViewPager tabsView;
     private MainTabAdapter mainTabAdapter;
-    private ActualMonthPresenter presenter;
+    private ActualMonthComponent actualMonthComponent;
+    @Inject
+    ActualMonthPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeFrameLayout(R.layout.activity_main);
+        initializeDependencyInjection();
         initializePresenter();
         initToolbar();
         initializeTabLayout();
@@ -59,13 +60,19 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
         activity.finish();
     }
 
+    private void initializeDependencyInjection(){
+        actualMonthComponent = DaggerActualMonthComponent.builder()
+                .contadroidComponent(getAppComponent())
+                .actualMonthModule(new ActualMonthModule())
+                .build();
+        actualMonthComponent.inject(this);
+    }
+
+    public ActualMonthComponent getActivityComponent(){
+        return actualMonthComponent;
+    }
+
     private void initializePresenter(){
-        ContadroidRepository repository = ((ContadroidApplication) getApplication()).getContadroidRepository();
-        presenter = new ActualMonthPresenter(new SaveExpense(repository),
-                new DeleteExpense(repository),
-                new ChangePaidStatus(repository),
-                new GetPaidExpenses(repository),
-                new GetNotPaidExpenses(repository));
         presenter.setView(this);
     }
 
@@ -120,7 +127,8 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
                 .withName(cardExpense.getName())
                 .withDescription(cardExpense.getDescription())
                 .withAmount(cardExpense.getAmount())
-                .withGroup(cardExpense.getGroup());
+                .withGroup(cardExpense.getGroup())
+                .withDate(cardExpense.getCreationDate());
         if(cardExpense.isPaid())
             expense.isPaid();
         return expense.build();

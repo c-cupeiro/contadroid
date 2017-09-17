@@ -34,8 +34,10 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.7.0'
     compile 'com.github.pedrovgs:renderers:3.3.3'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.dagger:dagger-android:2.11'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
 }
 
 apply plugin: 'realm-android'

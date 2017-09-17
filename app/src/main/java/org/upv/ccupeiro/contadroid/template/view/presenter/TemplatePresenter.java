@@ -1,11 +1,9 @@
 package org.upv.ccupeiro.contadroid.template.view.presenter;
 
 
-import android.support.v7.app.AlertDialog;
-
 import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.AddTemplateExpensesToActualMonth;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.DeleteTemplateExpenses;
 import org.upv.ccupeiro.contadroid.template.domain.usecase.GetTemplateExpenses;
@@ -13,6 +11,8 @@ import org.upv.ccupeiro.contadroid.template.domain.usecase.SaveTemplateExpenses;
 
 import java.util.Calendar;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class TemplatePresenter {
 
@@ -22,6 +22,7 @@ public class TemplatePresenter {
     private final AddTemplateExpensesToActualMonth addTemplateExpensesToActualMonth;
     private View view;
 
+    @Inject
     public TemplatePresenter(GetTemplateExpenses getTemplateExpenses,
                              SaveTemplateExpenses saveTemplateExpenses,
                              DeleteTemplateExpenses deleteTemplateExpenses,

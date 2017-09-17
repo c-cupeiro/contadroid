@@ -8,7 +8,8 @@ import android.widget.TextView;
 import com.pedrogomez.renderers.Renderer;
 
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.ExpensesGroup;
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
 
 import butterknife.BindView;
@@ -19,6 +20,8 @@ import butterknife.ButterKnife;
  */
 
 public abstract class CardExpenseRenderer extends Renderer<CardExpenseItem> {
+    public static final String NEGATIVE_SYMBOL = "-";
+    public static final String POSITIVE_SYMBOL = "+";
     @BindView(R.id.tv_row_item_name)
     TextView name;
     @BindView(R.id.tv_row_item_amount)
@@ -40,17 +43,26 @@ public abstract class CardExpenseRenderer extends Renderer<CardExpenseItem> {
         renderAmount(item);
     }
 
-    protected void renderName(CardExpenseItem item){
-        if(item.isGroupHeader()){
+    protected void renderName(CardExpenseItem item) {
+        if (item.isGroupHeader()) {
             name.setText(getContext().getText(item.getGroupName()));
-        }else{
+        } else {
             name.setText(item.getName());
         }
 
     }
 
-    protected void renderAmount(CardExpenseItem item){
-        amount.setText(StringUtils.formatAmount(item.getAmount()));
+    protected void renderAmount(CardExpenseItem item) {
+        String amountFormated = StringUtils.formatAmount(item.getAmount());
+        if(item.isGroupHeader()){
+            if (item.getGroup() == ExpensesGroup.INCOME) {
+                amount.setText(POSITIVE_SYMBOL + amountFormated);
+            } else {
+                amount.setText(NEGATIVE_SYMBOL + amountFormated);
+            }
+        }else{
+            amount.setText(amountFormated);
+        }
     }
 
     @Override

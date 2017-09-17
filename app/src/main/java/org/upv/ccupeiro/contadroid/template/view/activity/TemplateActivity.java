@@ -17,25 +17,21 @@ import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
-import org.upv.ccupeiro.contadroid.ContadroidApplication;
 import org.upv.ccupeiro.contadroid.R;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseCollection;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
-import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseCollection;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 import org.upv.ccupeiro.contadroid.common.utils.SnackBarUtils;
 import org.upv.ccupeiro.contadroid.common.view.activity.BasicActivity;
 import org.upv.ccupeiro.contadroid.common.view.listener.CardExpenseListener;
 import org.upv.ccupeiro.contadroid.detailexpense.view.activity.DetailExpenseActivity;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.AddTemplateExpensesToActualMonth;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.DeleteTemplateExpenses;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.GetTemplateExpenses;
-import org.upv.ccupeiro.contadroid.template.domain.usecase.SaveTemplateExpenses;
 import org.upv.ccupeiro.contadroid.template.view.builder.CardTemplateExpenseItemBuilder;
 import org.upv.ccupeiro.contadroid.template.view.presenter.TemplatePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -56,12 +52,15 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
     TextView emptyCase;
 
     private RVRendererAdapter<CardExpenseItem> adapter;
-    private TemplatePresenter presenter;
+
+    @Inject
+    TemplatePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeFrameLayout(R.layout.activity_template);
+        initializeDependencyInjection();
         initToolbar();
         initializeAdapter();
         initializeRecyclerView();
@@ -76,16 +75,15 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
         activity.finish();
     }
 
+    private void initializeDependencyInjection() {
+        getAppComponent().inject(this);
+    }
+
     private void initToolbar() {
         setTitle(R.string.template_title);
     }
 
     private void initializePresenter(){
-        ContadroidRepository repository = ((ContadroidApplication) getApplication()).getContadroidRepository();
-        presenter = new TemplatePresenter(new GetTemplateExpenses(repository),
-                new SaveTemplateExpenses(repository),
-                new DeleteTemplateExpenses(repository),
-                new AddTemplateExpensesToActualMonth(repository));
         presenter.setView(this);
         presenter.initialize();
     }
@@ -187,14 +185,14 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
     public void showAlertDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.add_template_to_month_alert_title)
-                .setPositiveButton(R.string.add_template_to_month_alert_yes_option,
+                .setPositiveButton(R.string.alert_yes_option,
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         presenter.addTemplateCurrentMonth();
                         dialog.dismiss();
                     }
-                }).setNegativeButton(R.string.add_template_to_month_alert_no_option,
+                }).setNegativeButton(R.string.alert_no_option,
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

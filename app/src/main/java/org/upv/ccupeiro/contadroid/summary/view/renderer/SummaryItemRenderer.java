@@ -1,8 +1,6 @@
 package org.upv.ccupeiro.contadroid.summary.view.renderer;
 
 
-import android.graphics.Color;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,7 @@ import com.pedrogomez.renderers.Renderer;
 
 import org.upv.ccupeiro.contadroid.R;
 import org.upv.ccupeiro.contadroid.common.utils.StringUtils;
-import org.upv.ccupeiro.contadroid.template.model.SummaryItem;
+import org.upv.ccupeiro.contadroid.template.domain.model.SummaryItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +28,6 @@ public class SummaryItemRenderer extends Renderer<SummaryItem>{
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup parent) {
         View inflatedView = inflater.inflate(R.layout.summary_row_renderer, parent, false);
-
         ButterKnife.bind(this, inflatedView);
         return inflatedView;
     }

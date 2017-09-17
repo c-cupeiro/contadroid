@@ -1,6 +1,6 @@
 package org.upv.ccupeiro.contadroid.common.view.listener;
 
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 
 public interface CardExpenseListener {
     void onCheckboxClicked(CardExpenseItem expense);

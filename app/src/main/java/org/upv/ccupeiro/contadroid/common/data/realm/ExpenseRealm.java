@@ -1,7 +1,7 @@
 package org.upv.ccupeiro.contadroid.common.data.realm;
 
-import org.upv.ccupeiro.contadroid.common.model.Expense;
-import org.upv.ccupeiro.contadroid.common.model.ExpensesGroup;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.ExpensesGroup;
 
 import java.util.Date;
 

@@ -1,12 +1,11 @@
 package org.upv.ccupeiro.contadroid.common.data.datasource;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.upv.ccupeiro.contadroid.common.data.ContadroidRepository;
 import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
 import org.upv.ccupeiro.contadroid.common.data.realm.ExpenseRealm;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,11 +14,8 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
 
-import static android.R.attr.id;
-import static android.content.ContentValues.TAG;
 import static org.upv.ccupeiro.contadroid.common.data.realm.ExpenseRealm.EXPENSE_FIELD_CREATION_DATE;
 import static org.upv.ccupeiro.contadroid.common.data.realm.ExpenseRealm.EXPENSE_FIELD_ID;
 import static org.upv.ccupeiro.contadroid.common.data.realm.ExpenseRealm.EXPENSE_FIELD_IS_PAID;

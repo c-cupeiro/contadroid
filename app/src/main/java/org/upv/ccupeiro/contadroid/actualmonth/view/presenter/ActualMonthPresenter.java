@@ -4,13 +4,15 @@ import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.ChangePaidStatus;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetNotPaidExpenses;
 import org.upv.ccupeiro.contadroid.actualmonth.domain.usecase.GetPaidExpenses;
 import org.upv.ccupeiro.contadroid.common.data.RepositoryCallback;
-import org.upv.ccupeiro.contadroid.common.model.CardExpenseItem;
+import org.upv.ccupeiro.contadroid.common.domain.model.CardExpenseItem;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.DeleteExpense;
 import org.upv.ccupeiro.contadroid.common.domain.usecase.SaveExpense;
-import org.upv.ccupeiro.contadroid.common.model.Expense;
+import org.upv.ccupeiro.contadroid.common.domain.model.Expense;
 
 import java.util.Calendar;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class ActualMonthPresenter {
 
@@ -21,6 +23,7 @@ public class ActualMonthPresenter {
     private final GetNotPaidExpenses getNotPaidExpenses;
     private View view;
 
+    @Inject
     public ActualMonthPresenter(SaveExpense saveExpense, DeleteExpense deleteExpense,
                                 ChangePaidStatus changePaidStatus, GetPaidExpenses getPaidExpenses,
                                 GetNotPaidExpenses getNotPaidExpenses) {

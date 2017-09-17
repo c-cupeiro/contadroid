@@ -1,4 +1,4 @@
-package org.upv.ccupeiro.contadroid.common.model;
+package org.upv.ccupeiro.contadroid.common.domain.model;
 
 import java.io.Serializable;
 import java.util.Date;
