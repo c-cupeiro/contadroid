@@ -8,15 +8,5 @@ import dagger.Provides;
 
 @Module
 public class ActualMonthModule {
-    private ActualMonthPresenter presenter;
 
-    public ActualMonthModule(ActualMonthPresenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @ActivityScope
-    @Provides
-    public ActualMonthPresenter providesActivityPresenter(){
-        return presenter;
-    }
 }

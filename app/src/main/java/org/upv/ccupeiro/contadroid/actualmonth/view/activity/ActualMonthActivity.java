@@ -63,7 +63,6 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     private void initializeDependencyInjection(){
         actualMonthComponent = DaggerActualMonthComponent.builder()
                 .contadroidComponent(getAppComponent())
-                .actualMonthModule(new ActualMonthModule(presenter))
                 .build();
         actualMonthComponent.inject(this);
     }
