@@ -1,16 +1,21 @@
 package org.upv.ccupeiro.contadroid.detailexpense.view.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RendererBuilder;
@@ -29,6 +34,7 @@ import org.upv.ccupeiro.contadroid.di.ContadroidApplication;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -63,6 +69,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
     private boolean isEdition=false;
     private boolean isExpenseEditionPaid = false;
     private long expenseEditionId = -1;
+    private Date creationDateEdition = new Date(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +82,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
         initializeAdapter();
         initializePresenter();
         initializeRecyclerView();
+        setKeyboardHideListener();
     }
 
 
@@ -124,6 +132,24 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
         presenter.initialize();
     }
 
+    private void setKeyboardHideListener(){
+        et_amount.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    presenter.hideAmountKeyboard();
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void hideAmountKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(et_amount.getWindowToken(), 0);
+    }
+
     @Override
     public void showExpenseInfo(List<ExpenseGroupView> expenseGroupViewList) {
         adapter.clear();
@@ -145,7 +171,8 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
                     .withAmount(amount)
                     .withGroup(group);
             if(isEdition){
-                expense.withId(expenseEditionId);
+                expense.withId(expenseEditionId)
+                .withDate(creationDateEdition);
                 if(isExpenseEditionPaid)
                     expense.isPaid();
             }else{
@@ -201,6 +228,7 @@ public class DetailExpenseActivity extends AppCompatActivity implements DetailEx
             isEdition = true;
             isExpenseEditionPaid = editionExpense.isPaid();
             expenseEditionId = editionExpense.getId();
+            creationDateEdition = editionExpense.getCreationDate();
             renderData(editionExpense);
         }
     }

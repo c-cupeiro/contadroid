@@ -1,6 +1,10 @@
 package org.upv.ccupeiro.contadroid.common.domain.model;
 
+import android.support.v7.app.AlertDialog;
+
 import org.upv.ccupeiro.contadroid.R;
+
+import java.util.Date;
 
 public class CardExpenseItem {
 
@@ -14,13 +18,14 @@ public class CardExpenseItem {
     private float amount;
     private String description;
     private boolean isPaid;
+    private Date creationDate;
 
-    public final static CardExpenseItem CARD_EXPENSE_ITEM_EMPTY = new CardExpenseItem(false,false,
-            -1, R.drawable.icon_other,ExpensesGroup.EMPTY,"",R.string.group_empty,0,"",false);
+    public final static CardExpenseItem CARD_EXPENSE_ITEM_EMPTY = new CardExpenseItem(false, false,
+            -1, R.drawable.icon_other, ExpensesGroup.EMPTY, "", R.string.group_empty, 0, "", false, new Date(0));
 
     private CardExpenseItem(boolean isGroupHeader, boolean isExpenseRow, long expenseId,
-                            int icon, ExpensesGroup group, String name,int groupName, float amount,
-                            String description, boolean isPaid) {
+                            int icon, ExpensesGroup group, String name, int groupName, float amount,
+                            String description, boolean isPaid, Date creationDate) {
         this.isGroupHeader = isGroupHeader;
         this.isExpenseRow = isExpenseRow;
         this.expenseId = expenseId;
@@ -31,9 +36,10 @@ public class CardExpenseItem {
         this.amount = amount;
         this.description = description;
         this.isPaid = isPaid;
+        this.creationDate = creationDate;
     }
 
-    public static class Builder{
+    public static class Builder {
         private boolean isGroupHeader = false;
         private boolean isExpenseRow = false;
         private long expenseId = -1;
@@ -44,60 +50,66 @@ public class CardExpenseItem {
         private float amount = 0;
         private String description = "";
         private boolean isPaid = false;
+        private Date creationDate = new Date(0);
 
-        public Builder isGroupHeader(){
+        public Builder isGroupHeader() {
             this.isGroupHeader = true;
             return this;
         }
 
-        public Builder isExpenseRow(){
+        public Builder isExpenseRow() {
             this.isExpenseRow = true;
             return this;
         }
 
-        public Builder withExpenseId(long expenseId){
+        public Builder withExpenseId(long expenseId) {
             this.expenseId = expenseId;
             return this;
         }
 
-        public Builder withIcon(int icon){
+        public Builder withIcon(int icon) {
             this.icon = icon;
             return this;
         }
 
-        public Builder withGroup(ExpensesGroup group){
+        public Builder withGroup(ExpensesGroup group) {
             this.group = group;
             return this;
         }
 
-        public Builder withGroupName(int groupName){
+        public Builder withGroupName(int groupName) {
             this.groupName = groupName;
             return this;
         }
 
-        public Builder withName(String name){
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder withAmount(float amount){
+        public Builder withAmount(float amount) {
             this.amount = amount;
             return this;
         }
 
-        public Builder withDescription(String description){
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder isPaid(){
+        public Builder isPaid() {
             this.isPaid = true;
             return this;
         }
 
-        public CardExpenseItem build(){
+        public Builder withDate(Date creationDate) {
+            this.creationDate = creationDate;
+            return this;
+        }
+
+        public CardExpenseItem build() {
             return new CardExpenseItem(isGroupHeader, isExpenseRow, expenseId, icon,
-                    group, name, groupName,  amount, description, isPaid);
+                    group, name, groupName, amount, description, isPaid,creationDate);
         }
 
     }
@@ -147,13 +159,17 @@ public class CardExpenseItem {
         return description;
     }
 
+    public Date getCreationDate(){
+        return creationDate;
+    }
+
     public boolean isPaid() {
         return isPaid;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof CardExpenseItem) {
+        if (obj instanceof CardExpenseItem) {
             CardExpenseItem other = (CardExpenseItem) obj;
             return name.equals(other.name)
                     && amount == other.amount
@@ -162,6 +178,7 @@ public class CardExpenseItem {
                     && group == other.group
                     && icon == other.icon
                     && isPaid == other.isPaid
+                    && creationDate.equals(other.creationDate)
                     && isGroupHeader == other.isGroupHeader
                     && isExpenseRow == other.isExpenseRow;
         } else {
@@ -178,9 +195,11 @@ public class CardExpenseItem {
                 ", icon=" + icon +
                 ", group=" + group +
                 ", name='" + name + '\'' +
+                ", groupName=" + groupName +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", isPaid=" + isPaid +
+                ", creationDate=" + creationDate +
                 '}';
     }
 }

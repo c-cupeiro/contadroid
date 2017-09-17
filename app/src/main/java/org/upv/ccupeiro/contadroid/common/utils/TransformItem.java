@@ -106,6 +106,7 @@ public class TransformItem {
                 .withGroup(expense.getGroup())
                 .withName(expense.getName())
                 .withDescription(expense.getDescription())
+                .withDate(expense.getCreationDate())
                 .withAmount(expense.getAmount());
         if(expense.isPaid())
             expenseRow.isPaid();

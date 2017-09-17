@@ -28,7 +28,6 @@ public class SummaryItemRenderer extends Renderer<SummaryItem>{
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup parent) {
         View inflatedView = inflater.inflate(R.layout.summary_row_renderer, parent, false);
-
         ButterKnife.bind(this, inflatedView);
         return inflatedView;
     }

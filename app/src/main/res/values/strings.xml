@@ -55,8 +55,9 @@
     <string name="summary_emtpy_case">No hay datos para sacar el resumen anual</string>
     <string name="summary_title">Resumen anual</string>
     <string name="add_template_to_month_alert_title">¿Añadir la plantilla al mes actual?</string>
-    <string name="add_template_to_month_alert_yes_option">Sí</string>
-    <string name="add_template_to_month_alert_no_option">No</string>
+    <string name="alert_yes_option">Sí</string>
+    <string name="alert_no_option">No</string>
+    <string name="basic_activity_alert_exit_message">¿Seguro que desea cerrar la aplicación?</string>
 
 
 </resources>

@@ -36,6 +36,9 @@ public class DetailExpensePresenter {
     public void changeGroupSelected(int groupSelectedPosition){
         view.changeGroupSelected(groupSelectedPosition);
     }
+    public void hideAmountKeyboard(){
+        view.hideAmountKeyboard();
+    }
 
     public void showSnackBar(String text){
         view.showSnackBar(text);
@@ -47,5 +50,6 @@ public class DetailExpensePresenter {
         boolean validateExpense();
         void changeGroupSelected(int id);
         void showSnackBar(String text);
+        void hideAmountKeyboard();
     }
 }

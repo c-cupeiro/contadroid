@@ -63,6 +63,7 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
     private void initializeDependencyInjection(){
         actualMonthComponent = DaggerActualMonthComponent.builder()
                 .contadroidComponent(getAppComponent())
+                .actualMonthModule(new ActualMonthModule())
                 .build();
         actualMonthComponent.inject(this);
     }
@@ -126,7 +127,8 @@ public class ActualMonthActivity extends BasicActivity implements ActualMonthPre
                 .withName(cardExpense.getName())
                 .withDescription(cardExpense.getDescription())
                 .withAmount(cardExpense.getAmount())
-                .withGroup(cardExpense.getGroup());
+                .withGroup(cardExpense.getGroup())
+                .withDate(cardExpense.getCreationDate());
         if(cardExpense.isPaid())
             expense.isPaid();
         return expense.build();

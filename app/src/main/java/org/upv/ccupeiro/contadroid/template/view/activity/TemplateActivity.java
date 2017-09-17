@@ -185,14 +185,14 @@ public class TemplateActivity extends BasicActivity implements TemplatePresenter
     public void showAlertDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.add_template_to_month_alert_title)
-                .setPositiveButton(R.string.add_template_to_month_alert_yes_option,
+                .setPositiveButton(R.string.alert_yes_option,
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         presenter.addTemplateCurrentMonth();
                         dialog.dismiss();
                     }
-                }).setNegativeButton(R.string.add_template_to_month_alert_no_option,
+                }).setNegativeButton(R.string.alert_no_option,
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

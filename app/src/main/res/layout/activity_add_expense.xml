@@ -53,6 +53,7 @@
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
             android:layout_weight="1"
+            android:imeOptions="actionDone"
             android:hint="@string/detail_expense_amount_hint" />
         <TextView
             android:id="@+id/tv_currency"

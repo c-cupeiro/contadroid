@@ -50,6 +50,7 @@ public class SummaryActivity extends BasicActivity implements SummaryPresenter.V
         initializeAdapter();
         initializeRecyclerView();
         initializePresenter();
+        hideFloatingButton();
     }
 
     public static void open(Activity activity){
