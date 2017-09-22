@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:weightSum="7"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        app:cardBackgroundColor="@color/colorBackCard">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_summary_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enero"
+            android:paddingTop="@dimen/summary_view_padding"
+            android:paddingBottom="@dimen/summary_view_padding"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/expense_row_main_horizontal"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
+        <TextView
+            android:id="@+id/tv_summary_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200 €"
+            android:paddingTop="@dimen/summary_view_padding"
+            android:paddingBottom="@dimen/summary_view_padding"
+            android:textColor="@color/summary_positive_color"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/expense_row_main_horizontal"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/iv_summary_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rectangle_positive"/>
+
+</LinearLayout>

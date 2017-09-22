@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_summary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/padding_for_fab"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"/>
+
+    <TextView
+        android:id="@+id/tv_empty_case"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/summary_emtpy_case"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="card_view_padding_title">5dp</dimen>
+    <dimen name="expense_row_main_horizontal">10dp</dimen>
+    <dimen name="expense_row_amount_margin_rigth">40dp</dimen>
+    <dimen name="expense_row_description_horizontal">20dp</dimen>
+    <dimen name="expense_row_vertical">5dp</dimen>
+    <dimen name="circle_icon_size">24dp</dimen>
+    <dimen name="circle_icon_stroke_width">3dp</dimen>
+    <dimen name="icon_drawable_margin">2dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="category_margin">5dp</dimen>
+    <dimen name="category_padding">5dp</dimen>
+    <dimen name="padding_for_fab">80dp</dimen>
+    <dimen name="summary_view_padding">10dp</dimen>
+    <dimen name="size_nav_image">100dp</dimen>
+</resources>
